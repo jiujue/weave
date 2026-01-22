@@ -1,0 +1,32 @@
+{
+	"name": "weave-docs",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"predev": "pnpm -C ../../packages/adapter-worker-image build",
+		"dev": "dumi dev",
+		"prebuild": "pnpm -C ../../packages/adapter-worker-image build",
+		"build": "dumi build",
+		"preview": "dumi preview",
+		"test": "node -e \"process.exit(0)\"",
+		"lint": "node -e \"process.exit(0)\""
+	},
+	"dependencies": {
+		"@jiujue/weave-adapter-node": "workspace:*",
+		"@jiujue/weave-adapter-offscreen": "workspace:*",
+		"@jiujue/weave-adapter-worker-image": "workspace:*",
+		"@jiujue/weave-app": "workspace:*",
+		"@jiujue/weave-core": "workspace:*",
+		"@jiujue/weave-devtools-runtime": "workspace:*",
+		"@jiujue/weave-displaylist": "workspace:*",
+		"@jiujue/weave-react": "workspace:*",
+		"@jiujue/weave-types": "workspace:*",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"devDependencies": {
+		"@types/react": "^18.2.66",
+		"@types/react-dom": "^18.2.22",
+		"dumi": "^2.4.21"
+	}
+}

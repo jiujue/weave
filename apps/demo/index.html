@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Weave Demo</title>
+		<style>
+			html,
+			body {
+				height: 100%;
+				margin: 0;
+				font-family:
+					ui-sans-serif,
+					system-ui,
+					-apple-system,
+					Segoe UI,
+					Roboto,
+					Helvetica,
+					Arial;
+			}
+			#app {
+				height: 100%;
+				display: grid;
+				grid-template-columns: 320px 1fr;
+			}
+			.panel {
+				padding: 16px;
+				border-right: 1px solid #e5e7eb;
+				background: #fafafa;
+			}
+			.stage {
+				position: relative;
+				background: #0b1020;
+				display: grid;
+				grid-template-rows: 1fr 1fr;
+			}
+			.pane {
+				position: relative;
+				border-top: 1px solid rgba(229, 231, 235, 0.14);
+			}
+			.pane:first-child {
+				border-top: none;
+			}
+			.paneTitle {
+				position: absolute;
+				top: 12px;
+				left: 12px;
+				z-index: 1;
+				padding: 6px 10px;
+				border: 1px solid rgba(148, 163, 184, 0.22);
+				border-radius: 999px;
+				background: rgba(15, 23, 42, 0.7);
+				color: #e5e7eb;
+				font-size: 12px;
+				line-height: 1;
+				backdrop-filter: blur(8px);
+				pointer-events: none;
+			}
+			canvas {
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+			.hint {
+				font-size: 12px;
+				color: #6b7280;
+				margin-top: 8px;
+				line-height: 1.4;
+			}
+			button {
+				padding: 10px 12px;
+				border: 1px solid #d1d5db;
+				background: white;
+				border-radius: 8px;
+				cursor: pointer;
+			}
+			button:hover {
+				background: #f9fafb;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="panel">
+				<h2 style="margin: 0 0 8px">Weave</h2>
+				<div class="hint">
+					Canvas 在主线程，仅负责 UI。\n 排版（Yoga）+ 绘制（DisplayList
+					replay）都在 Worker 内执行。\n
+				</div>
+				<div style="margin-top: 16px">
+					<button id="rerender">重新渲染（两种）</button>
+				</div>
+			</div>
+			<div class="stage">
+				<div class="pane">
+					<div class="paneTitle">sceneFromJSX（更简单）</div>
+					<canvas id="canvasSimple"></canvas>
+				</div>
+				<div class="pane">
+					<div class="paneTitle">
+						@jiujue/weave-types JSX runtime（更强类型）
+					</div>
+					<canvas id="canvasTyped"></canvas>
+				</div>
+			</div>
+		</div>
+		<script type="module" src="/src/main.tsx"></script>
+	</body>
+</html>

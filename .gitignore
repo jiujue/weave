@@ -1,0 +1,10 @@
+node_modules
+dist
+.pnpm-store
+.turbo
+.DS_Store
+*.log
+.vscode
+apps/devtools-extension/.plasmo/
+apps/devtools-extension/build/
+apps/docs/.dumi/

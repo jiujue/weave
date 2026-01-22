@@ -1,0 +1,10 @@
+{
+	"extends": "../../../../tsconfig.base.json",
+	"include": ["**/*.ts", "**/*.tsx"],
+	"compilerOptions": {
+		"noEmit": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "@jiujue/weave-types",
+		"types": ["vite/client"]
+	}
+}

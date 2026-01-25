@@ -5,7 +5,7 @@
 export { defineApp } from './core/defineApp'
 export type { RuntimeConfig } from './core/defineApp'
 // plugins
-export { getSketchJSON } from '/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs/.dumi/tmp-production/plugin-html2sketch';
+export { getSketchJSON } from '/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi/.dumi/tmp-production/plugin-html2sketch';
 // plugins types.d.ts
 // @umijs/renderer-*
 export { createBrowserHistory, createHashHistory, createMemoryHistory, Helmet, HelmetProvider, createSearchParams, generatePath, matchPath, matchRoutes, Navigate, NavLink, Outlet, resolvePath, useLocation, useMatch, useNavigate, useOutlet, useOutletContext, useParams, useResolvedPath, useRoutes, useSearchParams, useAppData, useClientLoaderData, useLoaderData, useRouteProps, useSelectedRoutes, useServerLoaderData, renderClient, __getRoot, Link, useRouteData, __useFetcher, withRouter } from '/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/@umijs+renderer-react@4.6.23_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@umijs/renderer-react';

@@ -11,7 +11,7 @@ import type { Location } from 'history';
 
 
 import { getPluginManager as getDumiPluginManager } from './core/plugin';
-import { setPluginManager as setDumiPluginManager } from '/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_d6i6leqpnd64cygdudoscjsuay/node_modules/dumi/dist/client/theme-api/utils.js';
+import { setPluginManager as setDumiPluginManager } from '/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/client/theme-api/utils.js';
 const publicPath = '/';
 const runtimePublicPath = false;
 

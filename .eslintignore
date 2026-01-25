@@ -1,5 +1,6 @@
 node_modules
 dist
+dumi-docs
 .turbo
 .dumi
 apps/devtools-extension/.plasmo

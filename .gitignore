@@ -1,5 +1,6 @@
 node_modules
 dist
+dumi-docs
 .pnpm-store
 .turbo
 .DS_Store
@@ -7,5 +8,6 @@ dist
 .vscode
 apps/devtools-extension/.plasmo/
 apps/devtools-extension/build/
-apps/docs/.dumi/
+apps/docs-dumi/.dumi/tmp/*
+apps/docs-dumi/.dumi/tmp-production/*
 .trae/*

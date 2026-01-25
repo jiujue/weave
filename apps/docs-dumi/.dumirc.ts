@@ -1,15 +1,17 @@
 import { defineConfig } from 'dumi'
 
+const pathPreFix = 'weave'
+
 export default defineConfig({
 	title: 'Weave',
-	outputPath: 'dist',
-	logo: '/weave-dumi-pages/weave.svg',
-	base: '/weave-dumi-pages/', // ✅ 关键：这里填你的仓库名
-	publicPath: '/weave-dumi-pages/', // ⚠️ 确保静态资源路径正确
-	favicons: ['/weave-dumi-pages/weave.svg'],
+	outputPath: '../../dumi-docs',
+	logo: `/${pathPreFix}/weave.svg`,
+	base: `/${pathPreFix}/`, // ✅ 关键：这里填你的仓库名
+	publicPath: `/${pathPreFix}/`, // ⚠️ 确保静态资源路径正确
+	favicons: [`/${pathPreFix}/weave.svg`],
 	themeConfig: {
 		name: 'Weave',
-		logo: '/weave-dumi-pages/weave.svg',
+		logo: `/${pathPreFix}/weave.svg`,
 		nav: [
 			{ title: '指南', link: '/guide/getting-started' },
 			{ title: '选型与对比', link: '/quick-comparison/selection' },

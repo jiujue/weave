@@ -8,9 +8,9 @@ export async function getRoutes() {
   return {
     routes,
     routeComponents: {
-'404': React.lazy(() => import(/* webpackChunkName: "nm__dumi__dist__client__pages__404" */'/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/client/pages/404.js')),
+'404': React.lazy(() => import(/* webpackChunkName: "nm__dumi__dist__client__pages__404" */'/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/client/pages/404.js')),
 'dumi-context-layout': React.lazy(() => import(/* webpackChunkName: "dumi__tmp-production__dumi__theme__ContextWrapper" */'/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi/.dumi/tmp-production/dumi/theme/ContextWrapper')),
-'DocLayout': React.lazy(() => import(/* webpackChunkName: "nm__dumi__theme-default__layouts__DocLayout__index" */'/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/theme-default/layouts/DocLayout/index.js')),
+'DocLayout': React.lazy(() => import(/* webpackChunkName: "nm__dumi__theme-default__layouts__DocLayout__index" */'/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/theme-default/layouts/DocLayout/index.js')),
 'docs/demos/worker-rendered-business-report': React.lazy(() => import(/* webpackChunkName: "docs__demos__worker-rendered-business-report.md" */'/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi/docs/demos/worker-rendered-business-report.md')),
 'docs/demos/worker-rendered-batch-reports': React.lazy(() => import(/* webpackChunkName: "docs__demos__worker-rendered-batch-reports.md" */'/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi/docs/demos/worker-rendered-batch-reports.md')),
 'docs/packages/adapter-offscreen/index': React.lazy(() => import(/* webpackChunkName: "docs__packages__adapter-offscreen__index.md" */'/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi/docs/packages/adapter-offscreen/index.md')),
@@ -60,7 +60,7 @@ export async function getRoutes() {
 'docs/core/index': React.lazy(() => import(/* webpackChunkName: "docs__core__index.md" */'/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi/docs/core/index.md')),
 'docs/app/index': React.lazy(() => import(/* webpackChunkName: "docs__app__index.md" */'/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi/docs/app/index.md')),
 'docs/index': React.lazy(() => import(/* webpackChunkName: "docs__index.md" */'/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi/docs/index.md')),
-'demo-render': React.lazy(() => import(/* webpackChunkName: "nm__dumi__dist__client__pages__Demo__index" */'/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/client/pages/Demo/index.js')),
+'demo-render': React.lazy(() => import(/* webpackChunkName: "nm__dumi__dist__client__pages__Demo__index" */'/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/client/pages/Demo/index.js')),
 },
   };
 }

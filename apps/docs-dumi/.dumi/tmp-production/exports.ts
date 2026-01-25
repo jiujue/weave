@@ -11,7 +11,7 @@ export { getSketchJSON } from '/Users/jiujue/Documents/workspace/webWorkSpace/we
 export { createBrowserHistory, createHashHistory, createMemoryHistory, Helmet, HelmetProvider, createSearchParams, generatePath, matchPath, matchRoutes, Navigate, NavLink, Outlet, resolvePath, useLocation, useMatch, useNavigate, useOutlet, useOutletContext, useParams, useResolvedPath, useRoutes, useSearchParams, useAppData, useClientLoaderData, useLoaderData, useRouteProps, useSelectedRoutes, useServerLoaderData, renderClient, __getRoot, Link, useRouteData, __useFetcher, withRouter } from '/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/@umijs+renderer-react@4.6.23_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@umijs/renderer-react';
 export type { History, ClientLoader } from '/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/@umijs+renderer-react@4.6.23_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@umijs/renderer-react'
 // umi/client/client/plugin
-export { ApplyPluginsType, PluginManager } from '/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/umi@4.6.23_@babel+core@7.28.6_@types+node@25.0.8_@types+react@18.3.27_eslint@8.57.1_less-load_jc5u63eiuck2qwh7aernjt2foy/node_modules/umi/client/client/plugin.js';
+export { ApplyPluginsType, PluginManager } from '/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/umi@4.6.23_@babel+core@7.28.6_@types+node@25.0.8_@types+react@18.3.27_eslint@9.39.2_jiti@2.6._madpjnfr6bu5jkj7nq4lemd46a/node_modules/umi/client/client/plugin.js';
 export { history, createHistory } from './core/history';
 export { terminal } from './core/terminal';
 // react ssr

@@ -43,7 +43,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -56,20 +56,20 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 8
+        "register": 27
       },
       "enableBy": "register"
     },
     "dumi/dist/preset": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "preset",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/preset.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/preset.js",
       "id": "dumi/dist/preset",
       "key": "dumi-preset",
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 3
       },
       "enableBy": "register"
     },
@@ -83,10 +83,10 @@
       "time": {
         "hooks": {
           "onStart": [
-            1
+            2
           ]
         },
-        "register": 2
+        "register": 5
       },
       "enableBy": "register"
     },
@@ -103,7 +103,7 @@
             0
           ]
         },
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -130,10 +130,10 @@
       "time": {
         "hooks": {
           "modifyAppData": [
-            7
+            11
           ]
         },
-        "register": 15
+        "register": 28
       },
       "enableBy": "register"
     },
@@ -146,7 +146,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -163,7 +163,7 @@
             0
           ],
           "onCheck": [
-            0
+            1
           ]
         },
         "register": 1
@@ -196,7 +196,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config"
     },
@@ -213,7 +213,7 @@
             0
           ]
         },
-        "register": 6
+        "register": 11
       },
       "enableBy": "register"
     },
@@ -1065,7 +1065,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config"
     },
@@ -1079,10 +1079,10 @@
       "time": {
         "hooks": {
           "onStart": [
-            0
+            1
           ]
         },
-        "register": 1
+        "register": 2
       },
       "enableBy": "register"
     },
@@ -1095,7 +1095,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -1108,7 +1108,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 55
+        "register": 124
       },
       "enableBy": "register"
     },
@@ -1121,7 +1121,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 23
+        "register": 40
       },
       "enableBy": "config"
     },
@@ -1138,7 +1138,7 @@
             0
           ]
         },
-        "register": 1
+        "register": 2
       },
       "enableBy": "config"
     },
@@ -1155,7 +1155,7 @@
             0
           ]
         },
-        "register": 1
+        "register": 0
       },
       "enableBy": "register"
     },
@@ -1181,7 +1181,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "enableBy": "config"
     },
@@ -1194,7 +1194,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 22
+        "register": 38
       }
     },
     "@umijs/preset-umi/dist/features/mpa/mpa": {
@@ -1206,7 +1206,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "enableBy": "config"
     },
@@ -1231,7 +1231,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register"
     },
@@ -1244,7 +1244,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config"
     },
@@ -1286,7 +1286,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "enableBy": "register"
     },
@@ -1312,7 +1312,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "config"
     },
@@ -1325,7 +1325,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -1338,7 +1338,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 5
       },
       "enableBy": "register"
     },
@@ -1351,7 +1351,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 8
       },
       "enableBy": "config"
     },
@@ -1376,7 +1376,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 4
       },
       "enableBy": "config"
     },
@@ -1389,7 +1389,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 5
       },
       "enableBy": "register"
     },
@@ -1402,7 +1402,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 4
       },
       "enableBy": "register"
     },
@@ -1415,7 +1415,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 3
       },
       "enableBy": "config"
     },
@@ -1441,7 +1441,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 4
+        "register": 8
       }
     },
     "@umijs/preset-umi/dist/features/monorepo/redirect": {
@@ -1453,7 +1453,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 14
+        "register": 68
       },
       "enableBy": "config"
     },
@@ -1466,7 +1466,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 4
       }
     },
     "@umijs/preset-umi/dist/features/clickToComponent/clickToComponent": {
@@ -1503,7 +1503,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 16
       },
       "enableBy": "config"
     },
@@ -1516,7 +1516,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 11
       }
     },
     "@umijs/preset-umi/dist/features/swc/swc": {
@@ -1529,7 +1529,7 @@
       "time": {
         "hooks": {
           "addOnDemandDeps": [
-            0
+            1
           ]
         },
         "register": 1
@@ -1545,7 +1545,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 9
       }
     },
     "@umijs/preset-umi/dist/features/mako/mako": {
@@ -1582,7 +1582,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       }
     },
     "@umijs/preset-umi/dist/features/routePreloadOnLoad/routePreloadOnLoad": {
@@ -1594,7 +1594,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 17
+        "register": 20
       }
     },
     "@umijs/preset-umi/dist/features/forget/forget": {
@@ -1645,7 +1645,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 26
+        "register": 31
       },
       "enableBy": "register"
     },
@@ -1658,7 +1658,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 16
+        "register": 72
       }
     },
     "@umijs/preset-umi/dist/commands/help": {
@@ -1670,7 +1670,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 31
       },
       "enableBy": "register"
     },
@@ -1683,7 +1683,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -1709,7 +1709,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -1722,7 +1722,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register"
     },
@@ -1735,7 +1735,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "enableBy": "register"
     },
@@ -1787,7 +1787,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 2
       },
       "enableBy": "register"
     },
@@ -1800,7 +1800,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 2
       },
       "enableBy": "register"
     },
@@ -1839,7 +1839,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
@@ -1865,7 +1865,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 20
       },
       "enableBy": "register"
     },
@@ -1917,7 +1917,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 2
       },
       "enableBy": "register"
     },
@@ -1930,33 +1930,33 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 13
       },
       "enableBy": "register"
     },
     "dumi/dist/registerMethods": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/registerMethods.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/registerMethods.js",
       "id": "dumi/dist/registerMethods",
       "key": "dumi:registerMethods",
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 7
       },
       "enableBy": "register"
     },
     "dumi/dist/features/configPlugins/index": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/configPlugins/index.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/configPlugins/index.js",
       "id": "dumi/dist/features/configPlugins/index",
       "key": "index",
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 172
       },
       "enableBy": "register"
     },
@@ -2053,14 +2053,14 @@
     "dumi/dist/features/autoAlias": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/autoAlias.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/autoAlias.js",
       "id": "dumi/dist/features/autoAlias",
       "key": "autoAlias",
       "config": {},
       "time": {
         "hooks": {
           "modifyConfig": [
-            0
+            1
           ]
         },
         "register": 1
@@ -2069,30 +2069,30 @@
     "dumi/dist/features/derivative": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/derivative.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/derivative.js",
       "id": "dumi/dist/features/derivative",
       "key": "dumi:derivative",
       "config": {},
       "time": {
         "hooks": {
           "modifyConfig": [
-            1
+            0
           ],
           "modifyDefaultConfig": [
             0
           ],
           "onCheck": [
-            1
+            0
           ]
         },
-        "register": 4
+        "register": 6
       },
       "enableBy": "register"
     },
     "@umijs/plugins": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/compiled/@umijs/plugins/index.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/compiled/@umijs/plugins/index.js",
       "id": "@umijs/plugins",
       "key": "analytics",
       "config": {
@@ -2100,13 +2100,13 @@
       },
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       }
     },
     "dumi/dist/features/sideEffects/index": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/sideEffects/index.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/sideEffects/index.js",
       "id": "dumi/dist/features/sideEffects/index",
       "key": "dumi:sideEffects",
       "config": {},
@@ -2119,7 +2119,7 @@
     "dumi/dist/features/exports": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/exports.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/exports.js",
       "id": "dumi/dist/features/exports",
       "key": "dumi:exports",
       "config": {},
@@ -2129,14 +2129,14 @@
             0
           ]
         },
-        "register": 0
+        "register": 1
       },
       "enableBy": "register"
     },
     "dumi/dist/features/compile/index": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/compile/index.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/compile/index.js",
       "id": "dumi/dist/features/compile/index",
       "key": "dumi:compile",
       "config": {},
@@ -2148,37 +2148,37 @@
             0
           ]
         },
-        "register": 24
+        "register": 515
       },
       "enableBy": "register"
     },
     "dumi/dist/features/routes": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/routes.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/routes.js",
       "id": "dumi/dist/features/routes",
       "key": "dumi:routes",
       "config": {},
       "time": {
         "hooks": {
           "modifyDefaultConfig": [
-            0
+            1
           ],
           "addLayouts": [
             0
           ],
           "modifyRoutes": [
-            4
+            6
           ]
         },
-        "register": 1
+        "register": 7
       },
       "enableBy": "register"
     },
     "dumi/dist/features/meta": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/meta.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/meta.js",
       "id": "dumi/dist/features/meta",
       "key": "meta",
       "config": {},
@@ -2195,7 +2195,7 @@
     "dumi/dist/features/tabs": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/tabs.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/tabs.js",
       "id": "dumi/dist/features/tabs",
       "key": "tabs",
       "config": {},
@@ -2215,7 +2215,7 @@
     "dumi/dist/features/theme/index": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/theme/index.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/theme/index.js",
       "id": "dumi/dist/features/theme/index",
       "key": "dumi:theme",
       "config": {},
@@ -2226,17 +2226,17 @@
           ],
           "modifyAppData": [
             0,
-            3
+            4
           ]
         },
-        "register": 22
+        "register": 31
       },
       "enableBy": "register"
     },
     "dumi/dist/features/locales": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/locales.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/locales.js",
       "id": "dumi/dist/features/locales",
       "key": "locales",
       "config": {
@@ -2264,7 +2264,7 @@
     "dumi/dist/features/parser": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/parser.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/parser.js",
       "id": "dumi/dist/features/parser",
       "key": "apiParser",
       "config": {},
@@ -2277,7 +2277,7 @@
     "dumi/dist/features/assets": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/assets.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/assets.js",
       "id": "dumi/dist/features/assets",
       "key": "assets",
       "config": {},
@@ -2289,7 +2289,7 @@
     "dumi/dist/features/exportStatic": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/exportStatic.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/exportStatic.js",
       "id": "dumi/dist/features/exportStatic",
       "key": "dumi:exportStatic",
       "config": {},
@@ -2299,25 +2299,25 @@
             0
           ]
         },
-        "register": 1
+        "register": 0
       }
     },
     "dumi/dist/features/sitemap": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/sitemap.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/sitemap.js",
       "id": "dumi/dist/features/sitemap",
       "key": "sitemap",
       "config": {},
       "time": {
         "hooks": {},
-        "register": 6
+        "register": 8
       }
     },
     "dumi/dist/features/html2sketch": {
       "cwd": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi",
       "type": "plugin",
-      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/html2sketch.js",
+      "path": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/html2sketch.js",
       "id": "dumi/dist/features/html2sketch",
       "key": "html2sketch",
       "config": {},
@@ -2348,7 +2348,7 @@
   },
   "userConfig": {
     "title": "Weave",
-    "outputPath": "dist",
+    "outputPath": "../../dumi-docs",
     "logo": "/weave-dumi-pages/weave.svg",
     "base": "/weave-dumi-pages/",
     "publicPath": "/weave-dumi-pages/",
@@ -2442,7 +2442,7 @@
       "dumi$": "@@/dumi/exports",
       "dumi/theme": "dumi/theme-original",
       "dumi/theme-original": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/apps/docs-dumi/.dumi/tmp-production/dumi/theme",
-      "dumi/theme-default": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/theme-default"
+      "dumi/theme-default": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/theme-default"
     },
     "themeConfig": {
       "footer": "Weave · OffscreenCanvas + Yoga + DisplayList",
@@ -2537,7 +2537,7 @@
     "exportStatic": {},
     "esbuildMinifyIIFE": true,
     "title": "Weave",
-    "outputPath": "dist",
+    "outputPath": "../../dumi-docs",
     "logo": "/weave-dumi-pages/weave.svg",
     "favicons": [
       "/weave-dumi-pages/weave.svg"
@@ -2546,12 +2546,12 @@
       "chrome": 80
     },
     "extraBabelIncludes": [
-      "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/client/theme-api"
+      "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/client/theme-api"
     ],
     "theme": {
       "dark-selector": "~'[data-prefers-color=\"dark\"]'"
     },
-    "babelLoaderCustomize": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/features/compile/babelLoaderCustomize.js",
+    "babelLoaderCustomize": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/features/compile/babelLoaderCustomize.js",
     "define": {
       "SEARCH_WORKER_CODE": "\"use strict\";(()=>{var P=Object.create;var I=Object.defineProperty;var z=Object.getOwnPropertyDescriptor;var D=Object.getOwnPropertyNames,R=Object.getOwnPropertySymbols,B=Object.getPrototypeOf,E=Object.prototype.hasOwnProperty,L=Object.prototype.propertyIsEnumerable;var O=(e,t,i)=>t in e?I(e,t,{enumerable:!0,configurable:!0,writable:!0,value:i}):e[t]=i,M=(e,t)=>{for(var i in t||(t={}))E.call(t,i)&&O(e,i,t[i]);if(R)for(var i of R(t))L.call(t,i)&&O(e,i,t[i]);return e};var F=(e,t)=>()=>(t||e((t={exports:{}}).exports,t),t.exports);var N=(e,t,i,h)=>{if(t&&typeof t==\"object\"||typeof t==\"function\")for(let a of D(t))!E.call(e,a)&&a!==i&&I(e,a,{get:()=>t[a],enumerable:!(h=z(t,a))||h.enumerable});return e};var W=(e,t,i)=>(i=e!=null?P(B(e)):{},N(t||!e||!e.__esModule?I(i,\"default\",{value:e,enumerable:!0}):i,e));var j=F((K,w)=>{w.exports=function(e){var t={};function i(h){if(t[h])return t[h].exports;var a=t[h]={exports:{},id:h,loaded:!1};return e[h].call(a.exports,a,a.exports,i),a.loaded=!0,a.exports}return i.m=e,i.c=t,i.p=\"\",i(0)}([function(e,t,i){e.exports=i(1)},function(e,t,i){\"use strict\";Object.defineProperty(t,\"__esModule\",{value:!0});var h=i(2);Object.defineProperty(t,\"combineChunks\",{enumerable:!0,get:function(){return h.combineChunks}}),Object.defineProperty(t,\"fillInChunks\",{enumerable:!0,get:function(){return h.fillInChunks}}),Object.defineProperty(t,\"findAll\",{enumerable:!0,get:function(){return h.findAll}}),Object.defineProperty(t,\"findChunks\",{enumerable:!0,get:function(){return h.findChunks}})},function(e,t){\"use strict\";Object.defineProperty(t,\"__esModule\",{value:!0});var i=t.findAll=function(s){var n=s.autoEscape,g=s.caseSensitive,f=g===void 0?!1:g,p=s.findChunks,u=p===void 0?a:p,c=s.sanitize,v=s.searchWords,T=s.textToHighlight;return l({chunksToHighlight:h({chunks:u({autoEscape:n,caseSensitive:f,sanitize:c,searchWords:v,textToHighlight:T})}),totalLength:T?T.length:0})},h=t.combineChunks=function(s){var n=s.chunks;return n=n.sort(function(g,f){return g.start-f.start}).reduce(function(g,f){if(g.length===0)return[f];var p=g.pop();if(f.start<=p.end){var u=Math.max(p.end,f.end);g.push({highlight:!1,start:p.start,end:u})}else g.push(p,f);return g},[]),n},a=function(s){var n=s.autoEscape,g=s.caseSensitive,f=s.sanitize,p=f===void 0?d:f,u=s.searchWords,c=s.textToHighlight;return c=p(c),u.filter(function(v){return v}).reduce(function(v,T){T=p(T),n&&(T=r(T));for(var m=new RegExp(T,g?\"g\":\"gi\"),x=void 0;x=m.exec(c);){var S=x.index,$=m.lastIndex;$>S&&v.push({highlight:!1,start:S,end:$}),x.index===m.lastIndex&&m.lastIndex++}return v},[])};t.findChunks=a;var l=t.fillInChunks=function(s){var n=s.chunksToHighlight,g=s.totalLength,f=[],p=function(v,T,m){T-v>0&&f.push({start:v,end:T,highlight:m})};if(n.length===0)p(0,g,!1);else{var u=0;n.forEach(function(c){p(u,c.start,!1),p(c.start,c.end,!0),u=c.end}),p(u,g,!1)}return f};function d(o){return o}function r(o){return o.replace(/[\\-\\[\\]\\/\\{\\}\\(\\)\\*\\+\\?\\.\\\\\\^\\$\\|]/g,\"\\\\$&\")}}])});var C=W(j());var H=\"tab\";function k(e,t,i,h,a){let l=a!==void 0;return h.reduce((r,o)=>(o.tocIndex===a&&(r[o.paraId]=(r[o.paraId]||\"\").concat(o.value)),r),[]).filter(Boolean).length||l?{rawTitle:e,title:t,link:i,paragraphs:h.reduce((r,o)=>{var s,n;return o.tocIndex===a&&((n=r[s=o.paraId])!=null||(r[s]=\"\"),r[o.paraId]+=o.value),r},[]).filter(Boolean)}:null}function y(e){return[e.title,e.subtitle].filter(Boolean).join(\" \")}function _(e,t,i){let h=[],a=Object.values(t).reduce((l,d)=>{var r,o;return d.asset&&((o=l[r=d.routeId])!=null||(l[r]=[]),l[d.routeId].push(d)),l},{});return Object.values(e).forEach(l=>{var d;if(\"meta\"in l&&!(\"isLayout\"in l)){let r=l.meta,o=l.path.replace(/^([^/])/,\"/$1\")||\"/\",s=i.find(u=>o===u.link||o.startsWith(`${u.activePath}/`)),n=(a[l.id]||[]).map(u=>{var c;return(c=u.asset)==null?void 0:c.id}),g=k(\"\",y(r.frontmatter),o,r.texts),f=r.toc.reduce((u,c,v)=>{if(!n.includes(c.id)&&c.depth>=1){let T=y(r.frontmatter);c.depth!==1&&(T=`${T} - ${c.title}`),u.push(k(c.title,T,`${o}#${c.id}`,r.texts,v))}return u},[]),p=(r.tabs||[]).reduce((u,{key:c,meta:v})=>{let T=k(\"\",`${y(r.frontmatter)} - ${v.frontmatter.title}`,`${o}?${H}=${c}`,v.texts);return T&&u.push(T),u.push(...v.toc.map((m,x)=>k(m.title,`${y(r.frontmatter)} - ${v.frontmatter.title} - ${m.title}`,`${o}?${H}=${c}#${m.id}`,v.texts,x))),u},[]);h.push({navTitle:s==null?void 0:s.title,navOrder:s?i.indexOf(s):1/0,title:y(r.frontmatter),link:o,sections:[...g?[g]:[],...f,...p],demos:((d=a[l.id])==null?void 0:d.map(u=>({link:`${o}#${u.asset.id}`,rawTitle:u.asset.title||\"\",title:u.asset.title||y(r.frontmatter),description:u.asset.description||\"\",keywords:u.asset.keywords||[]})))||[]})}}),h}function b(e=\"\",t,i=1){let h=(0,C.findAll)({textToHighlight:e,searchWords:t,autoEscape:!0}),a={};return[h.map(({start:l,end:d,highlight:r},o)=>{let s={text:e.slice(l,d)};return o===0&&!r&&h.length>1&&s.text.length>20&&(s.text=`...${s.text.slice(-20)}`),r&&(s.highlighted=!0,a[t.find(n=>s.text.includes(n))]=i),s}),a]}function Y(e,t){let i=t.split(\" \"),h=new RegExp(t.replace(/[.*+?^${}()|[\\]\\\\]/g,\"\\\\$&\").replace(/\\s+/g,\"|\"),\"i\"),a={};return e.forEach(l=>{var o,s;let d=l.title,r=[];if(l.sections.forEach(n=>{for(let g of n.paragraphs)if(h.test(g)){let[f,p]=b(n.title,i,10),[u,c]=b(g,i);r.push({type:\"content\",link:n.link,priority:Object.values(M(M({},c),p)).reduce((v,T)=>v+T,0),highlightTitleTexts:f,highlightTexts:u,pageTitle:d});return}if(h.test(n.rawTitle)&&!h.test(l.title)){let[g,f]=b(n.title,i,10);r.push({type:\"title\",link:n.link,priority:Object.values(f).reduce((p,u)=>p+u,0),highlightTitleTexts:g,highlightTexts:b(n.paragraphs[0]||\"\",i)[0],pageTitle:d})}}),l.demos.forEach(n=>{if(h.test(n.rawTitle)||h.test(n.description)){let[g,f]=b(n.title,i,10),[p,u]=b(n.description,i);r.push({type:\"demo\",link:n.link,priority:Object.values(M(M({},u),f)).reduce((c,v)=>c+v,0),highlightTitleTexts:g,highlightTexts:p,pageTitle:d})}}),h.test(l.title)){let[n,g]=b(l.title,i,100);r.push({type:\"page\",link:l.link,priority:Object.values(g).reduce((f,p)=>f+p,0),highlightTitleTexts:n,highlightTexts:b(((o=l.sections[0])==null?void 0:o.paragraphs[0])||\"\",i)[0],pageTitle:d})}if(r.length){let n=l.navTitle||\"$ROOT\";(s=a[n])!=null||(a[n]={title:l.navTitle,priority:l.navOrder*1e3,hints:[]}),a[n].hints.push(...r)}}),Object.values(a).forEach(({hints:l})=>{l.sort((d,r)=>r.priority-d.priority)}),Object.values(a).sort((l,d)=>d.priority-l.priority)}var A;self.onmessage=({data:e})=>{switch(e.action){case\"generate-metadata\":A=_(e.args.routes,e.args.demos,e.args.nav);break;case\"get-search-result\":self.postMessage(Y(A,e.args.keywords));break;default:}};})();\n"
     }
@@ -2562,7 +2562,7 @@
       "path": "*",
       "absPath": "/*",
       "parentId": "DocLayout",
-      "file": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/client/pages/404.js"
+      "file": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/client/pages/404.js"
     },
     "dumi-context-layout": {
       "id": "dumi-context-layout",
@@ -2575,7 +2575,7 @@
     "DocLayout": {
       "id": "DocLayout",
       "path": "/",
-      "file": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/theme-default/layouts/DocLayout/index.js",
+      "file": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/theme-default/layouts/DocLayout/index.js",
       "parentId": "dumi-context-layout",
       "absPath": "/",
       "isLayout": true
@@ -2928,7 +2928,7 @@
       "path": "~demos/:id",
       "absPath": "/~demos/:id",
       "parentId": "dumi-context-layout",
-      "file": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_ctsrt2kh6xjtv7fwqiwqchs62i/node_modules/dumi/dist/client/pages/Demo/index.js",
+      "file": "/Users/jiujue/Documents/workspace/webWorkSpace/weave/node_modules/.pnpm/dumi@2.4.21_@babel+core@7.28.6_@swc+helpers@0.5.15_@types+node@25.0.8_@types+react@18.3.27_es_c3xrqtus6aqnsm7t4w6gnqulh4/node_modules/dumi/dist/client/pages/Demo/index.js",
       "prerender": false
     }
   },

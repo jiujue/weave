@@ -9,30 +9,26 @@ export default function Demo(): JSX.Element {
 		() =>
 			sceneFromJSX(
 				<container
-					id='root'
+					id="root"
 					style={{ width: 360, padding: 16, flexDirection: 'column' }}
 					paint={{ background: { color: '#0b1021' } }}
 				>
 					<Text
-						id='title'
+						id="title"
 						textStyle={{
 							fontSize: 18,
 							color: '#e6e6e6',
-							fontWeight: 'bold'
+							fontWeight: 'bold',
 						}}
 					>
 						Weave: sceneFromJSX
 					</Text>
-					<Text
-						id='desc'
-						style={{ marginTop: 8 }}
-						textStyle={{ fontSize: 13, color: '#b7c0ff' }}
-					>
+					<Text id="desc" style={{ marginTop: 8 }} textStyle={{ fontSize: 13, color: '#b7c0ff' }}>
 						把 React JSX 转成纯数据 SceneNode（可 Patch、可跨端）。
 					</Text>
-				</container>
+				</container>,
 			),
-		[]
+		[],
 	)
 
 	return (
@@ -48,7 +44,7 @@ export default function Demo(): JSX.Element {
 						padding: 12,
 						borderRadius: 8,
 						background: '#0b1021',
-						color: '#e6e6e6'
+						color: '#e6e6e6',
 					}}
 				>
 					{JSON.stringify(scene, null, 2)}

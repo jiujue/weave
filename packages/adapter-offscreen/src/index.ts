@@ -1,8 +1,5 @@
 import type { SceneNode, ScenePatch } from '@jiujue/weave-types'
-import {
-	attachWeaveDevtools,
-	createSceneMirror
-} from '@jiujue/weave-devtools-runtime'
+import { attachWeaveDevtools, createSceneMirror } from '@jiujue/weave-devtools-runtime'
 
 export type WeaveWorkerInitMessage = Readonly<{
 	type: 'WEAVE_INIT'
@@ -113,18 +110,11 @@ export type OffscreenClient = Readonly<{
 	resize(dpr?: number, scale?: number): void
 	render(): void
 	dispose(): void
-	hitTest(
-		x: number,
-		y: number
-	): Promise<{ id: string | null; path: readonly string[] }>
-	getNodeInfo(
-		id: string
-	): Promise<{ x: number; y: number; width: number; height: number } | null>
+	hitTest(x: number, y: number): Promise<{ id: string | null; path: readonly string[] }>
+	getNodeInfo(id: string): Promise<{ x: number; y: number; width: number; height: number } | null>
 }>
 
-export function createOffscreenClient(
-	options: OffscreenClientOptions
-): OffscreenClient {
+export function createOffscreenClient(options: OffscreenClientOptions): OffscreenClient {
 	const { canvas, worker } = options
 	const offscreen = canvas.transferControlToOffscreen()
 	let currentDpr = options.dpr ?? (globalThis.devicePixelRatio || 1)
@@ -135,7 +125,7 @@ export function createOffscreenClient(
 	let reqId = 0
 	const pendingRequests = new Map<number, (res: any) => void>()
 
-	worker.addEventListener('message', event => {
+	worker.addEventListener('message', (event) => {
 		const msg = event.data as WeaveWorkerToMainMessage
 		if (msg.type === 'WEAVE_HIT_TEST_RESULT') {
 			const resolve = pendingRequests.get(msg.requestId)
@@ -165,9 +155,9 @@ export function createOffscreenClient(
 				dpr: getDpr(),
 				scale: getScale(),
 				clearColor: options.clearColor,
-				scene: options.scene
+				scene: options.scene,
 			} satisfies WeaveWorkerInitMessage,
-			[offscreen]
+			[offscreen],
 		)
 	}
 
@@ -180,71 +170,71 @@ export function createOffscreenClient(
 			width: rect.width,
 			height: rect.height,
 			dpr: getDpr(),
-			scale: getScale()
+			scale: getScale(),
 		} satisfies WeaveWorkerResizeMessage)
 	}
 
 	const applyPatches = (patches: readonly ScenePatch[]): void => {
 		worker.postMessage({
 			type: 'WEAVE_PATCH',
-			patches
+			patches,
 		} satisfies WeaveWorkerPatchMessage)
 	}
 
 	const setScene = (scene: SceneNode): void => {
 		worker.postMessage({
 			type: 'WEAVE_SET_SCENE',
-			scene
+			scene,
 		} satisfies WeaveWorkerSetSceneMessage)
 	}
 
 	const setClearColor = (color: string): void => {
 		worker.postMessage({
 			type: 'WEAVE_SET_CLEAR_COLOR',
-			color
+			color,
 		} satisfies WeaveWorkerSetClearColorMessage)
 	}
 
 	const render = (): void => {
 		worker.postMessage({
-			type: 'WEAVE_RENDER'
+			type: 'WEAVE_RENDER',
 		} satisfies WeaveWorkerRenderMessage)
 	}
 
 	const dispose = (): void => {
 		worker.postMessage({
-			type: 'WEAVE_DISPOSE'
+			type: 'WEAVE_DISPOSE',
 		} satisfies WeaveWorkerDisposeMessage)
 		worker.terminate()
 	}
 
 	const hitTest = (
 		x: number,
-		y: number
+		y: number,
 	): Promise<{ id: string | null; path: readonly string[] }> => {
-		return new Promise(resolve => {
+		return new Promise((resolve) => {
 			const requestId = ++reqId
 			pendingRequests.set(requestId, resolve)
 			worker.postMessage({
 				type: 'WEAVE_HIT_TEST',
 				requestId,
 				x: x / getScale(),
-				y: y / getScale()
+				y: y / getScale(),
 			} satisfies WeaveWorkerHitTestMessage)
 		})
 	}
 
 	const getNodeInfo = (
-		nodeId: string
+		nodeId: string,
 	): Promise<{
 		x: number
 		y: number
 		width: number
 		height: number
 	} | null> => {
-		return new Promise(resolve => {
+		return new Promise((resolve) => {
 			const requestId = ++reqId
-			pendingRequests.set(requestId, result => {
+			pendingRequests.set(requestId, (result) => {
 				if (!result) {
 					resolve(null)
 					return
@@ -254,13 +244,13 @@ export function createOffscreenClient(
 					x: result.x * s,
 					y: result.y * s,
 					width: result.width * s,
-					height: result.height * s
+					height: result.height * s,
 				})
 			})
 			worker.postMessage({
 				type: 'WEAVE_GET_NODE_INFO',
 				requestId,
-				nodeId
+				nodeId,
 			} satisfies WeaveWorkerGetNodeInfoMessage)
 		})
 	}
@@ -275,7 +265,7 @@ export function createOffscreenClient(
 		render,
 		dispose,
 		hitTest,
-		getNodeInfo
+		getNodeInfo,
 	}
 }
 
@@ -309,20 +299,13 @@ export type WeaveBrowserApp = Readonly<{
 	resize(dpr?: number, scale?: number): void
 	render(): void
 	dispose(): void
-	hitTest(
-		x: number,
-		y: number
-	): Promise<{ id: string | null; path: readonly string[] }>
-	getNodeInfo(
-		id: string
-	): Promise<{ x: number; y: number; width: number; height: number } | null>
+	hitTest(x: number, y: number): Promise<{ id: string | null; path: readonly string[] }>
+	getNodeInfo(id: string): Promise<{ x: number; y: number; width: number; height: number } | null>
 }>
 
-export function createWeaveBrowserApp(
-	options: WeaveBrowserAppOptions
-): WeaveBrowserApp {
+export function createWeaveBrowserApp(options: WeaveBrowserAppOptions): WeaveBrowserApp {
 	const worker = new Worker(new URL('./worker.js', import.meta.url), {
-		type: 'module'
+		type: 'module',
 	})
 	const devtoolsEnabled = options.devtools?.enabled ?? false
 	let currentDpr = options.dpr ?? (globalThis.devicePixelRatio || 1)
@@ -333,7 +316,7 @@ export function createWeaveBrowserApp(
 		clearColor: options.clearColor,
 		dpr: options.dpr,
 		scale: options.scale,
-		scene: options.scene
+		scene: options.scene,
 	})
 	const sceneMirror = createSceneMirror(options.scene ?? null)
 	const devtools = attachWeaveDevtools({
@@ -345,16 +328,16 @@ export function createWeaveBrowserApp(
 		getScene: sceneMirror.getScene,
 		getNodeById: sceneMirror.getNodeById,
 		hitTest: (x: number, y: number) => client.hitTest(x, y),
-		getNodeInfo: (id: string) => client.getNodeInfo(id)
+		getNodeInfo: (id: string) => client.getNodeInfo(id),
 	})
-	worker.addEventListener('message', event => {
+	worker.addEventListener('message', (event) => {
 		const msg = event.data as { type?: string; message?: string }
 		if (msg?.type === 'WEAVE_ERROR') {
 			options.onError?.(msg.message ?? 'Unknown worker error')
 			devtools.emit({
 				type: 'error',
 				message: msg.message ?? 'Unknown worker error',
-				time: Date.now()
+				time: Date.now(),
 			})
 		}
 	})
@@ -370,7 +353,7 @@ export function createWeaveBrowserApp(
 		devtools.emit({
 			type: 'applyPatches',
 			time: Date.now(),
-			count: patches.length
+			count: patches.length,
 		})
 		client.applyPatches(patches)
 	}
@@ -389,7 +372,7 @@ export function createWeaveBrowserApp(
 			time: Date.now(),
 			width: rect.width,
 			height: rect.height,
-			dpr: currentDpr
+			dpr: currentDpr,
 		})
 	}
 
@@ -405,10 +388,7 @@ export function createWeaveBrowserApp(
 		const shiftToHorizontal = wheel.shiftToHorizontal ?? true
 		const rawDX = event.deltaX
 		const rawDY = event.deltaY
-		const dx =
-			shiftToHorizontal && event.shiftKey && axis !== 'y'
-				? rawDY + rawDX
-				: rawDX
+		const dx = shiftToHorizontal && event.shiftKey && axis !== 'y' ? rawDY + rawDX : rawDX
 		const dy = shiftToHorizontal && event.shiftKey ? 0 : rawDY
 
 		if (axis === 'x') scrollX += dx * speed
@@ -421,14 +401,13 @@ export function createWeaveBrowserApp(
 			{
 				op: 'updateScroll',
 				id: wheel.targetId,
-				scroll: { x: scrollX, y: scrollY }
-			}
+				scroll: { x: scrollX, y: scrollY },
+			},
 		])
 		render()
 	}
 
-	if (wheel)
-		options.canvas.addEventListener('wheel', onWheel, { passive: false })
+	if (wheel) options.canvas.addEventListener('wheel', onWheel, { passive: false })
 
 	return {
 		setScene,
@@ -444,6 +423,6 @@ export function createWeaveBrowserApp(
 			client.dispose()
 		},
 		hitTest: client.hitTest,
-		getNodeInfo: client.getNodeInfo
+		getNodeInfo: client.getNodeInfo,
 	}
 }

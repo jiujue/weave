@@ -40,9 +40,7 @@ type WeaveWorkerToWorkerMessage =
 	| { type: 'WEAVE_DISPOSE' }
 
 // Worker -> Main
-type WeaveWorkerToMainMessage =
-	| { type: 'WEAVE_READY' }
-	| { type: 'WEAVE_ERROR'; message: string }
+type WeaveWorkerToMainMessage = { type: 'WEAVE_READY' } | { type: 'WEAVE_ERROR'; message: string }
 ```
 
 如果你想直接看原始定义（含 client 实现），这里也内嵌了源码：
@@ -104,7 +102,7 @@ import { createWeaveApp } from '@jiujue/weave-app'
 const app = createWeaveApp({
 	canvas,
 	clearColor: '#0b1021',
-	onError: console.error
+	onError: console.error,
 })
 app.setScene(scene)
 app.render()

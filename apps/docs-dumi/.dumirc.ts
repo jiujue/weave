@@ -23,15 +23,15 @@ export default defineConfig({
 					{ title: '@jiujue/weave-displaylist', link: '/displaylist' },
 					{
 						title: '@jiujue/weave-adapter-offscreen',
-						link: '/adapter-offscreen'
+						link: '/adapter-offscreen',
 					},
 					{ title: '@jiujue/weave-adapter-node', link: '/adapter-node' },
 					{ title: '@jiujue/weave-app', link: '/app' },
-					{ title: '@jiujue/weave-react', link: '/react' }
-				]
-			}
+					{ title: '@jiujue/weave-react', link: '/react' },
+				],
+			},
 		],
 		footer: 'Weave · OffscreenCanvas + Yoga + DisplayList',
-		socialLinks: {}
-	}
+		socialLinks: {},
+	},
 })

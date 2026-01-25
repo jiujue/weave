@@ -4,7 +4,7 @@ import type {
 	PathCmd,
 	Rect,
 	StrokeStyle,
-	TextStyle
+	TextStyle,
 } from '@jiujue/weave-types'
 
 export type DrawOp =
@@ -73,7 +73,7 @@ function applyTextStyle(ctx: Context2DLike, style: TextStyle): void {
 export function replayDisplayList(
 	ctx: Context2DLike,
 	displayList: DisplayList,
-	options?: ReplayOptions
+	options?: ReplayOptions,
 ): void {
 	const dpr = options?.dpr ?? 1
 	const scale = options?.scale ?? 1

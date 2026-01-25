@@ -1,12 +1,6 @@
 import type { SceneNode } from '@jiujue/weave-types'
 
-export type PropType =
-	| 'string'
-	| 'number'
-	| 'boolean'
-	| 'color'
-	| 'enum'
-	| 'json'
+export type PropType = 'string' | 'number' | 'boolean' | 'color' | 'enum' | 'json'
 
 export type PropSchema = {
 	name: string

@@ -4,19 +4,18 @@ import type { TextMeasureInput, TextMeasurer } from '@jiujue/weave-types'
 
 const measurer: TextMeasurer = {
 	measure(input: TextMeasureInput) {
-		const lineHeight =
-			input.style.lineHeight ?? Math.ceil(input.style.fontSize * 1.2)
+		const lineHeight = input.style.lineHeight ?? Math.ceil(input.style.fontSize * 1.2)
 		const width = Math.min(
 			input.maxWidth ?? Number.POSITIVE_INFINITY,
-			Math.max(0, input.text.length) * (input.style.fontSize * 0.6)
+			Math.max(0, input.text.length) * (input.style.fontSize * 0.6),
 		)
 		return {
 			width,
 			height: lineHeight,
 			lines: [{ text: input.text, width }],
-			lineHeight
+			lineHeight,
 		}
-	}
+	},
 }
 
 describe('weave core', () => {
@@ -26,7 +25,7 @@ describe('weave core', () => {
 			{
 				op: 'updateStyle',
 				id: 'root',
-				style: { padding: 10, gap: 8, flexDirection: 'column' }
+				style: { padding: 10, gap: 8, flexDirection: 'column' },
 			},
 			{
 				op: 'addNode',
@@ -39,15 +38,15 @@ describe('weave core', () => {
 						color: '#000',
 						fontSize: 20,
 						whiteSpace: 'nowrap',
-						textBaseline: 'top'
-					}
-				}
-			}
+						textBaseline: 'top',
+					},
+				},
+			},
 		])
 
 		const frames = engine.layout({ width: 300, height: 200 })
-		const root = frames.find(f => f.id === 'root')
-		const t1 = frames.find(f => f.id === 't1')
+		const root = frames.find((f) => f.id === 'root')
+		const t1 = frames.find((f) => f.id === 't1')
 		expect(root).toBeTruthy()
 		expect(t1).toBeTruthy()
 		expect(t1!.rect.width).toBeGreaterThan(0)
@@ -60,7 +59,7 @@ describe('weave core', () => {
 			{
 				op: 'updateStyle',
 				id: 'root',
-				style: { padding: 12, gap: 10, flexDirection: 'column' }
+				style: { padding: 12, gap: 10, flexDirection: 'column' },
 			},
 			{
 				op: 'addNode',
@@ -71,7 +70,7 @@ describe('weave core', () => {
 					style: { padding: 8, gap: 6, flexDirection: 'column' },
 					paint: {
 						background: { color: '#111' },
-						border: { color: '#222', width: 1 }
+						border: { color: '#222', width: 1 },
 					},
 					children: [
 						{
@@ -83,18 +82,18 @@ describe('weave core', () => {
 								color: '#fff',
 								fontSize: 14,
 								whiteSpace: 'normal',
-								textBaseline: 'top'
-							}
-						}
-					]
-				}
-			}
+								textBaseline: 'top',
+							},
+						},
+					],
+				},
+			},
 		])
 
 		const dl = engine.render({ width: 240, height: 160 })
 		expect(dl.length).toBeGreaterThan(0)
-		expect(dl.some(op => op.op === 'fillRect')).toBe(true)
-		expect(dl.some(op => op.op === 'drawText')).toBe(true)
+		expect(dl.some((op) => op.op === 'fillRect')).toBe(true)
+		expect(dl.some((op) => op.op === 'drawText')).toBe(true)
 	})
 
 	it('clips and scrolls container children', async () => {
@@ -103,7 +102,7 @@ describe('weave core', () => {
 			{
 				op: 'updateStyle',
 				id: 'root',
-				style: { flexDirection: 'column' }
+				style: { flexDirection: 'column' },
 			},
 			{
 				op: 'addNode',
@@ -115,7 +114,7 @@ describe('weave core', () => {
 						width: 120,
 						height: 40,
 						flexDirection: 'column',
-						overflowY: 'scroll'
+						overflowY: 'scroll',
 					},
 					children: [
 						{
@@ -126,8 +125,8 @@ describe('weave core', () => {
 								color: '#fff',
 								fontSize: 20,
 								whiteSpace: 'nowrap',
-								textBaseline: 'top'
-							}
+								textBaseline: 'top',
+							},
 						},
 						{
 							id: 't2',
@@ -137,8 +136,8 @@ describe('weave core', () => {
 								color: '#fff',
 								fontSize: 20,
 								whiteSpace: 'nowrap',
-								textBaseline: 'top'
-							}
+								textBaseline: 'top',
+							},
 						},
 						{
 							id: 't3',
@@ -148,40 +147,31 @@ describe('weave core', () => {
 								color: '#fff',
 								fontSize: 20,
 								whiteSpace: 'nowrap',
-								textBaseline: 'top'
-							}
-						}
-					]
-				}
+								textBaseline: 'top',
+							},
+						},
+					],
+				},
 			},
-			{ op: 'updateScroll', id: 'scroll', scroll: { y: 10 } }
+			{ op: 'updateScroll', id: 'scroll', scroll: { y: 10 } },
 		])
 
 		const dl = engine.render({ width: 300, height: 200 })
-		expect(dl.some(op => op.op === 'clipRect')).toBe(true)
+		expect(dl.some((op) => op.op === 'clipRect')).toBe(true)
 		expect(
 			dl.some(
-				op =>
-					op.op === 'fillRect' &&
-					op.style?.color === '#000000' &&
-					op.style?.alpha === 0.25
-			)
+				(op) => op.op === 'fillRect' && op.style?.color === '#000000' && op.style?.alpha === 0.25,
+			),
 		).toBe(true)
 		expect(
 			dl.some(
-				op =>
-					op.op === 'fillRect' &&
-					op.style?.color === '#94a3b8' &&
-					op.style?.alpha === 0.6
-			)
+				(op) => op.op === 'fillRect' && op.style?.color === '#94a3b8' && op.style?.alpha === 0.6,
+			),
 		).toBe(true)
 		expect(
 			dl.some(
-				op =>
-					op.op === 'translate' &&
-					typeof op.y === 'number' &&
-					Math.abs(op.y + 10) < 1e-6
-			)
+				(op) => op.op === 'translate' && typeof op.y === 'number' && Math.abs(op.y + 10) < 1e-6,
+			),
 		).toBe(true)
 
 		const hit = engine.hitTest({ x: 10, y: 5 })
@@ -202,7 +192,7 @@ describe('weave core', () => {
 						width: 120,
 						height: 40,
 						flexDirection: 'column',
-						overflowX: 'scroll'
+						overflowX: 'scroll',
 					},
 					children: [
 						{
@@ -213,13 +203,13 @@ describe('weave core', () => {
 								color: '#fff',
 								fontSize: 20,
 								whiteSpace: 'nowrap',
-								textBaseline: 'top'
-							}
-						}
-					]
-				}
+								textBaseline: 'top',
+							},
+						},
+					],
+				},
 			},
-			{ op: 'updateScroll', id: 'scrollx', scroll: { x: 10 } }
+			{ op: 'updateScroll', id: 'scrollx', scroll: { x: 10 } },
 		])
 
 		const dl = engine.render({ width: 300, height: 200 })
@@ -228,11 +218,8 @@ describe('weave core', () => {
 		expect(meta!.maxScrollX).toBeGreaterThan(0)
 		expect(
 			dl.some(
-				op =>
-					op.op === 'translate' &&
-					typeof op.x === 'number' &&
-					Math.abs(op.x + 10) < 1e-6
-			)
+				(op) => op.op === 'translate' && typeof op.x === 'number' && Math.abs(op.x + 10) < 1e-6,
+			),
 		).toBe(true)
 	})
 
@@ -252,14 +239,14 @@ describe('weave core', () => {
 						fontSize: 20,
 						lineHeight: 24,
 						whiteSpace: 'normal',
-						textBaseline: 'top'
-					}
-				}
-			}
+						textBaseline: 'top',
+					},
+				},
+			},
 		])
 
 		const dl = engine.render({ width: 200, height: 200 })
-		const drawn = dl.filter(op => op.op === 'drawText')
+		const drawn = dl.filter((op) => op.op === 'drawText')
 		expect(drawn.length).toBe(1)
 	})
 
@@ -276,13 +263,13 @@ describe('weave core', () => {
 						width: 240,
 						height: 120,
 						overflowX: 'auto',
-						overflowY: 'auto'
+						overflowY: 'auto',
 					},
 					columns: [
 						{ id: 'c0', title: 'C0', width: 120 },
 						{ id: 'c1', title: 'C1', width: 120 },
 						{ id: 'c2', title: 'C2', width: 120 },
-						{ id: 'c3', title: 'C3', width: 120 }
+						{ id: 'c3', title: 'C3', width: 120 },
 					],
 					rows: Array.from({ length: 50 }, (_, i) => ({
 						id: `r${i}`,
@@ -290,39 +277,30 @@ describe('weave core', () => {
 							c0: `row${i}`,
 							c1: String(i * 2),
 							c2: String(i * 3),
-							c3: String(i * 4)
-						}
+							c3: String(i * 4),
+						},
 					})),
-					tableStyle: { headerRowHeight: 24, rowHeight: 20 }
-				}
+					tableStyle: { headerRowHeight: 24, rowHeight: 20 },
+				},
 			},
-			{ op: 'updateScroll', id: 'table', scroll: { x: 50, y: 60 } }
+			{ op: 'updateScroll', id: 'table', scroll: { x: 50, y: 60 } },
 		])
 
 		const dl = engine.render({ width: 300, height: 260 })
 		expect(
 			dl.some(
-				op =>
-					op.op === 'translate' &&
-					typeof op.x === 'number' &&
-					Math.abs(op.x + 50) < 1e-6
-			)
+				(op) => op.op === 'translate' && typeof op.x === 'number' && Math.abs(op.x + 50) < 1e-6,
+			),
 		).toBe(true)
 		expect(
 			dl.some(
-				op =>
-					op.op === 'translate' &&
-					typeof op.y === 'number' &&
-					Math.abs(op.y + 60) < 1e-6
-			)
+				(op) => op.op === 'translate' && typeof op.y === 'number' && Math.abs(op.y + 60) < 1e-6,
+			),
 		).toBe(true)
 		expect(
 			dl.some(
-				op =>
-					op.op === 'fillRect' &&
-					op.style?.color === '#94a3b8' &&
-					op.style?.alpha === 0.6
-			)
+				(op) => op.op === 'fillRect' && op.style?.color === '#94a3b8' && op.style?.alpha === 0.6,
+			),
 		).toBe(true)
 	})
 
@@ -332,7 +310,7 @@ describe('weave core', () => {
 			{
 				op: 'updateStyle',
 				id: 'root',
-				style: { padding: 12, gap: 10, flexDirection: 'column' }
+				style: { padding: 12, gap: 10, flexDirection: 'column' },
 			},
 			{
 				op: 'addNode',
@@ -348,8 +326,8 @@ describe('weave core', () => {
 							id: 'score',
 							title: 'Score',
 							width: { type: 'auto' },
-							align: 'right'
-						}
+							align: 'right',
+						},
 					],
 					header: [
 						{
@@ -358,18 +336,18 @@ describe('weave core', () => {
 							align: 'center',
 							children: [
 								{ type: 'col', colId: 'name' },
-								{ type: 'col', colId: 'age' }
-							]
+								{ type: 'col', colId: 'age' },
+							],
 						},
 						{
 							id: 'g2',
 							label: 'Metrics',
-							children: [{ type: 'col', colId: 'score' }]
-						}
+							children: [{ type: 'col', colId: 'score' }],
+						},
 					],
 					rows: [
 						{ id: 'r1', cells: { name: 'Alice', age: '30', score: '98' } },
-						{ id: 'r2', cells: { name: 'Bob', age: '41', score: '87' } }
+						{ id: 'r2', cells: { name: 'Bob', age: '41', score: '87' } },
 					],
 					tableStyle: {
 						grid: { color: '#333', width: 1 },
@@ -379,15 +357,15 @@ describe('weave core', () => {
 						headerVAlign: 'middle',
 						cellVAlign: 'middle',
 						headerRowHeight: 30,
-						rowHeight: 34
-					}
-				}
-			}
+						rowHeight: 34,
+					},
+				},
+			},
 		])
 
 		const dl = engine.render({ width: 600, height: 400 })
-		const textOps = dl.filter(op => op.op === 'drawText')
+		const textOps = dl.filter((op) => op.op === 'drawText')
 		expect(textOps.length).toBeGreaterThanOrEqual(2 + 3 + 2 * 3)
-		expect(dl.some(op => op.op === 'drawPath')).toBe(true)
+		expect(dl.some((op) => op.op === 'drawPath')).toBe(true)
 	})
 })

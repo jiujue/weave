@@ -12,7 +12,7 @@ export function initRegistry() {
 				name: 'style.position',
 				label: 'Position',
 				type: 'enum',
-				options: ['relative', 'absolute']
+				options: ['relative', 'absolute'],
 			},
 			{ name: 'style.top', label: 'Top', type: 'number' },
 			{ name: 'style.left', label: 'Left', type: 'number' },
@@ -22,13 +22,13 @@ export function initRegistry() {
 				name: 'style.flexDirection',
 				label: 'Direction',
 				type: 'enum',
-				options: ['row', 'column', 'row-reverse', 'column-reverse']
+				options: ['row', 'column', 'row-reverse', 'column-reverse'],
 			},
 			{
 				name: 'style.flexWrap',
 				label: 'Wrap',
 				type: 'enum',
-				options: ['nowrap', 'wrap', 'wrap-reverse']
+				options: ['nowrap', 'wrap', 'wrap-reverse'],
 			},
 			{
 				name: 'style.justifyContent',
@@ -40,24 +40,24 @@ export function initRegistry() {
 					'flex-end',
 					'space-between',
 					'space-around',
-					'space-evenly'
-				]
+					'space-evenly',
+				],
 			},
 			{
 				name: 'style.alignItems',
 				label: 'Align',
 				type: 'enum',
-				options: ['stretch', 'flex-start', 'center', 'flex-end', 'baseline']
+				options: ['stretch', 'flex-start', 'center', 'flex-end', 'baseline'],
 			},
 			{ name: 'style.padding', label: 'Padding', type: 'number' },
 			{ name: 'style.gap', label: 'Gap', type: 'number' },
-			{ name: 'style.background.color', label: 'Bg Color', type: 'color' }
+			{ name: 'style.background.color', label: 'Bg Color', type: 'color' },
 		],
 		create: () => ({
 			type: 'container',
 			style: { width: 100, height: 100 },
-			children: []
-		})
+			children: [],
+		}),
 	})
 
 	registry.register({
@@ -71,20 +71,20 @@ export function initRegistry() {
 				name: 'style.overflowX',
 				label: 'Overflow X',
 				type: 'enum',
-				options: ['visible', 'hidden', 'scroll', 'auto']
+				options: ['visible', 'hidden', 'scroll', 'auto'],
 			},
 			{
 				name: 'style.overflowY',
 				label: 'Overflow Y',
 				type: 'enum',
-				options: ['visible', 'hidden', 'scroll', 'auto']
-			}
+				options: ['visible', 'hidden', 'scroll', 'auto'],
+			},
 		],
 		create: () => ({
 			type: 'relative',
 			style: { width: 320, height: 240 },
-			children: []
-		})
+			children: [],
+		}),
 	})
 
 	registry.register({
@@ -97,7 +97,7 @@ export function initRegistry() {
 				name: 'style.position',
 				label: 'Position',
 				type: 'enum',
-				options: ['relative', 'absolute']
+				options: ['relative', 'absolute'],
 			},
 			{ name: 'style.top', label: 'Top', type: 'number' },
 			{ name: 'style.left', label: 'Left', type: 'number' },
@@ -107,13 +107,13 @@ export function initRegistry() {
 			{ name: 'textStyle.color', label: 'Color', type: 'color' },
 			{ name: 'style.flexGrow', label: 'Grow', type: 'number' },
 			{ name: 'style.flexShrink', label: 'Shrink', type: 'number' },
-			{ name: 'style.flexBasis', label: 'Basis', type: 'number' }
+			{ name: 'style.flexBasis', label: 'Basis', type: 'number' },
 		],
 		create: () => ({
 			type: 'text',
 			text: 'Hello',
-			textStyle: { fontSize: 16 }
-		})
+			textStyle: { fontSize: 16 },
+		}),
 	})
 
 	registry.register({
@@ -127,7 +127,7 @@ export function initRegistry() {
 				name: 'style.position',
 				label: 'Position',
 				type: 'enum',
-				options: ['relative', 'absolute']
+				options: ['relative', 'absolute'],
 			},
 			{ name: 'style.top', label: 'Top', type: 'number' },
 			{ name: 'style.left', label: 'Left', type: 'number' },
@@ -137,23 +137,23 @@ export function initRegistry() {
 				name: 'style.overflowX',
 				label: 'Overflow X',
 				type: 'enum',
-				options: ['visible', 'hidden', 'scroll', 'auto']
+				options: ['visible', 'hidden', 'scroll', 'auto'],
 			},
 			{
 				name: 'style.overflowY',
 				label: 'Overflow Y',
 				type: 'enum',
-				options: ['visible', 'hidden', 'scroll', 'auto']
+				options: ['visible', 'hidden', 'scroll', 'auto'],
 			},
 			{
 				name: 'tableStyle.headerRowHeight',
 				label: 'Header Height',
-				type: 'number'
+				type: 'number',
 			},
 			{ name: 'tableStyle.rowHeight', label: 'Row Height', type: 'number' },
 			{ name: 'tableStyle.cellPadding', label: 'Cell Padding', type: 'number' },
 			{ name: 'columns', label: 'Columns', type: 'json' },
-			{ name: 'rows', label: 'Rows', type: 'json' }
+			{ name: 'rows', label: 'Rows', type: 'json' },
 		],
 		create: () => ({
 			type: 'table',
@@ -161,23 +161,23 @@ export function initRegistry() {
 				width: 520,
 				height: 280,
 				overflowX: 'auto',
-				overflowY: 'auto'
+				overflowY: 'auto',
 			},
 			columns: [
 				{
 					id: 'name',
 					title: 'Name',
 					width: { type: 'flex', weight: 2 },
-					minWidth: 140
+					minWidth: 140,
 				},
 				{
 					id: 'role',
 					title: 'Role',
 					width: { type: 'flex', weight: 1 },
-					minWidth: 120
+					minWidth: 120,
 				},
 				{ id: 'score', title: 'Score', width: 90, align: 'right' },
-				{ id: 'city', title: 'City', width: { type: 'auto' }, minWidth: 120 }
+				{ id: 'city', title: 'City', width: { type: 'auto' }, minWidth: 120 },
 			],
 			rows: [
 				{
@@ -186,8 +186,8 @@ export function initRegistry() {
 						name: 'Alice',
 						role: 'Engineer',
 						score: '93',
-						city: 'Shanghai'
-					}
+						city: 'Shanghai',
+					},
 				},
 				{
 					id: 'r2',
@@ -195,24 +195,24 @@ export function initRegistry() {
 						name: 'Bob',
 						role: 'Designer',
 						score: '88',
-						city: 'Shenzhen'
-					}
+						city: 'Shenzhen',
+					},
 				},
 				{
 					id: 'r3',
-					cells: { name: 'Carol', role: 'PM', score: '91', city: 'Beijing' }
+					cells: { name: 'Carol', role: 'PM', score: '91', city: 'Beijing' },
 				},
 				{
 					id: 'r4',
-					cells: { name: 'Dave', role: 'QA', score: '85', city: 'Hangzhou' }
+					cells: { name: 'Dave', role: 'QA', score: '85', city: 'Hangzhou' },
 				},
 				{
 					id: 'r5',
-					cells: { name: 'Eve', role: 'DevOps', score: '95', city: 'Chengdu' }
+					cells: { name: 'Eve', role: 'DevOps', score: '95', city: 'Chengdu' },
 				},
 				{
 					id: 'r6',
-					cells: { name: 'Frank', role: 'Data', score: '89', city: 'Wuhan' }
+					cells: { name: 'Frank', role: 'Data', score: '89', city: 'Wuhan' },
 				},
 				{
 					id: 'r7',
@@ -220,8 +220,8 @@ export function initRegistry() {
 						name: 'Grace',
 						role: 'Support',
 						score: '84',
-						city: 'Nanjing'
-					}
+						city: 'Nanjing',
+					},
 				},
 				{
 					id: 'r8',
@@ -229,10 +229,10 @@ export function initRegistry() {
 						name: 'Heidi',
 						role: 'Marketing',
 						score: '90',
-						city: 'Guangzhou'
-					}
-				}
-			]
-		})
+						city: 'Guangzhou',
+					},
+				},
+			],
+		}),
 	})
 }

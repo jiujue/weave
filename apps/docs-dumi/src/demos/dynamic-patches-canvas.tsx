@@ -27,7 +27,7 @@ function createBrowserTextMeasurer(): TextMeasurer {
 			const width = Math.ceil(ctx.measureText(text).width)
 			const lineHeight = style.lineHeight ?? Math.ceil(style.fontSize * 1.2)
 			return { width, height: lineHeight, lineHeight }
-		}
+		},
 	}
 }
 
@@ -46,7 +46,7 @@ function renderEngineToCanvas(
 	engine: Engine,
 	env: CanvasEnv,
 	width: number,
-	height: number
+	height: number,
 ): number {
 	const dpr = window.devicePixelRatio || 1
 	env.canvas.style.height = `${height}px`
@@ -64,35 +64,32 @@ function renderEngineToCanvas(
 function initialScene(): JSX.Element {
 	return (
 		<Container
-			id='root'
+			id="root"
 			style={{
 				padding: 16,
 				flexDirection: 'column',
-				gap: 8
+				gap: 8,
 			}}
 			paint={{
 				background: { color: '#0b1021' },
-				border: { color: '#334155', width: 1 }
+				border: { color: '#334155', width: 1 },
 			}}
 		>
-			<Text
-				id='title'
-				textStyle={{ fontSize: 16, color: '#e6e6e6', fontWeight: 'bold' }}
-			>
+			<Text id="title" textStyle={{ fontSize: 16, color: '#e6e6e6', fontWeight: 'bold' }}>
 				动态更新：applyPatches + render + replay
 			</Text>
-			<Text id='counter' textStyle={{ fontSize: 13, color: '#b7c0ff' }}>
+			<Text id="counter" textStyle={{ fontSize: 13, color: '#b7c0ff' }}>
 				counter = 0
 			</Text>
 			<Polygon
-				id='wave'
+				id="wave"
 				style={{ width: 360, height: 80 }}
 				points={[
 					{ x: 0, y: 40 },
 					{ x: 90, y: 10 },
 					{ x: 180, y: 70 },
 					{ x: 270, y: 10 },
-					{ x: 360, y: 40 }
+					{ x: 360, y: 40 },
 				]}
 				paint={{ stroke: { color: '#22c55e', width: 2 } }}
 			/>
@@ -106,8 +103,7 @@ function clampInt(v: number, min: number, max: number): number {
 }
 
 export default function Demo(): JSX.Element {
-	const { ref: containerRef, width: containerWidth } =
-		useContainerWidth<HTMLDivElement>(900)
+	const { ref: containerRef, width: containerWidth } = useContainerWidth<HTMLDivElement>(900)
 	const canvasRef = useRef<HTMLCanvasElement | null>(null)
 	const engineRef = useRef<Engine | null>(null)
 	const canvasEnvRef = useRef<CanvasEnv | null>(null)
@@ -127,7 +123,7 @@ export default function Demo(): JSX.Element {
 	const width = Math.max(420, Math.min(desiredWidth, maxAllowedWidth))
 
 	useEffect(() => {
-		setDesiredWidth(w => Math.max(420, Math.min(w, maxAllowedWidth)))
+		setDesiredWidth((w) => Math.max(420, Math.min(w, maxAllowedWidth)))
 	}, [maxAllowedWidth])
 
 	const rerender = (engine: Engine) => {
@@ -148,7 +144,7 @@ export default function Demo(): JSX.Element {
 
 			const engine = await createEngine({
 				textMeasurer,
-				root: sceneFromJSX(initialScene())
+				root: sceneFromJSX(initialScene()),
 			})
 			if (disposed) {
 				engine.dispose()
@@ -180,9 +176,9 @@ export default function Demo(): JSX.Element {
 				style: {
 					padding,
 					flexDirection: 'column',
-					gap: 8
-				}
-			}
+					gap: 8,
+				},
+			},
 		]
 
 		if (showExtra) {
@@ -193,8 +189,8 @@ export default function Demo(): JSX.Element {
 					id: 'extra',
 					type: 'text',
 					text: '这是一个通过 addNode 动态插入的节点',
-					textStyle: { fontSize: 12, color: '#93c5fd' }
-				}
+					textStyle: { fontSize: 12, color: '#93c5fd' },
+				},
 			})
 		} else {
 			patches.push({ op: 'removeNode', id: 'extra' })
@@ -240,45 +236,35 @@ export default function Demo(): JSX.Element {
 					display: 'grid',
 					gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
 					gap: 12,
-					alignItems: 'center'
+					alignItems: 'center',
 				}}
 			>
 				<label style={{ display: 'grid', gap: 6 }}>
 					<div style={{ fontSize: 12, color: '#6b7280' }}>counter</div>
 					<div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-						<button onClick={() => setCounter(c => c + 1)}>+1</button>
-						<button onClick={() => setCounter(c => c - 1)}>-1</button>
+						<button onClick={() => setCounter((c) => c + 1)}>+1</button>
+						<button onClick={() => setCounter((c) => c - 1)}>-1</button>
 						<button onClick={() => setCounter(0)}>reset</button>
 					</div>
 				</label>
 
 				<label style={{ display: 'grid', gap: 6 }}>
-					<div style={{ fontSize: 12, color: '#6b7280' }}>
-						动画波形（replacePoints）
-					</div>
+					<div style={{ fontSize: 12, color: '#6b7280' }}>动画波形（replacePoints）</div>
 					<div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-						<button onClick={() => setRunning(v => !v)}>
-							{running ? 'pause' : 'play'}
-						</button>
-						<span style={{ fontSize: 12, color: '#6b7280' }}>
-							{running ? 'running' : 'paused'}
-						</span>
+						<button onClick={() => setRunning((v) => !v)}>{running ? 'pause' : 'play'}</button>
+						<span style={{ fontSize: 12, color: '#6b7280' }}>{running ? 'running' : 'paused'}</span>
 					</div>
 				</label>
 
 				<label style={{ display: 'grid', gap: 6 }}>
-					<div style={{ fontSize: 12, color: '#6b7280' }}>
-						padding（updateStyle）
-					</div>
+					<div style={{ fontSize: 12, color: '#6b7280' }}>padding（updateStyle）</div>
 					<div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
 						<input
-							type='range'
+							type="range"
 							min={0}
 							max={48}
 							value={padding}
-							onChange={e =>
-								setPadding(clampInt(Number(e.target.value), 0, 48))
-							}
+							onChange={(e) => setPadding(clampInt(Number(e.target.value), 0, 48))}
 						/>
 						<span style={{ fontSize: 12, color: '#6b7280' }}>{padding}</span>
 					</div>
@@ -288,9 +274,9 @@ export default function Demo(): JSX.Element {
 					<div style={{ fontSize: 12, color: '#6b7280' }}>add/remove 节点</div>
 					<div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
 						<input
-							type='checkbox'
+							type="checkbox"
 							checked={showExtra}
-							onChange={e => setShowExtra(e.target.checked)}
+							onChange={(e) => setShowExtra(e.target.checked)}
 						/>
 						<span style={{ fontSize: 12, color: '#6b7280' }}>
 							{showExtra ? 'show extra' : 'hide extra'}
@@ -302,14 +288,12 @@ export default function Demo(): JSX.Element {
 					<div style={{ fontSize: 12, color: '#6b7280' }}>canvas width</div>
 					<div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
 						<input
-							type='range'
+							type="range"
 							min={420}
 							max={maxAllowedWidth}
 							value={desiredWidth}
-							onChange={e =>
-								setDesiredWidth(
-									clampInt(Number(e.target.value), 420, maxAllowedWidth)
-								)
+							onChange={(e) =>
+								setDesiredWidth(clampInt(Number(e.target.value), 420, maxAllowedWidth))
 							}
 						/>
 						<span style={{ fontSize: 12, color: '#6b7280' }}>{width}</span>
@@ -320,13 +304,11 @@ export default function Demo(): JSX.Element {
 					<div style={{ fontSize: 12, color: '#6b7280' }}>canvas height</div>
 					<div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
 						<input
-							type='range'
+							type="range"
 							min={180}
 							max={520}
 							value={height}
-							onChange={e =>
-								setHeight(clampInt(Number(e.target.value), 180, 520))
-							}
+							onChange={(e) => setHeight(clampInt(Number(e.target.value), 180, 520))}
 						/>
 						<span style={{ fontSize: 12, color: '#6b7280' }}>{height}</span>
 					</div>
@@ -341,12 +323,10 @@ export default function Demo(): JSX.Element {
 						width: '100%',
 						maxWidth: `${width}px`,
 						borderRadius: 10,
-						border: '1px solid #e5e7eb'
+						border: '1px solid #e5e7eb',
 					}}
 				/>
-				<div style={{ color: '#6b7280', fontSize: 12 }}>
-					DrawOps：{opCount ?? '-'}
-				</div>
+				<div style={{ color: '#6b7280', fontSize: 12 }}>DrawOps：{opCount ?? '-'}</div>
 			</div>
 		</div>
 	)

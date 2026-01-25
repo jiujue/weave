@@ -9,7 +9,7 @@ import type {
 	LayoutStyle,
 	ScenePatch,
 	TextMeasurer,
-	TextStyle
+	TextStyle,
 } from '@jiujue/weave-types'
 
 const Text = 'text' as any
@@ -32,7 +32,7 @@ function createBrowserTextMeasurer(): TextMeasurer {
 			const width = Math.ceil(ctx.measureText(text).width)
 			const lineHeight = style.lineHeight ?? Math.ceil(style.fontSize * 1.2)
 			return { width, height: lineHeight, lineHeight }
-		}
+		},
 	}
 }
 
@@ -51,7 +51,7 @@ function renderEngineToCanvas(
 	engine: Engine,
 	env: CanvasEnv,
 	width: number,
-	height: number
+	height: number,
 ): number {
 	const dpr = window.devicePixelRatio || 1
 	env.canvas.style.height = `${height}px`
@@ -69,64 +69,52 @@ function renderEngineToCanvas(
 function initialScene(): JSX.Element {
 	return (
 		<container
-			id='root'
+			id="root"
 			style={{
 				padding: 16,
 				flexDirection: 'row',
 				justifyContent: 'space-between',
 				alignItems: 'center',
-				gap: 12
+				gap: 12,
 			}}
 			paint={{
 				background: { color: '#0b1021' },
-				border: { color: '#334155', width: 1 }
+				border: { color: '#334155', width: 1 },
 			}}
 		>
 			<container
-				id='box-a'
+				id="box-a"
 				style={{ width: 140, height: 56, padding: 10 }}
 				paint={{ background: { color: '#1d4ed8' } }}
 			>
-				<Text
-					id='box-a-text'
-					textStyle={{ fontSize: 12, color: '#e5e7eb', fontWeight: 'bold' }}
-				>
+				<Text id="box-a-text" textStyle={{ fontSize: 12, color: '#e5e7eb', fontWeight: 'bold' }}>
 					A (140×56)
 				</Text>
 			</container>
 			<container
-				id='box-b'
+				id="box-b"
 				style={{ width: 120, height: 90, padding: 10 }}
 				paint={{ background: { color: '#16a34a' } }}
 			>
-				<Text
-					id='box-b-text'
-					textStyle={{ fontSize: 12, color: '#e5e7eb', fontWeight: 'bold' }}
-				>
+				<Text id="box-b-text" textStyle={{ fontSize: 12, color: '#e5e7eb', fontWeight: 'bold' }}>
 					B (120×90)
 				</Text>
 			</container>
 			<container
-				id='box-c'
+				id="box-c"
 				style={{ width: 160, height: 70, padding: 10 }}
 				paint={{ background: { color: '#f97316' } }}
 			>
-				<Text
-					id='box-c-text'
-					textStyle={{ fontSize: 12, color: '#0b1021', fontWeight: 'bold' }}
-				>
+				<Text id="box-c-text" textStyle={{ fontSize: 12, color: '#0b1021', fontWeight: 'bold' }}>
 					C (160×70)
 				</Text>
 			</container>
 			<container
-				id='box-d'
+				id="box-d"
 				style={{ width: 110, height: 110, padding: 10 }}
 				paint={{ background: { color: '#a855f7' } }}
 			>
-				<Text
-					id='box-d-text'
-					textStyle={{ fontSize: 12, color: '#0b1021', fontWeight: 'bold' }}
-				>
+				<Text id="box-d-text" textStyle={{ fontSize: 12, color: '#0b1021', fontWeight: 'bold' }}>
 					D (110×110)
 				</Text>
 			</container>
@@ -145,7 +133,7 @@ const justifyOptions: readonly JustifyContent[] = [
 	'flex-end',
 	'space-between',
 	'space-around',
-	'space-evenly'
+	'space-evenly',
 ]
 
 const alignOptions: readonly AlignItems[] = [
@@ -153,12 +141,11 @@ const alignOptions: readonly AlignItems[] = [
 	'flex-start',
 	'center',
 	'flex-end',
-	'baseline'
+	'baseline',
 ]
 
 export default function Demo(): JSX.Element {
-	const { ref: containerRef, width: containerWidth } =
-		useContainerWidth<HTMLDivElement>(960)
+	const { ref: containerRef, width: containerWidth } = useContainerWidth<HTMLDivElement>(960)
 	const canvasRef = useRef<HTMLCanvasElement | null>(null)
 	const engineRef = useRef<Engine | null>(null)
 	const canvasEnvRef = useRef<CanvasEnv | null>(null)
@@ -166,8 +153,7 @@ export default function Demo(): JSX.Element {
 	const textMeasurer = useMemo(() => createBrowserTextMeasurer(), [])
 
 	const [flexDirection, setFlexDirection] = useState<'row' | 'column'>('row')
-	const [justifyContent, setJustifyContent] =
-		useState<JustifyContent>('space-between')
+	const [justifyContent, setJustifyContent] = useState<JustifyContent>('space-between')
 	const [alignItems, setAlignItems] = useState<AlignItems>('center')
 	const [gap, setGap] = useState(12)
 	const [padding, setPadding] = useState(16)
@@ -179,7 +165,7 @@ export default function Demo(): JSX.Element {
 	const width = Math.max(420, Math.min(desiredWidth, maxAllowedWidth))
 
 	useEffect(() => {
-		setDesiredWidth(w => Math.max(420, Math.min(w, maxAllowedWidth)))
+		setDesiredWidth((w) => Math.max(420, Math.min(w, maxAllowedWidth)))
 	}, [maxAllowedWidth])
 
 	const rerender = (engine: Engine) => {
@@ -200,7 +186,7 @@ export default function Demo(): JSX.Element {
 
 			const engine = await createEngine({
 				textMeasurer,
-				root: sceneFromJSX(initialScene())
+				root: sceneFromJSX(initialScene()),
 			})
 			if (disposed) {
 				engine.dispose()
@@ -228,7 +214,7 @@ export default function Demo(): JSX.Element {
 			flexDirection,
 			justifyContent,
 			alignItems,
-			gap
+			gap,
 		}
 
 		const patches: ScenePatch[] = [{ op: 'updateStyle', id: 'root', style }]
@@ -243,19 +229,17 @@ export default function Demo(): JSX.Element {
 					display: 'grid',
 					gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
 					gap: 12,
-					alignItems: 'end'
+					alignItems: 'end',
 				}}
 			>
 				<label style={{ display: 'grid', gap: 6 }}>
 					<div style={{ fontSize: 12, color: '#6b7280' }}>flexDirection</div>
 					<select
 						value={flexDirection}
-						onChange={e =>
-							setFlexDirection(e.target.value === 'column' ? 'column' : 'row')
-						}
+						onChange={(e) => setFlexDirection(e.target.value === 'column' ? 'column' : 'row')}
 					>
-						<option value='row'>row</option>
-						<option value='column'>column</option>
+						<option value="row">row</option>
+						<option value="column">column</option>
 					</select>
 				</label>
 
@@ -263,9 +247,9 @@ export default function Demo(): JSX.Element {
 					<div style={{ fontSize: 12, color: '#6b7280' }}>justifyContent</div>
 					<select
 						value={justifyContent}
-						onChange={e => setJustifyContent(e.target.value as JustifyContent)}
+						onChange={(e) => setJustifyContent(e.target.value as JustifyContent)}
 					>
-						{justifyOptions.map(v => (
+						{justifyOptions.map((v) => (
 							<option key={v} value={v}>
 								{v}
 							</option>
@@ -275,11 +259,8 @@ export default function Demo(): JSX.Element {
 
 				<label style={{ display: 'grid', gap: 6 }}>
 					<div style={{ fontSize: 12, color: '#6b7280' }}>alignItems</div>
-					<select
-						value={alignItems}
-						onChange={e => setAlignItems(e.target.value as AlignItems)}
-					>
-						{alignOptions.map(v => (
+					<select value={alignItems} onChange={(e) => setAlignItems(e.target.value as AlignItems)}>
+						{alignOptions.map((v) => (
 							<option key={v} value={v}>
 								{v}
 							</option>
@@ -291,11 +272,11 @@ export default function Demo(): JSX.Element {
 					<div style={{ fontSize: 12, color: '#6b7280' }}>gap</div>
 					<div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
 						<input
-							type='range'
+							type="range"
 							min={0}
 							max={40}
 							value={gap}
-							onChange={e => setGap(clampInt(Number(e.target.value), 0, 40))}
+							onChange={(e) => setGap(clampInt(Number(e.target.value), 0, 40))}
 						/>
 						<span style={{ fontSize: 12, color: '#6b7280' }}>{gap}</span>
 					</div>
@@ -305,13 +286,11 @@ export default function Demo(): JSX.Element {
 					<div style={{ fontSize: 12, color: '#6b7280' }}>padding</div>
 					<div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
 						<input
-							type='range'
+							type="range"
 							min={0}
 							max={48}
 							value={padding}
-							onChange={e =>
-								setPadding(clampInt(Number(e.target.value), 0, 48))
-							}
+							onChange={(e) => setPadding(clampInt(Number(e.target.value), 0, 48))}
 						/>
 						<span style={{ fontSize: 12, color: '#6b7280' }}>{padding}</span>
 					</div>
@@ -321,40 +300,28 @@ export default function Demo(): JSX.Element {
 					<div style={{ fontSize: 12, color: '#6b7280' }}>constraints</div>
 					<div style={{ display: 'grid', gap: 6 }}>
 						<div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-							<span style={{ width: 48, fontSize: 12, color: '#6b7280' }}>
-								W
-							</span>
+							<span style={{ width: 48, fontSize: 12, color: '#6b7280' }}>W</span>
 							<input
-								type='range'
+								type="range"
 								min={420}
 								max={maxAllowedWidth}
 								value={desiredWidth}
-								onChange={e =>
-									setDesiredWidth(
-										clampInt(Number(e.target.value), 420, maxAllowedWidth)
-									)
+								onChange={(e) =>
+									setDesiredWidth(clampInt(Number(e.target.value), 420, maxAllowedWidth))
 								}
 							/>
-							<span style={{ width: 40, fontSize: 12, color: '#6b7280' }}>
-								{width}
-							</span>
+							<span style={{ width: 40, fontSize: 12, color: '#6b7280' }}>{width}</span>
 						</div>
 						<div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-							<span style={{ width: 48, fontSize: 12, color: '#6b7280' }}>
-								H
-							</span>
+							<span style={{ width: 48, fontSize: 12, color: '#6b7280' }}>H</span>
 							<input
-								type='range'
+								type="range"
 								min={200}
 								max={560}
 								value={height}
-								onChange={e =>
-									setHeight(clampInt(Number(e.target.value), 200, 560))
-								}
+								onChange={(e) => setHeight(clampInt(Number(e.target.value), 200, 560))}
 							/>
-							<span style={{ width: 40, fontSize: 12, color: '#6b7280' }}>
-								{height}
-							</span>
+							<span style={{ width: 40, fontSize: 12, color: '#6b7280' }}>{height}</span>
 						</div>
 					</div>
 				</label>
@@ -368,12 +335,10 @@ export default function Demo(): JSX.Element {
 						width: '100%',
 						maxWidth: `${width}px`,
 						borderRadius: 10,
-						border: '1px solid #e5e7eb'
+						border: '1px solid #e5e7eb',
 					}}
 				/>
-				<div style={{ color: '#6b7280', fontSize: 12 }}>
-					DrawOps：{opCount ?? '-'}
-				</div>
+				<div style={{ color: '#6b7280', fontSize: 12 }}>DrawOps：{opCount ?? '-'}</div>
 			</div>
 		</div>
 	)

@@ -1,0 +1,8 @@
+node_modules
+dist
+.turbo
+.dumi
+apps/devtools-extension/.plasmo
+apps/devtools-extension/build
+pnpm-lock.yaml
+*.png

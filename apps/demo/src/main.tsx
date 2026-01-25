@@ -3,9 +3,7 @@ import type { SceneNode } from '@jiujue/weave-types'
 import { sceneFromJSX } from '@jiujue/weave-react'
 import React from 'react'
 
-const canvasSimple = document.getElementById(
-	'canvasSimple'
-) as HTMLCanvasElement
+const canvasSimple = document.getElementById('canvasSimple') as HTMLCanvasElement
 const canvasTyped = document.getElementById('canvasTyped') as HTMLCanvasElement
 
 const tableColumns = [
@@ -18,7 +16,7 @@ const tableColumns = [
 	{ id: 'q2', title: 'Q2', width: 72, align: 'right' },
 	{ id: 'q3', title: 'Q3', width: 72, align: 'right' },
 	{ id: 'q4', title: 'Q4', width: 72, align: 'right' },
-	{ id: 'total', title: '全年', width: 88, align: 'right' }
+	{ id: 'total', title: '全年', width: 88, align: 'right' },
 ] as const
 
 const tableHeader = [
@@ -29,8 +27,8 @@ const tableHeader = [
 		children: [
 			{ type: 'col', colId: 'name' },
 			{ type: 'col', colId: 'age' },
-			{ type: 'col', colId: 'city' }
-		]
+			{ type: 'col', colId: 'city' },
+		],
 	},
 	{
 		id: 'g2',
@@ -38,8 +36,8 @@ const tableHeader = [
 		align: 'center',
 		children: [
 			{ type: 'col', colId: 'dept' },
-			{ type: 'col', colId: 'role' }
-		]
+			{ type: 'col', colId: 'role' },
+		],
 	},
 	{
 		id: 'g3',
@@ -54,17 +52,17 @@ const tableHeader = [
 					{ type: 'col', colId: 'q1' },
 					{ type: 'col', colId: 'q2' },
 					{ type: 'col', colId: 'q3' },
-					{ type: 'col', colId: 'q4' }
-				]
+					{ type: 'col', colId: 'q4' },
+				],
 			},
 			{
 				id: 'g3-2',
 				label: '汇总',
 				align: 'center',
-				children: [{ type: 'col', colId: 'total' }]
-			}
-		]
-	}
+				children: [{ type: 'col', colId: 'total' }],
+			},
+		],
+	},
 ] as const
 
 const tableRows = [
@@ -80,8 +78,8 @@ const tableRows = [
 			q2: '98',
 			q3: '97',
 			q4: '99',
-			total: '98'
-		}
+			total: '98',
+		},
 	},
 	{
 		id: 'r2',
@@ -95,8 +93,8 @@ const tableRows = [
 			q2: '86',
 			q3: '89',
 			q4: '87',
-			total: '88'
-		}
+			total: '88',
+		},
 	},
 	{
 		id: 'r3',
@@ -110,8 +108,8 @@ const tableRows = [
 			q2: '84',
 			q3: '82',
 			q4: '85',
-			total: '83'
-		}
+			total: '83',
+		},
 	},
 	{
 		id: 'r4',
@@ -125,8 +123,8 @@ const tableRows = [
 			q2: '76',
 			q3: '78',
 			q4: '75',
-			total: '75'
-		}
+			total: '75',
+		},
 	},
 	{
 		id: 'r5',
@@ -140,48 +138,42 @@ const tableRows = [
 			q2: '92',
 			q3: '91',
 			q4: '93',
-			total: '92'
-		}
-	}
+			total: '92',
+		},
+	},
 ] as const
 
 const typedScene: SceneNode = (
-	<container
-		id='root'
-		style={{ padding: 24, gap: 16, flexDirection: 'column' }}
-	>
+	<container id="root" style={{ padding: 24, gap: 16, flexDirection: 'column' }}>
 		<text
-			id='title'
+			id="title"
 			textStyle={{
 				color: '#e5e7eb',
 				fontSize: 26,
 				fontWeight: 700,
 				whiteSpace: 'nowrap',
-				textBaseline: 'top'
+				textBaseline: 'top',
 			}}
 		>
 			Weave：Offscreen + Yoga + DisplayList
 		</text>
 
-		<container
-			id='row'
-			style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}
-		>
+		<container id="row" style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
 			<container
-				id='badge'
+				id="badge"
 				style={{ paddingVertical: 10, paddingHorizontal: 12 }}
 				paint={{
 					background: { color: '#111827', alpha: 0.9 },
-					border: { color: '#374151', width: 1 }
+					border: { color: '#374151', width: 1 },
 				}}
 			>
 				<text
-					id='badgeText'
+					id="badgeText"
 					textStyle={{
 						color: '#93c5fd',
 						fontSize: 14,
 						whiteSpace: 'nowrap',
-						textBaseline: 'top'
+						textBaseline: 'top',
 					}}
 				>
 					布局来自 Yoga，渲染靠 DisplayList
@@ -189,60 +181,60 @@ const typedScene: SceneNode = (
 			</container>
 
 			<polygon
-				id='poly'
+				id="poly"
 				style={{ marginLeft: 6 }}
 				points={[
 					{ x: 0, y: 8 },
 					{ x: 40, y: 0 },
 					{ x: 72, y: 22 },
 					{ x: 56, y: 56 },
-					{ x: 16, y: 48 }
+					{ x: 16, y: 48 },
 				]}
 				paint={{
 					fill: { color: '#34d399', alpha: 0.9 },
-					stroke: { color: '#10b981', width: 2, alpha: 0.9 }
+					stroke: { color: '#10b981', width: 2, alpha: 0.9 },
 				}}
 			/>
 		</container>
 
 		<container
-			id='card'
+			id="card"
 			style={{ padding: 16, gap: 10, flexDirection: 'column' }}
 			paint={{
 				background: { color: '#0f172a', alpha: 0.9 },
-				border: { color: '#1f2937', width: 1 }
+				border: { color: '#1f2937', width: 1 },
 			}}
 		>
 			<text
-				id='cardTitle'
+				id="cardTitle"
 				textStyle={{
 					color: '#f8fafc',
 					fontSize: 18,
 					fontWeight: 600,
 					whiteSpace: 'nowrap',
-					textBaseline: 'top'
+					textBaseline: 'top',
 				}}
 			>
 				Text / Container / Polygon 基础元素
 			</text>
 			<text
-				id='cardBody'
+				id="cardBody"
 				style={{ width: 520 }}
 				textStyle={{
 					color: '#cbd5e1',
 					fontSize: 14,
 					whiteSpace: 'normal',
 					textBaseline: 'top',
-					lineHeight: 18
+					lineHeight: 18,
 				}}
 			>
-				这段文字会在 Yoga 的 width 约束下进行测量，生成多行 lines，然后 paint
-				阶段输出多条 drawText 指令（仍然是 DisplayList）。
+				这段文字会在 Yoga 的 width 约束下进行测量，生成多行 lines，然后 paint 阶段输出多条 drawText
+				指令（仍然是 DisplayList）。
 			</text>
 		</container>
 
 		<table
-			id='table1'
+			id="table1"
 			style={{ width: 980 }}
 			columns={tableColumns}
 			header={tableHeader}
@@ -259,7 +251,7 @@ const typedScene: SceneNode = (
 				headerRowHeight: 44,
 				rowHeight: 40,
 				cellPaddingHorizontal: 10,
-				cellPaddingVertical: 8
+				cellPaddingVertical: 8,
 			}}
 		/>
 	</container>
@@ -279,16 +271,16 @@ const simpleScene: SceneNode = sceneFromJSX(
 					fontSize: 26,
 					fontWeight: 700,
 					whiteSpace: 'nowrap',
-					textBaseline: 'top'
-				}
+					textBaseline: 'top',
+				},
 			},
-			'sceneFromJSX（更简单）'
+			'sceneFromJSX（更简单）',
 		),
 		el(
 			'container',
 			{
 				id: 'row',
-				style: { flexDirection: 'row', gap: 16, alignItems: 'center' }
+				style: { flexDirection: 'row', gap: 16, alignItems: 'center' },
 			},
 			el(
 				'container',
@@ -297,8 +289,8 @@ const simpleScene: SceneNode = sceneFromJSX(
 					style: { paddingVertical: 10, paddingHorizontal: 12 },
 					paint: {
 						background: { color: '#111827', alpha: 0.9 },
-						border: { color: '#374151', width: 1 }
-					}
+						border: { color: '#374151', width: 1 },
+					},
 				},
 				el(
 					'text',
@@ -308,11 +300,11 @@ const simpleScene: SceneNode = sceneFromJSX(
 							color: '#93c5fd',
 							fontSize: 14,
 							whiteSpace: 'nowrap',
-							textBaseline: 'top'
-						}
+							textBaseline: 'top',
+						},
 					},
-					'JSX 交给 React element；sceneFromJSX 转成 SceneNode'
-				)
+					'JSX 交给 React element；sceneFromJSX 转成 SceneNode',
+				),
 			),
 			el('polygon', {
 				id: 'poly',
@@ -322,13 +314,13 @@ const simpleScene: SceneNode = sceneFromJSX(
 					{ x: 40, y: 0 },
 					{ x: 72, y: 22 },
 					{ x: 56, y: 56 },
-					{ x: 16, y: 48 }
+					{ x: 16, y: 48 },
 				],
 				paint: {
 					fill: { color: '#34d399', alpha: 0.9 },
-					stroke: { color: '#10b981', width: 2, alpha: 0.9 }
-				}
-			})
+					stroke: { color: '#10b981', width: 2, alpha: 0.9 },
+				},
+			}),
 		),
 		el(
 			'container',
@@ -337,8 +329,8 @@ const simpleScene: SceneNode = sceneFromJSX(
 				style: { padding: 16, gap: 10, flexDirection: 'column' },
 				paint: {
 					background: { color: '#0f172a', alpha: 0.9 },
-					border: { color: '#1f2937', width: 1 }
-				}
+					border: { color: '#1f2937', width: 1 },
+				},
 			},
 			el(
 				'text',
@@ -349,10 +341,10 @@ const simpleScene: SceneNode = sceneFromJSX(
 						fontSize: 18,
 						fontWeight: 600,
 						whiteSpace: 'nowrap',
-						textBaseline: 'top'
-					}
+						textBaseline: 'top',
+					},
 				},
-				'Text / Container / Polygon 基础元素'
+				'Text / Container / Polygon 基础元素',
 			),
 			el(
 				'text',
@@ -364,11 +356,11 @@ const simpleScene: SceneNode = sceneFromJSX(
 						fontSize: 14,
 						whiteSpace: 'normal',
 						textBaseline: 'top',
-						lineHeight: 18
-					}
+						lineHeight: 18,
+					},
 				},
-				'这段文字会在 Yoga 的 width 约束下进行测量，生成多行 lines，然后输出 drawText 指令。'
-			)
+				'这段文字会在 Yoga 的 width 约束下进行测量，生成多行 lines，然后输出 drawText 指令。',
+			),
 		),
 		el('table', {
 			id: 'table1',
@@ -388,10 +380,10 @@ const simpleScene: SceneNode = sceneFromJSX(
 				headerRowHeight: 44,
 				rowHeight: 40,
 				cellPaddingHorizontal: 10,
-				cellPaddingVertical: 8
-			}
-		})
-	)
+				cellPaddingVertical: 8,
+			},
+		}),
+	),
 )
 
 const appSimple = createWeaveApp({
@@ -400,7 +392,7 @@ const appSimple = createWeaveApp({
 	scene: simpleScene,
 	onError(message) {
 		console.error('[weave worker error][simple]', message)
-	}
+	},
 })
 
 const appTyped = createWeaveApp({
@@ -409,7 +401,7 @@ const appTyped = createWeaveApp({
 	scene: typedScene,
 	onError(message) {
 		console.error('[weave worker error][typed]', message)
-	}
+	},
 })
 
 const resize = () => {

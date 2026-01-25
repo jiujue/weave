@@ -12,8 +12,7 @@ try {
 	const mod = await import('@napi-rs/canvas')
 	const GlobalFonts = mod.GlobalFonts
 	if (GlobalFonts && typeof GlobalFonts.registerFromPath === 'function') {
-		registerFromPathFn = (path, family) =>
-			GlobalFonts.registerFromPath(path, family)
+		registerFromPathFn = (path, family) => GlobalFonts.registerFromPath(path, family)
 	}
 } catch {}
 
@@ -54,7 +53,7 @@ if (envFontPath && envFontFamily) {
 		{ path: 'C:\\Windows\\Fonts\\msyh.ttc', family: 'Microsoft YaHei' },
 		{ path: 'C:\\Windows\\Fonts\\msyhbd.ttc', family: 'Microsoft YaHei' },
 		{ path: 'C:\\Windows\\Fonts\\simhei.ttf', family: 'SimHei' },
-		{ path: 'C:\\Windows\\Fonts\\simsun.ttc', family: 'SimSun' }
+		{ path: 'C:\\Windows\\Fonts\\simsun.ttc', family: 'SimSun' },
 	]
 	for (const c of candidates) {
 		if (tryRegisterFont(c.path, c.family)) {
@@ -74,7 +73,7 @@ const fontFamily = [
 	'Source Han Sans SC',
 	'Segoe UI',
 	'Arial',
-	'sans-serif'
+	'sans-serif',
 ].join(', ')
 
 if (registered) console.log(`Using font: ${primaryFontFamily}`)
@@ -85,7 +84,7 @@ const titleStyle = {
 	fontWeight: 700,
 	fontFamily,
 	whiteSpace: 'nowrap',
-	textBaseline: 'top'
+	textBaseline: 'top',
 }
 
 const bodyStyle = {
@@ -94,7 +93,7 @@ const bodyStyle = {
 	fontFamily,
 	whiteSpace: 'normal',
 	textBaseline: 'top',
-	lineHeight: 18
+	lineHeight: 18,
 }
 
 const poly = {
@@ -104,12 +103,12 @@ const poly = {
 		{ x: 50, y: 0 },
 		{ x: 90, y: 35 },
 		{ x: 70, y: 80 },
-		{ x: 20, y: 65 }
+		{ x: 20, y: 65 },
 	],
 	paint: {
 		fill: { color: '#34d399', alpha: 0.9 },
-		stroke: { color: '#10b981', width: 2, alpha: 0.9 }
-	}
+		stroke: { color: '#10b981', width: 2, alpha: 0.9 },
+	},
 }
 
 const tableColumns = [
@@ -122,7 +121,7 @@ const tableColumns = [
 	{ id: 'q2', title: 'Q2', width: 72, align: 'right', vAlign: 'middle' },
 	{ id: 'q3', title: 'Q3', width: 72, align: 'right', vAlign: 'middle' },
 	{ id: 'q4', title: 'Q4', width: 72, align: 'right', vAlign: 'middle' },
-	{ id: 'total', title: '全年', width: 88, align: 'right', vAlign: 'middle' }
+	{ id: 'total', title: '全年', width: 88, align: 'right', vAlign: 'middle' },
 ]
 
 const tableHeader = [
@@ -134,8 +133,8 @@ const tableHeader = [
 		children: [
 			{ type: 'col', colId: 'name' },
 			{ type: 'col', colId: 'age' },
-			{ type: 'col', colId: 'city' }
-		]
+			{ type: 'col', colId: 'city' },
+		],
 	},
 	{
 		id: 'g2',
@@ -144,8 +143,8 @@ const tableHeader = [
 		vAlign: 'middle',
 		children: [
 			{ type: 'col', colId: 'dept' },
-			{ type: 'col', colId: 'role' }
-		]
+			{ type: 'col', colId: 'role' },
+		],
 	},
 	{
 		id: 'g3',
@@ -162,18 +161,18 @@ const tableHeader = [
 					{ type: 'col', colId: 'q1' },
 					{ type: 'col', colId: 'q2' },
 					{ type: 'col', colId: 'q3' },
-					{ type: 'col', colId: 'q4' }
-				]
+					{ type: 'col', colId: 'q4' },
+				],
 			},
 			{
 				id: 'g3-2',
 				label: '汇总',
 				align: 'center',
 				vAlign: 'middle',
-				children: [{ type: 'col', colId: 'total' }]
-			}
-		]
-	}
+				children: [{ type: 'col', colId: 'total' }],
+			},
+		],
+	},
 ]
 
 const tableRows = [
@@ -189,8 +188,8 @@ const tableRows = [
 			q2: '98',
 			q3: '97',
 			q4: '99',
-			total: '98'
-		}
+			total: '98',
+		},
 	},
 	{
 		id: 'r2',
@@ -204,8 +203,8 @@ const tableRows = [
 			q2: '86',
 			q3: '89',
 			q4: '87',
-			total: '88'
-		}
+			total: '88',
+		},
 	},
 	{
 		id: 'r3',
@@ -219,8 +218,8 @@ const tableRows = [
 			q2: '84',
 			q3: '82',
 			q4: '85',
-			total: '83'
-		}
+			total: '83',
+		},
 	},
 	{
 		id: 'r4',
@@ -234,8 +233,8 @@ const tableRows = [
 			q2: '76',
 			q3: '78',
 			q4: '75',
-			total: '75'
-		}
+			total: '75',
+		},
 	},
 	{
 		id: 'r5',
@@ -249,9 +248,9 @@ const tableRows = [
 			q2: '92',
 			q3: '91',
 			q4: '93',
-			total: '92'
-		}
-	}
+			total: '92',
+		},
+	},
 ]
 
 const tableStyle = {
@@ -266,7 +265,7 @@ const tableStyle = {
 	headerRowHeight: 40,
 	rowHeight: 32,
 	cellPaddingHorizontal: 10,
-	cellPaddingVertical: 8
+	cellPaddingVertical: 8,
 }
 
 const el = React.createElement
@@ -277,16 +276,16 @@ const sceneSimple = sceneFromJSX(
 		el(
 			'text',
 			{ id: 'title', textStyle: titleStyle },
-			'Weave Node Render - sceneFromJSX（更简单）'
+			'Weave Node Render - sceneFromJSX（更简单）',
 		),
 		el(
 			'text',
 			{
 				id: 'body',
 				style: { width: 520 },
-				textStyle: bodyStyle
+				textStyle: bodyStyle,
 			},
-			'这个脚本在 Node 环境创建引擎，生成 DisplayList，并通过 @napi-rs/canvas 或 canvas 导出 PNG。'
+			'这个脚本在 Node 环境创建引擎，生成 DisplayList，并通过 @napi-rs/canvas 或 canvas 导出 PNG。',
 		),
 		el('polygon', { id: poly.id, points: poly.points, paint: poly.paint }),
 		el('table', {
@@ -295,9 +294,9 @@ const sceneSimple = sceneFromJSX(
 			columns: tableColumns,
 			header: tableHeader,
 			rows: tableRows,
-			tableStyle
-		})
-	)
+			tableStyle,
+		}),
+	),
 )
 
 const sceneTyped = jsxs('container', {
@@ -307,15 +306,14 @@ const sceneTyped = jsxs('container', {
 		jsx('text', {
 			id: 'title',
 			textStyle: titleStyle,
-			children:
-				'Weave Node Render - @jiujue/weave-types JSX runtime（更强类型）'
+			children: 'Weave Node Render - @jiujue/weave-types JSX runtime（更强类型）',
 		}),
 		jsx('text', {
 			id: 'body',
 			style: { width: 520 },
 			textStyle: bodyStyle,
 			children:
-				'这个场景通过 @jiujue/weave-types/jsx-runtime 生成 SceneNode（相当于 TSX 编译后的输出）。'
+				'这个场景通过 @jiujue/weave-types/jsx-runtime 生成 SceneNode（相当于 TSX 编译后的输出）。',
 		}),
 		jsx('polygon', { id: poly.id, points: poly.points, paint: poly.paint }),
 		jsx('table', {
@@ -324,9 +322,9 @@ const sceneTyped = jsxs('container', {
 			columns: tableColumns,
 			header: tableHeader,
 			rows: tableRows,
-			tableStyle
-		})
-	]
+			tableStyle,
+		}),
+	],
 })
 
 try {
@@ -334,27 +332,21 @@ try {
 		width: 800,
 		height: 480,
 		clearColor: '#0b1020',
-		scene: sceneSimple
+		scene: sceneSimple,
 	})
 	const appTyped = createWeaveApp({
 		width: 800,
 		height: 480,
 		clearColor: '#0b1020',
-		scene: sceneTyped
+		scene: sceneTyped,
 	})
 	try {
 		const pngSimple = await appSimple.renderToPng()
-		await writeFile(
-			new URL('./output.sceneFromJSX.png', import.meta.url),
-			pngSimple
-		)
+		await writeFile(new URL('./output.sceneFromJSX.png', import.meta.url), pngSimple)
 		console.log('Wrote output.sceneFromJSX.png')
 
 		const pngTyped = await appTyped.renderToPng()
-		await writeFile(
-			new URL('./output.jsxRuntime.png', import.meta.url),
-			pngTyped
-		)
+		await writeFile(new URL('./output.jsxRuntime.png', import.meta.url), pngTyped)
 		console.log('Wrote output.jsxRuntime.png')
 	} finally {
 		appSimple.dispose()
@@ -363,8 +355,6 @@ try {
 } catch (err) {
 	const message = err instanceof Error ? err.message : String(err)
 	console.error(message)
-	console.error(
-		'Install one of: pnpm add -D @napi-rs/canvas  OR  pnpm add -D canvas'
-	)
+	console.error('Install one of: pnpm add -D @napi-rs/canvas  OR  pnpm add -D canvas')
 	process.exitCode = 1
 }

@@ -7,14 +7,9 @@ import { createInterface } from 'readline'
 const run = (command, args) => {
 	return new Promise((resolve, reject) => {
 		const child = spawn(command, args, { stdio: 'inherit', shell: true })
-		child.on('close', code => {
+		child.on('close', (code) => {
 			if (code === 0) resolve()
-			else
-				reject(
-					new Error(
-						`Command "${command} ${args.join(' ')}" failed with code ${code}`
-					)
-				)
+			else reject(new Error(`Command "${command} ${args.join(' ')}" failed with code ${code}`))
 		})
 	})
 }
@@ -24,28 +19,27 @@ const runCapture = (command, args) => {
 		const child = spawn(command, args, { shell: true })
 		let stdout = ''
 		let stderr = ''
-		child.stdout?.on('data', data => (stdout += data))
-		child.stderr?.on('data', data => (stderr += data))
-		child.on('close', code => {
+		child.stdout?.on('data', (data) => (stdout += data))
+		child.stderr?.on('data', (data) => (stderr += data))
+		child.on('close', (code) => {
 			if (code === 0) resolve(stdout.trim())
 			else
 				reject(
 					new Error(
-						(stderr || stdout || '').trim() ||
-							`Command "${command} ${args.join(' ')}" failed`
-					)
+						(stderr || stdout || '').trim() || `Command "${command} ${args.join(' ')}" failed`,
+					),
 				)
 		})
 	})
 }
 
-const ask = question => {
+const ask = (question) => {
 	const rl = createInterface({
 		input: process.stdin,
-		output: process.stdout
+		output: process.stdout,
 	})
-	return new Promise(resolve => {
-		rl.question(`\n${question} (Y/n) `, answer => {
+	return new Promise((resolve) => {
+		rl.question(`\n${question} (Y/n) `, (answer) => {
 			rl.close()
 			resolve(answer.trim().toLowerCase() !== 'n')
 		})
@@ -64,9 +58,9 @@ const getPendingChangesets = async () => {
 	try {
 		const entries = await readdir('.changeset', { withFileTypes: true })
 		return entries
-			.filter(e => e.isFile())
-			.map(e => e.name)
-			.filter(name => name.endsWith('.md') && name !== 'README.md')
+			.filter((e) => e.isFile())
+			.map((e) => e.name)
+			.filter((name) => name.endsWith('.md') && name !== 'README.md')
 	} catch {
 		return []
 	}
@@ -82,9 +76,7 @@ async function main() {
 			if (!cont) process.exit(1)
 		}
 
-		const addChangeset = await ask(
-			'1. 是否需要添加新的变更记录 (运行 pnpm changeset)？'
-		)
+		const addChangeset = await ask('1. 是否需要添加新的变更记录 (运行 pnpm changeset)？')
 		if (addChangeset) {
 			console.log('\n运行 changeset（选择包 + patch/minor/major + 填写说明）')
 			await run('pnpm', ['changeset'])
@@ -99,14 +91,12 @@ async function main() {
 		}
 
 		const updateVersion = await ask(
-			'2. 是否需要消耗变更集并更新版本号 (运行 pnpm changeset version)？'
+			'2. 是否需要消耗变更集并更新版本号 (运行 pnpm changeset version)？',
 		)
 		if (updateVersion) {
 			const pendingBeforeVersion = await getPendingChangesets()
 			if (!pendingBeforeVersion.length) {
-				console.log(
-					'\n未发现待消耗的 changeset 文件，changeset version 可能不会产生任何变更'
-				)
+				console.log('\n未发现待消耗的 changeset 文件，changeset version 可能不会产生任何变更')
 			}
 
 			console.log('\n运行 changeset version')
@@ -129,9 +119,7 @@ async function main() {
 			await run('pnpm', ['build'])
 		}
 
-		const publish = await ask(
-			'4. 是否确认发布到 npm (运行 pnpm changeset publish)？'
-		)
+		const publish = await ask('4. 是否确认发布到 npm (运行 pnpm changeset publish)？')
 		if (publish) {
 			const dirtyBeforePublish = await getGitStatusPorcelain()
 			if (dirtyBeforePublish) {
@@ -142,9 +130,7 @@ async function main() {
 			console.log('\n运行 changeset publish')
 			await run('pnpm', ['changeset', 'publish'])
 
-			const push = await ask(
-				'   发布完成。是否推送到远程仓库 (git push --follow-tags)？'
-			)
+			const push = await ask('   发布完成。是否推送到远程仓库 (git push --follow-tags)？')
 			if (push) {
 				await run('pnpm', ['push'])
 			}

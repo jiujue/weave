@@ -53,6 +53,6 @@ export class EditorState {
 
 	private notify() {
 		this.version++
-		this.listeners.forEach(l => l(this))
+		this.listeners.forEach((l) => l(this))
 	}
 }

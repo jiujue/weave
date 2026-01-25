@@ -20,9 +20,7 @@ import { jsx, jsxs } from '@jiujue/weave-types/jsx-runtime'
 const scene = jsxs('container', {
 	id: 'root',
 	style: { padding: 24, flexDirection: 'column', gap: 12 },
-	children: [
-		jsx('text', { id: 't1', textStyle: { fontSize: 16 }, children: 'Hello' })
-	]
+	children: [jsx('text', { id: 't1', textStyle: { fontSize: 16 }, children: 'Hello' })],
 })
 ```
 
@@ -43,8 +41,8 @@ const scene = jsxs('container', {
 export default defineConfig({
 	esbuild: {
 		jsx: 'automatic',
-		jsxImportSource: '@jiujue/weave-types'
-	}
+		jsxImportSource: '@jiujue/weave-types',
+	},
 })
 ```
 
@@ -52,8 +50,8 @@ export default defineConfig({
 
 ```jsx | pure
 const scene = (
-	<container id='root'>
-		<text id='t1'>Hello</text>
+	<container id="root">
+		<text id="t1">Hello</text>
 	</container>
 )
 ```
@@ -66,7 +64,7 @@ const scene = (
 
 ```ts | pure
 export default defineConfig({
-	esbuild: { jsx: 'automatic' }
+	esbuild: { jsx: 'automatic' },
 })
 ```
 
@@ -76,8 +74,8 @@ export default defineConfig({
 /** @jsxImportSource @jiujue/weave-types */
 
 export const scene = (
-	<container id='root'>
-		<text id='t1'>Hello</text>
+	<container id="root">
+		<text id="t1">Hello</text>
 	</container>
 )
 ```

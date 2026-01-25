@@ -11,20 +11,63 @@
 		"docs": "pnpm -r --filter @jiujue/weave-types --filter @jiujue/weave-react --filter @jiujue/weave-displaylist --filter @jiujue/weave-core --filter @jiujue/weave-devtools-runtime --filter @jiujue/weave-adapter-offscreen --filter @jiujue/weave-adapter-worker-image --filter @jiujue/weave-app build && pnpm -C apps/docs dev",
 		"docs:build": "pnpm -r --filter @jiujue/weave-types --filter @jiujue/weave-react --filter @jiujue/weave-displaylist --filter @jiujue/weave-core --filter @jiujue/weave-devtools-runtime --filter @jiujue/weave-adapter-offscreen --filter @jiujue/weave-adapter-worker-image --filter @jiujue/weave-app build && pnpm -C apps/docs build",
 		"docs:preview": "pnpm -C apps/docs preview",
+		"prepare": "husky",
 		"test": "vitest run",
-		"lint": "pnpm -r lint",
+		"lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue,.mjs,.cjs --max-warnings=0",
+		"lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.vue,.mjs,.cjs --fix",
+		"lint:workspace": "pnpm -r lint",
+		"lint-staged": "lint-staged",
+		"format": "prettier . --write",
+		"format:check": "prettier . --check",
+		"check": "pnpm lint && pnpm test",
 		"change": "changeset",
 		"version-packages": "changeset version",
 		"release": "changeset publish",
 		"release-flow": "node scripts/release.js",
-		"commit:changeset": "git add .changeset && git commit -m \"chore: add changeset\"",
-		"commit:version": "git add -A && git commit -m \"chore: version packages\"",
+		"commitlint": "commitlint",
+		"commit": "cz",
 		"push": "git push --follow-tags"
+	},
+	"config": {
+		"commitizen": {
+			"path": "cz-git"
+		}
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx,mjs,cjs,vue}": [
+			"prettier --write",
+			"eslint --fix --max-warnings=50"
+		],
+		"*.{css,scss,less,md,mdx,json,yml,yaml}": [
+			"prettier --write"
+		]
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.29.8",
+		"@commitlint/cli": "^20.3.1",
+		"@commitlint/config-conventional": "^20.3.1",
+		"@eslint/js": "^8.57.1",
+		"@typescript-eslint/eslint-plugin": "^8.53.1",
+		"@typescript-eslint/parser": "^8.53.1",
+		"commitizen": "^4.3.1",
+		"cz-git": "^1.12.0",
+		"eslint": "^8.57.1",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-react": "^7.37.5",
+		"eslint-plugin-react-hooks": "^7.0.1",
+		"eslint-plugin-vue": "^9.33.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.7",
+		"prettier": "^3.8.1",
 		"tsup": "^8.5.1",
 		"typescript": "^5.9.3",
-		"vitest": "^4.0.17"
+		"typescript-eslint": "^8.53.1",
+		"vitest": "^4.0.17",
+		"vue-eslint-parser": "^10.2.0"
+	},
+	"pnpm": {
+		"overrides": {
+			"string-width": "4.2.3"
+		}
 	}
 }

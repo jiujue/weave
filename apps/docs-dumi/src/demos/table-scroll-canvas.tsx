@@ -8,7 +8,7 @@ import type {
 	TableRow,
 	TextMeasureInput,
 	TextMeasurer,
-	TextStyle
+	TextStyle,
 } from '@jiujue/weave-types'
 import { useContainerWidth } from './useContainerWidth'
 
@@ -31,15 +31,11 @@ function createBrowserTextMeasurer(): TextMeasurer {
 		measure(input: TextMeasureInput) {
 			ctx.font = fontFromTextStyle(input.style)
 			const width = Math.ceil(
-				Math.min(
-					input.maxWidth ?? Number.POSITIVE_INFINITY,
-					ctx.measureText(input.text).width
-				)
+				Math.min(input.maxWidth ?? Number.POSITIVE_INFINITY, ctx.measureText(input.text).width),
 			)
-			const lineHeight =
-				input.style.lineHeight ?? Math.ceil(input.style.fontSize * 1.2)
+			const lineHeight = input.style.lineHeight ?? Math.ceil(input.style.fontSize * 1.2)
 			return { width, height: lineHeight, lineHeight }
-		}
+		},
 	}
 }
 
@@ -54,12 +50,7 @@ function ensureCanvasEnv(canvas: HTMLCanvasElement): CanvasEnv | null {
 	return { canvas, ctx }
 }
 
-function renderEngineToCanvas(
-	engine: Engine,
-	env: CanvasEnv,
-	width: number,
-	height: number
-): void {
+function renderEngineToCanvas(engine: Engine, env: CanvasEnv, width: number, height: number): void {
 	const dpr = window.devicePixelRatio || 1
 	env.canvas.style.height = `${height}px`
 	env.canvas.width = Math.floor(width * dpr)
@@ -79,7 +70,7 @@ function createColumns(count: number): readonly TableColumn[] {
 		width: i === 0 ? 180 : 120,
 		align: i === 0 ? 'left' : 'right',
 		cellTextStyle: { fontSize: 12, color: '#e5e7eb' },
-		headerTextStyle: { fontSize: 12, color: '#e5e7eb' }
+		headerTextStyle: { fontSize: 12, color: '#e5e7eb' },
 	}))
 }
 
@@ -96,30 +87,30 @@ function createRows(rowCount: number, colCount: number): readonly TableRow[] {
 function buildScene(
 	columns: readonly TableColumn[],
 	rows: readonly TableRow[],
-	tableHeight: number
+	tableHeight: number,
 ): JSX.Element {
 	return (
 		<Container
-			id='root'
+			id="root"
 			style={{ padding: 16, flexDirection: 'column', gap: 10 }}
 			paint={{
 				background: { color: '#0b1021' },
-				border: { color: '#334155', width: 1 }
+				border: { color: '#334155', width: 1 },
 			}}
 		>
-			<Text id='title' textStyle={{ fontSize: 16, color: '#e5e7eb' }}>
+			<Text id="title" textStyle={{ fontSize: 16, color: '#e5e7eb' }}>
 				Table 滚动：overflowX/overflowY + updateScroll
 			</Text>
-			<Text id='state' textStyle={{ fontSize: 12, color: '#93c5fd' }}>
+			<Text id="state" textStyle={{ fontSize: 12, color: '#93c5fd' }}>
 				scrollX=0, scrollY=0
 			</Text>
 			<Table
-				id='table'
+				id="table"
 				style={{
 					width: 720,
 					height: tableHeight,
 					overflowX: 'auto',
-					overflowY: 'auto'
+					overflowY: 'auto',
 				}}
 				columns={columns}
 				rows={rows}
@@ -135,10 +126,10 @@ function buildScene(
 					headerAlign: 'left',
 					cellAlign: 'left',
 					headerVAlign: 'middle',
-					cellVAlign: 'middle'
+					cellVAlign: 'middle',
 				}}
 			/>
-			<Text id='hint' textStyle={{ fontSize: 12, color: '#94a3b8' }}>
+			<Text id="hint" textStyle={{ fontSize: 12, color: '#94a3b8' }}>
 				提示：把鼠标移到表格区域上滚轮滚动（Shift+滚轮更容易触发横向滚动）。
 			</Text>
 		</Container>
@@ -146,8 +137,7 @@ function buildScene(
 }
 
 export default function Demo(): JSX.Element {
-	const { ref: containerRef, width: containerWidth } =
-		useContainerWidth<HTMLDivElement>(980)
+	const { ref: containerRef, width: containerWidth } = useContainerWidth<HTMLDivElement>(980)
 	const canvasRef = useRef<HTMLCanvasElement | null>(null)
 	const envRef = useRef<CanvasEnv | null>(null)
 	const engineRef = useRef<Engine | null>(null)
@@ -180,7 +170,7 @@ export default function Demo(): JSX.Element {
 
 			const engine = await createEngine({
 				textMeasurer,
-				root: sceneFromJSX(buildScene(columns, rows, tableHeight))
+				root: sceneFromJSX(buildScene(columns, rows, tableHeight)),
 			})
 			if (disposed) {
 				engine.dispose()
@@ -208,15 +198,15 @@ export default function Demo(): JSX.Element {
 					width: 720,
 					height: tableHeight,
 					overflowX: 'auto',
-					overflowY: 'auto'
-				}
+					overflowY: 'auto',
+				},
 			},
 			{ op: 'updateScroll', id: 'table', scroll: { x: scrollX, y: scrollY } },
 			{
 				op: 'updateText',
 				id: 'state',
-				text: `scrollX=${Math.round(scrollX)}, scrollY=${Math.round(scrollY)}`
-			}
+				text: `scrollX=${Math.round(scrollX)}, scrollY=${Math.round(scrollY)}`,
+			},
 		]
 		engine.applyPatches(patches)
 		rerender(engine)
@@ -236,8 +226,8 @@ export default function Demo(): JSX.Element {
 			event.preventDefault()
 			const dx = event.shiftKey ? event.deltaY : event.deltaX
 			const dy = event.shiftKey ? 0 : event.deltaY
-			setScrollX(v => v + dx)
-			setScrollY(v => v + dy)
+			setScrollX((v) => v + dx)
+			setScrollY((v) => v + dy)
 		}
 		canvas.addEventListener('wheel', onWheel, { passive: false })
 		return () => canvas.removeEventListener('wheel', onWheel)
@@ -249,31 +239,31 @@ export default function Demo(): JSX.Element {
 				<label style={{ display: 'grid', gap: 4 }}>
 					<span style={{ fontSize: 12, color: '#334155' }}>table height</span>
 					<input
-						type='range'
+						type="range"
 						min={160}
 						max={360}
 						value={tableHeight}
-						onChange={e => setTableHeight(Number(e.target.value))}
+						onChange={(e) => setTableHeight(Number(e.target.value))}
 					/>
 				</label>
 				<label style={{ display: 'grid', gap: 4 }}>
 					<span style={{ fontSize: 12, color: '#334155' }}>scrollX</span>
 					<input
-						type='range'
+						type="range"
 						min={0}
 						max={1600}
 						value={scrollX}
-						onChange={e => setScrollX(Number(e.target.value))}
+						onChange={(e) => setScrollX(Number(e.target.value))}
 					/>
 				</label>
 				<label style={{ display: 'grid', gap: 4 }}>
 					<span style={{ fontSize: 12, color: '#334155' }}>scrollY</span>
 					<input
-						type='range'
+						type="range"
 						min={0}
 						max={5200}
 						value={scrollY}
-						onChange={e => setScrollY(Number(e.target.value))}
+						onChange={(e) => setScrollY(Number(e.target.value))}
 					/>
 				</label>
 			</div>

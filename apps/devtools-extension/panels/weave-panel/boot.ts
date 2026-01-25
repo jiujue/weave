@@ -23,9 +23,8 @@ if (el) {
 		if (document.getElementById('weave-panel-loading')) {
 			setText(
 				'#92400E',
-				'Weave panel still loading... (Right click -> Inspect to view panel console)'
+				'Weave panel still loading... (Right click -> Inspect to view panel console)',
 			)
 		}
 	}, 1500)
 }
-

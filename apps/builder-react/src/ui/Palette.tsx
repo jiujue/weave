@@ -31,17 +31,15 @@ export function Palette() {
 	}
 
 	return (
-		<div className='grid grid-cols-2 gap-2 p-2'>
-			{components.map(comp => (
+		<div className="grid grid-cols-2 gap-2 p-2">
+			{components.map((comp) => (
 				<button
 					key={comp.type}
-					className='flex flex-col items-center justify-center p-3 border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-300 transition-colors'
+					className="flex flex-col items-center justify-center p-3 border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-300 transition-colors"
 					onClick={() => handleAdd(comp.type)}
 				>
-					<Box size={20} className='text-slate-500 mb-1' />
-					<span className='text-xs text-slate-600 font-medium'>
-						{comp.label}
-					</span>
+					<Box size={20} className="text-slate-500 mb-1" />
+					<span className="text-xs text-slate-600 font-medium">{comp.label}</span>
 				</button>
 			))}
 		</div>

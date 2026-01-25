@@ -27,12 +27,10 @@ const safeRuntimeSendMessage = (message: any) => {
 window.addEventListener('message', (event) => {
 	if (event.source !== window) return
 	const data = event.data as any
-	if (!data || data.source !== BRIDGE_SOURCE || data.version !== BRIDGE_VERSION)
-		return
+	if (!data || data.source !== BRIDGE_SOURCE || data.version !== BRIDGE_VERSION) return
 
 	if (data.kind === 'response') {
-		if (DEBUG)
-			console.log('[weave devtools][content] bridge response', data.requestId)
+		if (DEBUG) console.log('[weave devtools][content] bridge response', data.requestId)
 		const resolve = pending.get(data.requestId)
 		if (!resolve) return
 		pending.delete(data.requestId)
@@ -41,8 +39,7 @@ window.addEventListener('message', (event) => {
 	}
 
 	if (data.kind === 'event') {
-		if (DEBUG)
-			console.log('[weave devtools][content] bridge event', data.event?.type)
+		if (DEBUG) console.log('[weave devtools][content] bridge event', data.event?.type)
 		const ev = data.event as BridgeEvent
 		safeRuntimeSendMessage({
 			channel: CHANNEL,
@@ -55,12 +52,7 @@ window.addEventListener('message', (event) => {
 const requestMainWorld = (payload: BridgeRequest): Promise<any> => {
 	return new Promise((resolve) => {
 		const requestId = ++reqId
-		if (DEBUG)
-			console.log(
-				'[weave devtools][content] bridge request',
-				requestId,
-				payload.method
-			)
+		if (DEBUG) console.log('[weave devtools][content] bridge request', requestId, payload.method)
 		pending.set(requestId, resolve)
 		window.postMessage(
 			{
@@ -70,7 +62,7 @@ const requestMainWorld = (payload: BridgeRequest): Promise<any> => {
 				requestId,
 				payload,
 			},
-			'*'
+			'*',
 		)
 	})
 }
@@ -177,12 +169,7 @@ const handleInspectClick = (e: MouseEvent) => {
 		})
 		if (pickRes?.ok) {
 			const pick = pickRes.result as any
-			if (DEBUG)
-				console.log(
-					'[weave devtools][content] select',
-					pick?.instanceId,
-					pick?.nodeId
-				)
+			if (DEBUG) console.log('[weave devtools][content] select', pick?.instanceId, pick?.nodeId)
 			setOverlayRect(pick?.highlight ?? null)
 			safeRuntimeSendMessage({
 				channel: CHANNEL,
@@ -207,11 +194,7 @@ try {
 		const req = msg as ContentRequestMessage
 		void (async () => {
 			if (DEBUG)
-				console.log(
-					'[weave devtools][content] contentRequest',
-					req.requestId,
-					req.payload.method
-				)
+				console.log('[weave devtools][content] contentRequest', req.requestId, req.payload.method)
 			if (req.payload.method === 'pickNode') {
 				sendResponse({ ok: false, error: 'UNSUPPORTED_FROM_PANEL' })
 				return

@@ -21,12 +21,9 @@ export type WeaveDevtoolsInstance = Readonly<{
 	canvas: HTMLCanvasElement
 	getScene?: () => SceneNode | null
 	getNodeById?: (id: string) => SceneNode | null
-	hitTest: (
-		x: number,
-		y: number
-	) => Promise<{ id: string | null; path: readonly string[] }>
+	hitTest: (x: number, y: number) => Promise<{ id: string | null; path: readonly string[] }>
 	getNodeInfo: (
-		id: string
+		id: string,
 	) => Promise<{ x: number; y: number; width: number; height: number } | null>
 	subscribe?: (listener: (event: WeaveDevtoolsEvent) => void) => () => void
 }>
@@ -65,7 +62,7 @@ export function ensureWeaveDevtoolsHook(): WeaveDevtoolsHook {
 			emit()
 		},
 		list() {
-			return [...instances.values()].map(i => ({ id: i.id, name: i.name }))
+			return [...instances.values()].map((i) => ({ id: i.id, name: i.name }))
 		},
 		get(id) {
 			return instances.get(id)
@@ -75,7 +72,7 @@ export function ensureWeaveDevtoolsHook(): WeaveDevtoolsHook {
 			return () => {
 				listeners.delete(listener)
 			}
-		}
+		},
 	}
 
 	g[KEY] = hook
@@ -96,7 +93,7 @@ export function findNodeById(root: SceneNode, id: string): SceneNode | null {
 function updateNode(
 	root: SceneNode,
 	id: string,
-	updater: (node: SceneNode) => SceneNode
+	updater: (node: SceneNode) => SceneNode,
 ): SceneNode {
 	if (root.id === id) return updater(root)
 
@@ -104,7 +101,7 @@ function updateNode(
 	if (!Array.isArray(children) || children.length === 0) return root
 
 	let changed = false
-	const nextChildren = children.map(c => {
+	const nextChildren = children.map((c) => {
 		const next = updateNode(c, id, updater)
 		if (next !== c) changed = true
 		return next
@@ -114,18 +111,12 @@ function updateNode(
 	return { ...(root as any), children: nextChildren } as SceneNode
 }
 
-function insertNode(
-	root: SceneNode,
-	parentId: string,
-	node: SceneNode,
-	index?: number
-): SceneNode {
+function insertNode(root: SceneNode, parentId: string, node: SceneNode, index?: number): SceneNode {
 	if (root.id === parentId) {
 		const children = (root as any).children as SceneNode[] | undefined
 		if (!Array.isArray(children)) return root
 		const nextChildren = [...children]
-		if (typeof index === 'number' && index >= 0)
-			nextChildren.splice(index, 0, node)
+		if (typeof index === 'number' && index >= 0) nextChildren.splice(index, 0, node)
 		else nextChildren.push(node)
 		return { ...(root as any), children: nextChildren } as SceneNode
 	}
@@ -134,7 +125,7 @@ function insertNode(
 	if (!Array.isArray(children) || children.length === 0) return root
 
 	let changed = false
-	const nextChildren = children.map(c => {
+	const nextChildren = children.map((c) => {
 		const next = insertNode(c, parentId, node, index)
 		if (next !== c) changed = true
 		return next
@@ -148,7 +139,7 @@ function removeNode(root: SceneNode, id: string): SceneNode {
 	const children = (root as any).children as SceneNode[] | undefined
 	if (!Array.isArray(children) || children.length === 0) return root
 
-	const directIndex = children.findIndex(c => c.id === id)
+	const directIndex = children.findIndex((c) => c.id === id)
 	if (directIndex !== -1) {
 		const nextChildren = [...children]
 		nextChildren.splice(directIndex, 1)
@@ -156,7 +147,7 @@ function removeNode(root: SceneNode, id: string): SceneNode {
 	}
 
 	let changed = false
-	const nextChildren = children.map(c => {
+	const nextChildren = children.map((c) => {
 		const next = removeNode(c, id)
 		if (next !== c) changed = true
 		return next
@@ -166,67 +157,55 @@ function removeNode(root: SceneNode, id: string): SceneNode {
 }
 
 function applyPatch(root: SceneNode, patch: ScenePatch): SceneNode {
-	if (patch.op === 'addNode')
-		return insertNode(root, patch.parentId, patch.node, patch.index)
+	if (patch.op === 'addNode') return insertNode(root, patch.parentId, patch.node, patch.index)
 	if (patch.op === 'removeNode') return removeNode(root, patch.id)
 	if (patch.op === 'updateStyle')
-		return updateNode(root, patch.id, node => ({
+		return updateNode(root, patch.id, (node) => ({
 			...(node as any),
-			style: patch.style
+			style: patch.style,
 		}))
 	if (patch.op === 'updateScroll')
-		return updateNode(root, patch.id, node => ({
+		return updateNode(root, patch.id, (node) => ({
 			...(node as any),
-			scroll: patch.scroll
+			scroll: patch.scroll,
 		}))
 	if (patch.op === 'updateText')
-		return updateNode(root, patch.id, node =>
-			node.type === 'text'
-				? ({ ...(node as any), text: patch.text } as SceneNode)
-				: node
+		return updateNode(root, patch.id, (node) =>
+			node.type === 'text' ? ({ ...(node as any), text: patch.text } as SceneNode) : node,
 		)
 	if (patch.op === 'updateTextStyle')
-		return updateNode(root, patch.id, node =>
-			node.type === 'text'
-				? ({ ...(node as any), textStyle: patch.textStyle } as SceneNode)
-				: node
+		return updateNode(root, patch.id, (node) =>
+			node.type === 'text' ? ({ ...(node as any), textStyle: patch.textStyle } as SceneNode) : node,
 		)
 	if (patch.op === 'replacePoints')
-		return updateNode(root, patch.id, node =>
-			node.type === 'polygon'
-				? ({ ...(node as any), points: patch.points } as SceneNode)
-				: node
+		return updateNode(root, patch.id, (node) =>
+			node.type === 'polygon' ? ({ ...(node as any), points: patch.points } as SceneNode) : node,
 		)
 	if (patch.op === 'updateTableData')
-		return updateNode(root, patch.id, node =>
-			node.type === 'table'
-				? ({ ...(node as any), rows: patch.rows } as SceneNode)
-				: node
+		return updateNode(root, patch.id, (node) =>
+			node.type === 'table' ? ({ ...(node as any), rows: patch.rows } as SceneNode) : node,
 		)
 	if (patch.op === 'updateTableColumns')
-		return updateNode(root, patch.id, node =>
+		return updateNode(root, patch.id, (node) =>
 			node.type === 'table'
 				? ({
 						...(node as any),
 						columns: patch.columns,
-						header: patch.header
+						header: patch.header,
 					} as SceneNode)
-				: node
+				: node,
 		)
 	if (patch.op === 'updateTableStyle')
-		return updateNode(root, patch.id, node =>
+		return updateNode(root, patch.id, (node) =>
 			node.type === 'table'
 				? ({ ...(node as any), tableStyle: patch.tableStyle } as SceneNode)
-				: node
+				: node,
 		)
 
 	return root
 }
 
-export function applyScenePatches(
-	root: SceneNode,
-	patches: readonly ScenePatch[]
-): SceneNode {
+export function applyScenePatches(root: SceneNode, patches: readonly ScenePatch[]): SceneNode {
 	let next = root
 	for (const p of patches) next = applyPatch(next, p)
 	return next
@@ -243,14 +222,14 @@ export function createSceneMirror(initialScene: SceneNode | null): SceneMirror {
 	let scene = initialScene
 	return {
 		getScene: () => scene,
-		getNodeById: id => (scene ? findNodeById(scene, id) : null),
+		getNodeById: (id) => (scene ? findNodeById(scene, id) : null),
 		setScene(next) {
 			scene = next
 		},
 		applyPatches(patches) {
 			if (!scene) return
 			scene = applyScenePatches(scene, patches)
-		}
+		},
 	}
 }
 
@@ -262,12 +241,9 @@ export type AttachWeaveDevtoolsOptions = Readonly<{
 	canvas: HTMLCanvasElement
 	getScene?: () => SceneNode | null
 	getNodeById?: (id: string) => SceneNode | null
-	hitTest: (
-		x: number,
-		y: number
-	) => Promise<{ id: string | null; path: readonly string[] }>
+	hitTest: (x: number, y: number) => Promise<{ id: string | null; path: readonly string[] }>
 	getNodeInfo: (
-		id: string
+		id: string,
 	) => Promise<{ x: number; y: number; width: number; height: number } | null>
 }>
 
@@ -281,9 +257,7 @@ function createId(): string {
 	return `weave-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`
 }
 
-export function attachWeaveDevtools(
-	options: AttachWeaveDevtoolsOptions
-): WeaveDevtoolsController {
+export function attachWeaveDevtools(options: AttachWeaveDevtoolsOptions): WeaveDevtoolsController {
 	const enabled = options.enabled ?? false
 	const id = options.id ?? createId()
 	if (!enabled) {
@@ -312,7 +286,7 @@ export function attachWeaveDevtools(
 			return () => {
 				listeners.delete(listener)
 			}
-		}
+		},
 	})
 
 	return {
@@ -325,6 +299,6 @@ export function attachWeaveDevtools(
 			log('unregister', { id })
 			hook.unregister(id)
 			listeners.clear()
-		}
+		},
 	}
 }

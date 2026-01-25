@@ -9,6 +9,5 @@ export default defineConfig({
 	dts: true,
 	outDir: 'dist',
 	clean: false,
-	noExternal: [/.*/]
+	noExternal: [/.*/],
 })
-

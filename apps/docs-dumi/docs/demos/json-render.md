@@ -28,7 +28,7 @@ const initialJson: SceneNode = {
 		alignItems: 'center',
 		padding: 20,
 		gap: 10,
-		background: { color: '#1e293b' }
+		background: { color: '#1e293b' },
 	},
 	children: [
 		{
@@ -43,22 +43,22 @@ const initialJson: SceneNode = {
 				paddingHorizontal: 20,
 				background: { color: '#334155' },
 				marginBottom: 20,
-				borderRadius: 8
+				borderRadius: 8,
 			},
 			children: [
 				{
 					id: 'logo',
 					type: 'text',
 					text: 'WEAVE',
-					textStyle: { fontSize: 24, fontWeight: 700, color: '#38bdf8' }
+					textStyle: { fontSize: 24, fontWeight: 700, color: '#38bdf8' },
 				},
 				{
 					id: 'menu',
 					type: 'text',
 					text: 'Menu',
-					textStyle: { fontSize: 14, color: '#94a3b8' }
-				}
-			]
+					textStyle: { fontSize: 14, color: '#94a3b8' },
+				},
+			],
 		},
 		{
 			id: 'content',
@@ -67,7 +67,7 @@ const initialJson: SceneNode = {
 				width: '100%',
 				flex: 1,
 				flexDirection: 'row',
-				gap: 20
+				gap: 20,
 			},
 			children: [
 				{
@@ -79,28 +79,28 @@ const initialJson: SceneNode = {
 						background: { color: '#334155' },
 						borderRadius: 8,
 						padding: 10,
-						gap: 10
+						gap: 10,
 					},
 					children: [
 						{
 							id: 'item1',
 							type: 'text',
 							text: 'Dashboard',
-							textStyle: { color: '#e2e8f0', fontSize: 14 }
+							textStyle: { color: '#e2e8f0', fontSize: 14 },
 						},
 						{
 							id: 'item2',
 							type: 'text',
 							text: 'Settings',
-							textStyle: { color: '#e2e8f0', fontSize: 14 }
+							textStyle: { color: '#e2e8f0', fontSize: 14 },
 						},
 						{
 							id: 'item3',
 							type: 'text',
 							text: 'Profile',
-							textStyle: { color: '#e2e8f0', fontSize: 14 }
-						}
-					]
+							textStyle: { color: '#e2e8f0', fontSize: 14 },
+						},
+					],
 				},
 				{
 					id: 'main',
@@ -111,26 +111,26 @@ const initialJson: SceneNode = {
 						background: { color: '#475569' },
 						borderRadius: 8,
 						justifyContent: 'center',
-						alignItems: 'center'
+						alignItems: 'center',
 					},
 					children: [
 						{
 							id: 'welcome',
 							type: 'text',
 							text: 'Welcome to Weave',
-							textStyle: { fontSize: 32, color: '#ffffff', fontWeight: 'bold' }
+							textStyle: { fontSize: 32, color: '#ffffff', fontWeight: 'bold' },
 						},
 						{
 							id: 'desc',
 							type: 'text',
 							text: 'Edit JSON below to update me!',
-							textStyle: { fontSize: 16, color: '#cbd5e1' }
-						}
-					]
-				}
-			]
-		}
-	]
+							textStyle: { fontSize: 16, color: '#cbd5e1' },
+						},
+					],
+				},
+			],
+		},
+	],
 }
 
 // 简单的文本测量实现 (浏览器端)
@@ -143,16 +143,14 @@ const createTextMeasurer = (ctx: CanvasRenderingContext2D) => ({
 		return {
 			width: metrics.width,
 			height: (style.fontSize || 14) * 1.2, // 简单估算行高
-			lines: []
+			lines: [],
 		}
-	}
+	},
 })
 
 export default () => {
 	const canvasRef = useRef<HTMLCanvasElement>(null)
-	const [jsonContent, setJsonContent] = useState(
-		JSON.stringify(initialJson, null, 2)
-	)
+	const [jsonContent, setJsonContent] = useState(JSON.stringify(initialJson, null, 2))
 	const [error, setError] = useState('')
 	const engineRef = useRef<any>(null)
 
@@ -168,7 +166,7 @@ export default () => {
 
 			// 1. 创建引擎
 			const engine = await createEngine({
-				textMeasurer: createTextMeasurer(ctx)
+				textMeasurer: createTextMeasurer(ctx),
 			})
 
 			if (mounted) {
@@ -224,7 +222,7 @@ export default () => {
 				style={{
 					border: '1px solid #e2e8f0',
 					borderRadius: 8,
-					overflow: 'hidden'
+					overflow: 'hidden',
 				}}
 			>
 				<canvas
@@ -241,7 +239,7 @@ export default () => {
 					style={{
 						display: 'flex',
 						justifyContent: 'space-between',
-						alignItems: 'center'
+						alignItems: 'center',
 					}}
 				>
 					<span style={{ fontWeight: 'bold', fontSize: 14 }}>Scene JSON</span>
@@ -249,7 +247,7 @@ export default () => {
 				</div>
 				<textarea
 					value={jsonContent}
-					onChange={e => setJsonContent(e.target.value)}
+					onChange={(e) => setJsonContent(e.target.value)}
 					style={{
 						width: '100%',
 						height: 300,
@@ -259,7 +257,7 @@ export default () => {
 						borderRadius: 8,
 						border: `1px solid ${error ? 'red' : '#e2e8f0'}`,
 						backgroundColor: '#f8fafc',
-						resize: 'vertical'
+						resize: 'vertical',
 					}}
 				/>
 			</div>

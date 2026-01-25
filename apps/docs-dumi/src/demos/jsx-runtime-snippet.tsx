@@ -4,8 +4,7 @@ export default function Demo(): JSX.Element {
 	return (
 		<div style={{ lineHeight: 1.7 }}>
 			<div style={{ marginBottom: 8 }}>
-				这段代码展示 <code>@jiujue/weave-types/jsx-runtime</code> 的写法（更偏
-				DSL，强类型）。
+				这段代码展示 <code>@jiujue/weave-types/jsx-runtime</code> 的写法（更偏 DSL，强类型）。
 			</div>
 			<pre
 				style={{
@@ -13,7 +12,7 @@ export default function Demo(): JSX.Element {
 					borderRadius: 8,
 					background: '#0b1021',
 					color: '#e6e6e6',
-					overflow: 'auto'
+					overflow: 'auto',
 				}}
 			>{`/** @jsxImportSource @jiujue/weave-types */
 import type { SceneNode } from '@jiujue/weave-types'

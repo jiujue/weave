@@ -57,12 +57,9 @@ export type WeaveImageClient = Readonly<{
 	dispose(): void
 }>
 
-export function createWeaveImageClient(
-	options: WeaveImageClientOptions
-): WeaveImageClient {
+export function createWeaveImageClient(options: WeaveImageClientOptions): WeaveImageClient {
 	const worker =
-		options.worker ??
-		new Worker(new URL('./worker.js', import.meta.url), { type: 'module' })
+		options.worker ?? new Worker(new URL('./worker.js', import.meta.url), { type: 'module' })
 
 	const dpr = options.dpr ?? (globalThis.devicePixelRatio || 1)
 	let requestId = 0
@@ -90,7 +87,7 @@ export function createWeaveImageClient(
 				width: msg.width,
 				height: msg.height,
 				mime: msg.mime,
-				data: msg.data
+				data: msg.data,
 			})
 		}
 	}
@@ -102,20 +99,20 @@ export function createWeaveImageClient(
 		height: options.height,
 		dpr,
 		clearColor: options.clearColor,
-		scene: options.scene
+		scene: options.scene,
 	} satisfies WeaveImageWorkerToWorkerMessage)
 
 	return {
 		setScene(scene) {
 			worker.postMessage({
 				type: 'WEAVE_IMAGE_SET_SCENE',
-				scene
+				scene,
 			} satisfies WeaveImageWorkerToWorkerMessage)
 		},
 		applyPatches(patches) {
 			worker.postMessage({
 				type: 'WEAVE_IMAGE_PATCH',
-				patches
+				patches,
 			} satisfies WeaveImageWorkerToWorkerMessage)
 		},
 		resize(size) {
@@ -123,7 +120,7 @@ export function createWeaveImageClient(
 				type: 'WEAVE_IMAGE_RESIZE',
 				width: size.width,
 				height: size.height,
-				dpr: size.dpr ?? (globalThis.devicePixelRatio || 1)
+				dpr: size.dpr ?? (globalThis.devicePixelRatio || 1),
 			} satisfies WeaveImageWorkerToWorkerMessage)
 		},
 		render() {
@@ -133,7 +130,7 @@ export function createWeaveImageClient(
 			})
 			worker.postMessage({
 				type: 'WEAVE_IMAGE_RENDER',
-				requestId: id
+				requestId: id,
 			} satisfies WeaveImageWorkerToWorkerMessage)
 			return p
 		},
@@ -142,9 +139,9 @@ export function createWeaveImageClient(
 			pending.clear()
 			worker.removeEventListener('message', onMessage as any)
 			worker.postMessage({
-				type: 'WEAVE_IMAGE_DISPOSE'
+				type: 'WEAVE_IMAGE_DISPOSE',
 			} satisfies WeaveImageWorkerToWorkerMessage)
 			worker.terminate()
-		}
+		},
 	}
 }

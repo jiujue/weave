@@ -12,8 +12,7 @@ export function buildWeaveSceneRuntimeJs(input) {
 	const tableHeight = Number(input?.tableHeight ?? 0)
 	const message = String(input?.message ?? 'Hello')
 
-	const total =
-		sum(rows, 'q1') + sum(rows, 'q2') + sum(rows, 'q3') + sum(rows, 'q4')
+	const total = sum(rows, 'q1') + sum(rows, 'q2') + sum(rows, 'q3') + sum(rows, 'q4')
 
 	return jsxs('container', {
 		id: 'root',
@@ -26,10 +25,9 @@ export function buildWeaveSceneRuntimeJs(input) {
 					fontSize: 26,
 					fontWeight: 700,
 					whiteSpace: 'nowrap',
-					textBaseline: 'top'
+					textBaseline: 'top',
 				},
-				children:
-					'@jiujue/weave-types/jsx-runtime（JS 项目直接用函数，不需要 TS/JSX 编译配置）'
+				children: '@jiujue/weave-types/jsx-runtime（JS 项目直接用函数，不需要 TS/JSX 编译配置）',
 			}),
 			jsxs('container', {
 				id: 'row',
@@ -40,7 +38,7 @@ export function buildWeaveSceneRuntimeJs(input) {
 						style: { paddingVertical: 10, paddingHorizontal: 12 },
 						paint: {
 							background: { color: '#111827', alpha: 0.9 },
-							border: { color: '#374151', width: 1 }
+							border: { color: '#374151', width: 1 },
 						},
 						children: jsx('text', {
 							id: 'badgeText',
@@ -48,10 +46,10 @@ export function buildWeaveSceneRuntimeJs(input) {
 								color: '#93c5fd',
 								fontSize: 14,
 								whiteSpace: 'nowrap',
-								textBaseline: 'top'
+								textBaseline: 'top',
 							},
-							children: message
-						})
+							children: message,
+						}),
 					}),
 					jsx('polygon', {
 						id: 'poly',
@@ -61,19 +59,19 @@ export function buildWeaveSceneRuntimeJs(input) {
 							{ x: 40, y: 0 },
 							{ x: 72, y: 22 },
 							{ x: 56, y: 56 },
-							{ x: 16, y: 48 }
+							{ x: 16, y: 48 },
 						],
 						paint: {
 							fill: { color: `hsl(${hue} 80% 55%)`, alpha: 0.9 },
-							stroke: { color: `hsl(${hue} 80% 45%)`, width: 2, alpha: 0.9 }
-						}
+							stroke: { color: `hsl(${hue} 80% 45%)`, width: 2, alpha: 0.9 },
+						},
 					}),
 					jsx('container', {
 						id: 'total',
 						style: { paddingVertical: 10, paddingHorizontal: 12 },
 						paint: {
 							background: { color: '#0b1021', alpha: 1 },
-							border: { color: '#334155', width: 1 }
+							border: { color: '#334155', width: 1 },
 						},
 						children: jsx('text', {
 							id: 'totalText',
@@ -81,18 +79,18 @@ export function buildWeaveSceneRuntimeJs(input) {
 								color: '#e5e7eb',
 								fontSize: 14,
 								whiteSpace: 'nowrap',
-								textBaseline: 'top'
+								textBaseline: 'top',
 							},
-							children: `Total: ${total}`
-						})
-					})
-				]
+							children: `Total: ${total}`,
+						}),
+					}),
+				],
 			}),
 			jsx('table', {
 				id: 'table',
 				style: {
 					width: 980,
-					...(tableHeight > 0 ? { height: tableHeight } : {})
+					...(tableHeight > 0 ? { height: tableHeight } : {}),
 				},
 				columns: [
 					{ id: 'name', title: '姓名', width: { type: 'flex', weight: 2 } },
@@ -101,7 +99,7 @@ export function buildWeaveSceneRuntimeJs(input) {
 						title: '年龄',
 						width: 72,
 						align: 'right',
-						vAlign: 'middle'
+						vAlign: 'middle',
 					},
 					{ id: 'city', title: '城市', width: { type: 'flex', weight: 2 } },
 					{ id: 'dept', title: '部门', width: { type: 'flex', weight: 2 } },
@@ -111,23 +109,23 @@ export function buildWeaveSceneRuntimeJs(input) {
 						title: 'Q1',
 						width: 72,
 						align: 'right',
-						vAlign: 'middle'
+						vAlign: 'middle',
 					},
 					{
 						id: 'q2',
 						title: 'Q2',
 						width: 72,
 						align: 'right',
-						vAlign: 'middle'
+						vAlign: 'middle',
 					},
 					{
 						id: 'q3',
 						title: 'Q3',
 						width: 72,
 						align: 'right',
-						vAlign: 'middle'
+						vAlign: 'middle',
 					},
-					{ id: 'q4', title: 'Q4', width: 72, align: 'right', vAlign: 'middle' }
+					{ id: 'q4', title: 'Q4', width: 72, align: 'right', vAlign: 'middle' },
 				],
 				rows,
 				tableStyle: {
@@ -142,11 +140,11 @@ export function buildWeaveSceneRuntimeJs(input) {
 					headerTextStyle: {
 						fontSize: 12,
 						color: '#e5e7eb',
-						fontWeight: 'bold'
+						fontWeight: 'bold',
 					},
-					cellTextStyle: { fontSize: 12, color: '#e5e7eb' }
-				}
-			})
-		]
+					cellTextStyle: { fontSize: 12, color: '#e5e7eb' },
+				},
+			}),
+		],
 	})
 }

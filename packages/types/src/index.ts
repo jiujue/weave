@@ -64,12 +64,7 @@ export type JustifyContent =
 	| 'space-between'
 	| 'space-around'
 	| 'space-evenly'
-export type AlignItems =
-	| 'stretch'
-	| 'flex-start'
-	| 'center'
-	| 'flex-end'
-	| 'baseline'
+export type AlignItems = 'stretch' | 'flex-start' | 'center' | 'flex-end' | 'baseline'
 export type FlexWrap = 'no-wrap' | 'wrap' | 'wrap-reverse'
 export type PositionType = 'relative' | 'absolute'
 
@@ -254,12 +249,7 @@ export type TableNode = BaseNode &
 		tableStyle?: TableStyle
 	}>
 
-export type SceneNode =
-	| ContainerNode
-	| RelativeNode
-	| TextNode
-	| PolygonNode
-	| TableNode
+export type SceneNode = ContainerNode | RelativeNode | TextNode | PolygonNode | TableNode
 
 export type SceneRoot = Readonly<{
 	root: SceneNode
@@ -317,14 +307,7 @@ export type Context2DLike = {
 	restore(): void
 	translate(x: number, y: number): void
 	scale?(x: number, y: number): void
-	setTransform?(
-		a: number,
-		b: number,
-		c: number,
-		d: number,
-		e: number,
-		f: number
-	): void
+	setTransform?(a: number, b: number, c: number, d: number, e: number, f: number): void
 
 	beginPath(): void
 	moveTo(x: number, y: number): void

@@ -29,17 +29,17 @@ Chrome 加载方式（开发构建）：
 
 ## 使用
 
-1) 在你的 Weave 页面创建 app 时开启：
+1. 在你的 Weave 页面创建 app 时开启：
 
 ```ts
 createWeaveApp({
-  canvas,
-  scene,
-  devtools: { enabled: true }
+	canvas,
+	scene,
+	devtools: { enabled: true },
 })
 ```
 
-2) 打开该页面的 DevTools，选择 `Weave` 面板。
+2. 打开该页面的 DevTools，选择 `Weave` 面板。
 
 ## 架构
 

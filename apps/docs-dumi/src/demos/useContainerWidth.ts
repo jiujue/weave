@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import type { RefObject } from 'react'
 
 export function useContainerWidth<T extends HTMLElement>(
-	initialWidth = 800
+	initialWidth = 800,
 ): Readonly<{ ref: RefObject<T>; width: number }> {
 	const ref = useRef<T>(null)
 	const [width, setWidth] = useState(initialWidth)

@@ -26,18 +26,11 @@ export type WeaveBrowserApp = Readonly<{
 	resize(dpr?: number, scale?: number): void
 	render(): void
 	dispose(): void
-	hitTest(
-		x: number,
-		y: number
-	): Promise<{ id: string | null; path: readonly string[] }>
-	getNodeInfo(
-		id: string
-	): Promise<{ x: number; y: number; width: number; height: number } | null>
+	hitTest(x: number, y: number): Promise<{ id: string | null; path: readonly string[] }>
+	getNodeInfo(id: string): Promise<{ x: number; y: number; width: number; height: number } | null>
 }>
 
-export function createWeaveApp(
-	options: WeaveBrowserAppOptions
-): WeaveBrowserApp {
+export function createWeaveApp(options: WeaveBrowserAppOptions): WeaveBrowserApp {
 	const app = createWeaveBrowserApp(options)
 	return {
 		kind: 'browser',
@@ -50,6 +43,6 @@ export function createWeaveApp(
 		render: app.render,
 		dispose: app.dispose,
 		hitTest: app.hitTest,
-		getNodeInfo: app.getNodeInfo
+		getNodeInfo: app.getNodeInfo,
 	}
 }

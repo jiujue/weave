@@ -6,7 +6,7 @@ import type {
 	TextMeasureInput,
 	TextMeasureOutput,
 	TextMeasurer,
-	TextStyle
+	TextStyle,
 } from '@jiujue/weave-types'
 import type { WeaveWorkerToWorkerMessage } from './index.js'
 
@@ -33,7 +33,7 @@ const toCanvasFont = (style: TextStyle): string => {
 const measureLineWidth = (
 	ctx2d: OffscreenCanvasRenderingContext2D,
 	text: string,
-	style: TextStyle
+	style: TextStyle,
 ): number => {
 	ctx2d.font = toCanvasFont(style)
 	const base = ctx2d.measureText(text).width
@@ -45,7 +45,7 @@ const measureLineWidth = (
 
 const breakLines = (
 	ctx2d: OffscreenCanvasRenderingContext2D,
-	input: TextMeasureInput
+	input: TextMeasureInput,
 ): { lines: { text: string; width: number }[]; maxWidth: number } => {
 	const { text, style, maxWidth } = input
 	const whiteSpace = style.whiteSpace ?? 'nowrap'
@@ -92,21 +92,18 @@ const breakLines = (
 	return { lines, maxWidth: maxLine }
 }
 
-const createTextMeasurer = (
-	ctx2d: OffscreenCanvasRenderingContext2D
-): TextMeasurer => {
+const createTextMeasurer = (ctx2d: OffscreenCanvasRenderingContext2D): TextMeasurer => {
 	return {
 		measure(input): TextMeasureOutput {
-			const lineHeight =
-				input.style.lineHeight ?? Math.ceil(input.style.fontSize * 1.2)
+			const lineHeight = input.style.lineHeight ?? Math.ceil(input.style.fontSize * 1.2)
 			const { lines, maxWidth } = breakLines(ctx2d, input)
 			return {
 				width: maxWidth,
 				height: lines.length * lineHeight,
 				lines,
-				lineHeight
+				lineHeight,
 			}
-		}
+		},
 	}
 }
 
@@ -114,13 +111,10 @@ let enginePromise: ReturnType<typeof createEngine> | null = null
 let pendingPatches: ScenePatch[] = []
 let pendingScene: SceneNode | null = null
 
-const ensureEngine = async (): Promise<
-	Awaited<ReturnType<typeof createEngine>>
-> => {
+const ensureEngine = async (): Promise<Awaited<ReturnType<typeof createEngine>>> => {
 	if (!ctx) throw new Error('Missing 2D context')
 	// TextMeasurer 在 worker 内由真实 2D ctx 实现；core 只依赖接口，不绑定具体平台。
-	if (!enginePromise)
-		enginePromise = createEngine({ textMeasurer: createTextMeasurer(ctx) })
+	if (!enginePromise) enginePromise = createEngine({ textMeasurer: createTextMeasurer(ctx) })
 	return enginePromise
 }
 
@@ -132,8 +126,7 @@ const resizeCanvas = () => {
 
 const clear = () => {
 	if (!ctx || !canvas) return
-	if (typeof (ctx as any).setTransform === 'function')
-		(ctx as any).setTransform(1, 0, 0, 1, 0, 0)
+	if (typeof (ctx as any).setTransform === 'function') (ctx as any).setTransform(1, 0, 0, 1, 0, 0)
 	ctx.globalAlpha = 1
 	ctx.fillStyle = clearColor
 	ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -243,7 +236,7 @@ self.onmessage = async (event: MessageEvent<WeaveWorkerToWorkerMessage>) => {
 			self.postMessage({
 				type: 'WEAVE_HIT_TEST_RESULT',
 				requestId: msg.requestId,
-				result
+				result,
 			})
 			return
 		}
@@ -261,7 +254,7 @@ self.onmessage = async (event: MessageEvent<WeaveWorkerToWorkerMessage>) => {
 			self.postMessage({
 				type: 'WEAVE_GET_NODE_INFO_RESULT',
 				requestId: msg.requestId,
-				result
+				result,
 			})
 			return
 		}

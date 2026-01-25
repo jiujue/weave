@@ -30,7 +30,7 @@ import { createWeaveApp } from '@jiujue/weave-app'
 const app = createWeaveApp({
 	canvas,
 	scene,
-	devtools: { enabled: true, name: 'My Weave Canvas' }
+	devtools: { enabled: true, name: 'My Weave Canvas' },
 })
 ```
 
@@ -50,17 +50,10 @@ const app = createWeaveApp({
 
 ```ts
 import { createEngine } from '@jiujue/weave-core'
-import {
-	attachWeaveDevtools,
-	createSceneMirror
-} from '@jiujue/weave-devtools-runtime'
+import { attachWeaveDevtools, createSceneMirror } from '@jiujue/weave-devtools-runtime'
 import type { SceneNode, ScenePatch, TextMeasurer } from '@jiujue/weave-types'
 
-export async function run(
-	canvas: HTMLCanvasElement,
-	root: SceneNode,
-	textMeasurer: TextMeasurer
-) {
+export async function run(canvas: HTMLCanvasElement, root: SceneNode, textMeasurer: TextMeasurer) {
 	const sceneMirror = createSceneMirror(null)
 	let engine: Awaited<ReturnType<typeof createEngine>> | null = null
 
@@ -77,7 +70,7 @@ export async function run(
 		getNodeInfo: async (id: string) => {
 			if (!engine) return null
 			return engine.getNodeInfo(id)
-		}
+		},
 	})
 
 	sceneMirror.setScene(root)
@@ -99,7 +92,7 @@ export async function run(
 		devtools.emit({
 			type: 'applyPatches',
 			time: Date.now(),
-			count: patches.length
+			count: patches.length,
 		})
 		engine.applyPatches(patches)
 	}
@@ -109,7 +102,7 @@ export async function run(
 			engine?.dispose()
 			devtools.dispose()
 			engine = null
-		}
+		},
 	}
 }
 ```
@@ -145,12 +138,8 @@ Weave 的 `SceneNode` 支持可选字段：
 ```tsx | pure
 export function Scene() {
 	return (
-		<container id='root' displayName='Page'>
-			<text
-				id='title'
-				displayName='Title'
-				textStyle={{ fontSize: 20, color: '#111' }}
-			>
+		<container id="root" displayName="Page">
+			<text id="title" displayName="Title" textStyle={{ fontSize: 20, color: '#111' }}>
 				Hello
 			</text>
 		</container>

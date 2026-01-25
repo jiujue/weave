@@ -12,192 +12,179 @@ function buildA4Scene(size: { pageW: number; pageH: number }): JSX.Element {
 		color: '#0f172a',
 		fontWeight: 'bold',
 		whiteSpace: 'nowrap',
-		textBaseline: 'top'
+		textBaseline: 'top',
 	}
 	const h2: TextStyle = {
 		fontSize: 14,
 		color: '#0f172a',
 		fontWeight: 'bold',
 		whiteSpace: 'nowrap',
-		textBaseline: 'top'
+		textBaseline: 'top',
 	}
 	const body: TextStyle = {
 		fontSize: 12,
 		color: '#0f172a',
 		whiteSpace: 'normal',
-		textBaseline: 'top'
+		textBaseline: 'top',
 	}
 	const mono: TextStyle = {
 		fontSize: 11,
 		color: '#0f172a',
-		fontFamily:
-			'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+		fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
 		whiteSpace: 'nowrap',
-		textBaseline: 'top'
+		textBaseline: 'top',
 	}
 
 	return (
 		<Container
-			id='root'
+			id="root"
 			style={{
 				width: size.pageW,
 				height: size.pageH,
 				flexDirection: 'column',
 				padding: 56,
-				gap: 18
+				gap: 18,
 			}}
 			paint={{
 				background: { color: '#ffffff' },
-				border: { color: '#e2e8f0', width: 1 }
+				border: { color: '#e2e8f0', width: 1 },
 			}}
 		>
 			<Container
-				id='header'
+				id="header"
 				style={{
 					flexDirection: 'row',
 					alignItems: 'center',
 					justifyContent: 'space-between',
-					gap: 16
+					gap: 16,
 				}}
 			>
 				<Container
-					id='logo'
+					id="logo"
 					style={{ width: 40, height: 40 }}
 					paint={{ background: { color: '#2563eb', alpha: 0.9 } }}
 				/>
 				<Container
-					id='headerText'
+					id="headerText"
 					style={{
 						flexDirection: 'column',
 						flexGrow: 1,
 						flexShrink: 1,
 						minWidth: 0,
-						gap: 4
+						gap: 4,
 					}}
 				>
-					<Text id='docTitle' textStyle={title}>
+					<Text id="docTitle" textStyle={title}>
 						A4 文档（flex 布局）
 					</Text>
-					<Text id='docSub' textStyle={body}>
-						由 WebWorker 离屏渲染为 PNG，主线程仅展示
-						img（更适合导出/预渲染场景）
+					<Text id="docSub" textStyle={body}>
+						由 WebWorker 离屏渲染为 PNG，主线程仅展示 img（更适合导出/预渲染场景）
 					</Text>
 				</Container>
 				<Container
-					id='badge'
+					id="badge"
 					style={{ padding: 8 }}
 					paint={{
 						background: { color: '#e0f2fe', alpha: 1 },
-						border: { color: '#38bdf8', width: 1 }
+						border: { color: '#38bdf8', width: 1 },
 					}}
 				>
-					<Text id='badgeText' textStyle={mono}>
+					<Text id="badgeText" textStyle={mono}>
 						DPR x2
 					</Text>
 				</Container>
 			</Container>
 
-			<Container
-				id='hr'
-				style={{ height: 1 }}
-				paint={{ background: { color: '#e2e8f0' } }}
-			/>
+			<Container id="hr" style={{ height: 1 }} paint={{ background: { color: '#e2e8f0' } }} />
 
-			<Container
-				id='content'
-				style={{ flexDirection: 'row', gap: 18, flexGrow: 1 }}
-			>
+			<Container id="content" style={{ flexDirection: 'row', gap: 18, flexGrow: 1 }}>
 				<Container
-					id='left'
+					id="left"
 					style={{
 						flexDirection: 'column',
 						gap: 10,
 						flexGrow: 1,
 						flexShrink: 1,
-						minWidth: 0
+						minWidth: 0,
 					}}
 				>
-					<Text id='sec1' textStyle={h2}>
+					<Text id="sec1" textStyle={h2}>
 						概览
 					</Text>
-					<Text id='p1' textStyle={body}>
+					<Text id="p1" textStyle={body}>
 						本示例在 worker 中用 @jiujue/weave-core 生成 display list，并回放到
 						OffscreenCanvas，然后 convertToBlob 得到 PNG。
 					</Text>
-					<Text id='p2' textStyle={body}>
-						布局完全走 Yoga（flexDirection/gap/flexGrow 等），因此能像写 UI
-						一样拼装一张“文档”。
+					<Text id="p2" textStyle={body}>
+						布局完全走 Yoga（flexDirection/gap/flexGrow 等），因此能像写 UI 一样拼装一张“文档”。
 					</Text>
 					<Container
-						id='callout'
+						id="callout"
 						style={{ padding: 12, gap: 6, flexDirection: 'column' }}
 						paint={{
 							background: { color: '#f8fafc' },
-							border: { color: '#e2e8f0', width: 1 }
+							border: { color: '#e2e8f0', width: 1 },
 						}}
 					>
-						<Text id='calloutTitle' textStyle={h2}>
+						<Text id="calloutTitle" textStyle={h2}>
 							关键点
 						</Text>
-						<Text id='calloutLine1' textStyle={body}>
+						<Text id="calloutLine1" textStyle={body}>
 							- 主线程不画 canvas，只显示 img
 						</Text>
-						<Text id='calloutLine2' textStyle={body}>
+						<Text id="calloutLine2" textStyle={body}>
 							- DPR 提升后边缘/字体更清晰
 						</Text>
-						<Text id='calloutLine3' textStyle={body}>
+						<Text id="calloutLine3" textStyle={body}>
 							- 适合“导出/静态预渲染/低频更新”
 						</Text>
 					</Container>
 				</Container>
 
 				<Container
-					id='right'
+					id="right"
 					style={{
 						flexDirection: 'column',
 						gap: 10,
 						width: 220,
-						flexShrink: 0
+						flexShrink: 0,
 					}}
 				>
-					<Text id='sec2' textStyle={h2}>
+					<Text id="sec2" textStyle={h2}>
 						元信息
 					</Text>
 					<Container
-						id='meta'
+						id="meta"
 						style={{ flexDirection: 'column', gap: 6, padding: 10 }}
 						paint={{
 							background: { color: '#f8fafc' },
-							border: { color: '#e2e8f0', width: 1 }
+							border: { color: '#e2e8f0', width: 1 },
 						}}
 					>
-						<Text id='m1' textStyle={mono}>
+						<Text id="m1" textStyle={mono}>
 							page: {size.pageW}x{size.pageH}
 						</Text>
-						<Text id='m2' textStyle={mono}>
+						<Text id="m2" textStyle={mono}>
 							layout: flex
 						</Text>
-						<Text id='m3' textStyle={mono}>
+						<Text id="m3" textStyle={mono}>
 							output: image/png
 						</Text>
 					</Container>
-					<Text id='sec3' textStyle={h2}>
+					<Text id="sec3" textStyle={h2}>
 						说明
 					</Text>
-					<Text id='p3' textStyle={body}>
+					<Text id="p3" textStyle={body}>
 						A4 这里按 96 DPI 近似：794 x 1123（逻辑像素），再用 DPR 放大渲染。
 					</Text>
 				</Container>
 			</Container>
 
-			<Container
-				id='footer'
-				style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-			>
-				<Text id='f1' textStyle={mono}>
+			<Container id="footer" style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+				<Text id="f1" textStyle={mono}>
 					weave / worker-image
 				</Text>
-				<Text id='f2' textStyle={mono}>
+				<Text id="f2" textStyle={mono}>
 					page 1 / 1
 				</Text>
 			</Container>
@@ -229,12 +216,12 @@ export default function Demo(): JSX.Element {
 			onError: () => {
 				cleanupUrl()
 				if (!disposed) setImgUrl(null)
-			}
+			},
 		})
 
 		client
 			.render()
-			.then(r => {
+			.then((r) => {
 				if (disposed) return
 				cleanupUrl()
 				const blob = new Blob([r.data], { type: r.mime })
@@ -253,13 +240,10 @@ export default function Demo(): JSX.Element {
 		}
 	}, [scene])
 
-	if (!imgUrl)
-		return (
-			<img alt='worker rendered' style={{ width: '100%', display: 'block' }} />
-		)
+	if (!imgUrl) return <img alt="worker rendered" style={{ width: '100%', display: 'block' }} />
 	return (
 		<img
-			alt='worker rendered'
+			alt="worker rendered"
 			src={imgUrl}
 			style={{ width: '100%', display: 'block', background: '#ffffff' }}
 		/>

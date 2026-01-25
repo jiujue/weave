@@ -14,7 +14,7 @@ import {
 	FileJson,
 	FileCode,
 	MoreHorizontal,
-	LayoutTemplate
+	LayoutTemplate,
 } from 'lucide-react'
 import * as Babel from '@babel/standalone'
 import type { SceneNode } from '@jiujue/weave-types'
@@ -28,26 +28,20 @@ const jsxToScene = (code: string): SceneNode | null => {
 	try {
 		// Transpile JSX to JS calls (React.createElement)
 		const transpiled = Babel.transform(code, {
-			presets: ['react']
+			presets: ['react'],
 		}).code
 
 		if (!transpiled) return null
 
 		// Helper to execute the transpiled code safely
 		// We mock React.createElement to build our SceneNode tree instead of React elements
-		const mockCreateElement = (
-			type: string,
-			props: any,
-			...children: any[]
-		) => {
+		const mockCreateElement = (type: string, props: any, ...children: any[]) => {
 			const node: any = { type, ...props }
 
 			// Handle children
 			if (children && children.length > 0) {
 				// Flatten children array and filter out nulls/strings (unless it's text content)
-				const flatChildren = children
-					.flat()
-					.filter(c => c !== null && c !== undefined)
+				const flatChildren = children.flat().filter((c) => c !== null && c !== undefined)
 
 				if (type === 'text') {
 					// For text nodes, children are the text content
@@ -55,7 +49,7 @@ const jsxToScene = (code: string): SceneNode | null => {
 				} else {
 					// For other nodes, children are child nodes
 					// Filter out strings (whitespace) that might appear in JSX
-					node.children = flatChildren.filter(c => typeof c === 'object')
+					node.children = flatChildren.filter((c) => typeof c === 'object')
 				}
 			}
 
@@ -101,13 +95,10 @@ const TreeNode = ({ node, depth = 0 }: { node: SceneNode; depth?: number }) => {
 	const editor = useEditor()
 	const isSelected = editor.selection.includes(node.id)
 	// Simple check for children property
-	const children =
-		'children' in node ? ((node as any).children as SceneNode[]) : undefined
+	const children = 'children' in node ? ((node as any).children as SceneNode[]) : undefined
 	const hasChildren = children && children.length > 0
 	const [expanded, setExpanded] = React.useState(true)
-	const [dragOver, setDragOver] = useState<'top' | 'bottom' | 'inside' | null>(
-		null
-	)
+	const [dragOver, setDragOver] = useState<'top' | 'bottom' | 'inside' | null>(null)
 	const ref = useRef<HTMLDivElement>(null)
 
 	const handleSelect = (e: React.MouseEvent) => {
@@ -139,11 +130,7 @@ const TreeNode = ({ node, depth = 0 }: { node: SceneNode; depth?: number }) => {
 		// 25% bottom -> insert after
 		// 50% middle -> insert inside (if container)
 
-		if (
-			node.type === 'container' ||
-			node.type === 'relative' ||
-			node.type === 'table'
-		) {
+		if (node.type === 'container' || node.type === 'relative' || node.type === 'table') {
 			if (y < height * 0.25) setDragOver('top')
 			else if (y > height * 0.75) setDragOver('bottom')
 			else setDragOver('inside')
@@ -203,12 +190,10 @@ const TreeNode = ({ node, depth = 0 }: { node: SceneNode; depth?: number }) => {
 				draggable
 				className={clsx(
 					'group flex items-center h-8 cursor-pointer text-slate-700 select-none pr-2 relative border-transparent border-y-2',
-					isSelected
-						? 'bg-blue-50 text-blue-600 font-medium'
-						: 'hover:bg-slate-100',
+					isSelected ? 'bg-blue-50 text-blue-600 font-medium' : 'hover:bg-slate-100',
 					dragOver === 'top' && 'border-t-blue-500',
 					dragOver === 'bottom' && 'border-b-blue-500',
-					dragOver === 'inside' && 'bg-blue-100 ring-1 ring-inset ring-blue-500'
+					dragOver === 'inside' && 'bg-blue-100 ring-1 ring-inset ring-blue-500',
 				)}
 				style={{ paddingLeft: depth * 12 + 4 }}
 				onClick={handleSelect}
@@ -218,21 +203,20 @@ const TreeNode = ({ node, depth = 0 }: { node: SceneNode; depth?: number }) => {
 				onDrop={handleDrop}
 			>
 				<div
-					className='w-5 h-5 flex items-center justify-center mr-0.5 text-slate-400 hover:text-slate-600 shrink-0'
+					className="w-5 h-5 flex items-center justify-center mr-0.5 text-slate-400 hover:text-slate-600 shrink-0"
 					onClick={hasChildren ? handleToggle : undefined}
 				>
-					{hasChildren &&
-						(expanded ? <ChevronDown size={12} /> : <ChevronRight size={12} />)}
+					{hasChildren && (expanded ? <ChevronDown size={12} /> : <ChevronRight size={12} />)}
 				</div>
-				<div className='mr-2 opacity-70 shrink-0'>
+				<div className="mr-2 opacity-70 shrink-0">
 					<NodeIcon type={node.type} />
 				</div>
-				<span className='text-xs truncate flex-1'>{node.id}</span>
+				<span className="text-xs truncate flex-1">{node.id}</span>
 				{node.id !== 'root' && (
 					<button
-						className='opacity-0 group-hover:opacity-100 p-1 hover:text-red-500 transition-opacity'
+						className="opacity-0 group-hover:opacity-100 p-1 hover:text-red-500 transition-opacity"
 						onClick={handleDelete}
-						title='Delete'
+						title="Delete"
 					>
 						<Trash2 size={12} />
 					</button>
@@ -297,16 +281,10 @@ export function LayerTree() {
 	}
 
 	const handleLoadDemo = () => {
-		if (
-			window.confirm(
-				'This will replace your current scene with the Juejin Demo. Continue?'
-			)
-		) {
+		if (window.confirm('This will replace your current scene with the Juejin Demo. Continue?')) {
 			setShowMenu(false)
 			requestAnimationFrame(() => {
-				const canvas = document.getElementById(
-					'weave-canvas'
-				) as HTMLCanvasElement | null
+				const canvas = document.getElementById('weave-canvas') as HTMLCanvasElement | null
 				const rect = canvas?.getBoundingClientRect()
 				const canvasW = rect?.width ?? 0
 				const maxViewportW = 1440
@@ -330,7 +308,7 @@ export function LayerTree() {
 		if (!file) return
 
 		const reader = new FileReader()
-		reader.onload = event => {
+		reader.onload = (event) => {
 			try {
 				const content = event.target?.result as string
 				if (file.name.endsWith('.json')) {
@@ -358,50 +336,48 @@ export function LayerTree() {
 	}
 
 	return (
-		<div className='flex flex-col h-full'>
-			<div className='flex items-center justify-between p-2 border-b border-slate-200 bg-slate-50 relative'>
-				<span className='text-xs font-semibold text-slate-500 uppercase'>
-					Layers
-				</span>
-				<div className='flex gap-1' ref={menuRef}>
+		<div className="flex flex-col h-full">
+			<div className="flex items-center justify-between p-2 border-b border-slate-200 bg-slate-50 relative">
+				<span className="text-xs font-semibold text-slate-500 uppercase">Layers</span>
+				<div className="flex gap-1" ref={menuRef}>
 					<button
-						className='p-1 text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded'
+						className="p-1 text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded"
 						onClick={() => setShowMenu(!showMenu)}
-						title='Menu'
+						title="Menu"
 					>
 						<MoreHorizontal size={16} />
 					</button>
 
 					{showMenu && (
-						<div className='absolute top-full right-2 mt-1 w-40 bg-white border border-slate-200 rounded-md shadow-lg py-1 z-50 flex flex-col text-xs'>
+						<div className="absolute top-full right-2 mt-1 w-40 bg-white border border-slate-200 rounded-md shadow-lg py-1 z-50 flex flex-col text-xs">
 							<button
-								className='flex items-center gap-2 px-3 py-2 hover:bg-slate-50 text-left w-full'
+								className="flex items-center gap-2 px-3 py-2 hover:bg-slate-50 text-left w-full"
 								onClick={handleLoadDemo}
 							>
-								<LayoutTemplate size={14} className='text-slate-400' />
+								<LayoutTemplate size={14} className="text-slate-400" />
 								<span>Load Juejin Demo</span>
 							</button>
-							<div className='h-px bg-slate-100 my-1' />
+							<div className="h-px bg-slate-100 my-1" />
 							<button
-								className='flex items-center gap-2 px-3 py-2 hover:bg-slate-50 text-left w-full'
+								className="flex items-center gap-2 px-3 py-2 hover:bg-slate-50 text-left w-full"
 								onClick={handleImport}
 							>
-								<Upload size={14} className='text-slate-400' />
+								<Upload size={14} className="text-slate-400" />
 								<span>Import JSON / JSX</span>
 							</button>
-							<div className='h-px bg-slate-100 my-1' />
+							<div className="h-px bg-slate-100 my-1" />
 							<button
-								className='flex items-center gap-2 px-3 py-2 hover:bg-slate-50 text-left w-full'
+								className="flex items-center gap-2 px-3 py-2 hover:bg-slate-50 text-left w-full"
 								onClick={handleExportJSON}
 							>
-								<FileJson size={14} className='text-slate-400' />
+								<FileJson size={14} className="text-slate-400" />
 								<span>Export JSON</span>
 							</button>
 							<button
-								className='flex items-center gap-2 px-3 py-2 hover:bg-slate-50 text-left w-full'
+								className="flex items-center gap-2 px-3 py-2 hover:bg-slate-50 text-left w-full"
 								onClick={handleExportJSX}
 							>
-								<FileCode size={14} className='text-slate-400' />
+								<FileCode size={14} className="text-slate-400" />
 								<span>Export JSX</span>
 							</button>
 						</div>
@@ -409,13 +385,13 @@ export function LayerTree() {
 				</div>
 				<input
 					ref={fileInputRef}
-					type='file'
-					accept='.json,.jsx,.tsx'
-					className='hidden'
+					type="file"
+					accept=".json,.jsx,.tsx"
+					className="hidden"
 					onChange={handleFileChange}
 				/>
 			</div>
-			<div className='flex-1 overflow-y-auto pb-10'>
+			<div className="flex-1 overflow-y-auto pb-10">
 				<TreeNode node={editor.scene} />
 			</div>
 		</div>

@@ -20,9 +20,7 @@ async function loadCanvasFactory(): Promise<CanvasFactory> {
 	const mod = await import('canvas')
 	const createCanvas = (mod as any).createCanvas as CanvasFactory | undefined
 	if (typeof createCanvas === 'function') return createCanvas
-	throw new Error(
-		'No supported canvas backend found. Install @napi-rs/canvas or canvas.'
-	)
+	throw new Error('No supported canvas backend found. Install @napi-rs/canvas or canvas.')
 }
 
 export type NodeCanvasBackend = Readonly<{
@@ -34,9 +32,7 @@ export type NodeCanvasBackend = Readonly<{
 	toPng(): Promise<Uint8Array>
 }>
 
-export async function createNodeCanvas(
-	options: NodeRenderOptions
-): Promise<NodeCanvasBackend> {
+export async function createNodeCanvas(options: NodeRenderOptions): Promise<NodeCanvasBackend> {
 	const dpr = options.dpr ?? 1
 	const pixelWidth = Math.max(1, Math.floor(options.width * dpr))
 	const pixelHeight = Math.max(1, Math.floor(options.height * dpr))
@@ -60,7 +56,7 @@ export async function createNodeCanvas(
 
 export async function renderDisplayListToPng(
 	displayList: DisplayList,
-	options: NodeRenderOptions
+	options: NodeRenderOptions,
 ): Promise<Uint8Array> {
 	const backend = await createNodeCanvas(options)
 	const { ctx, pixelWidth, pixelHeight, dpr } = backend

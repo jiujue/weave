@@ -14,12 +14,12 @@ registry.register({
 	label: 'My Component',
 	props: [
 		{ name: 'id', label: 'ID', type: 'string' },
-		{ name: 'customProp', label: 'Custom Prop', type: 'string' }
+		{ name: 'customProp', label: 'Custom Prop', type: 'string' },
 	],
 	create: () => ({
 		type: 'my-component',
-		customProp: 'default value'
-	})
+		customProp: 'default value',
+	}),
 })
 ```
 

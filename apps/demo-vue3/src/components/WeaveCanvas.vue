@@ -35,7 +35,7 @@ onMounted(() => {
 		scene: props.scene,
 		onError(message) {
 			console.error('[weave worker error]', message)
-		}
+		},
 	})
 
 	app.render()
@@ -58,12 +58,12 @@ onBeforeUnmount(() => {
 
 watch(
 	() => props.scene,
-	scene => {
+	(scene) => {
 		if (!app) return
 		app.setScene(scene)
 		app.render()
 	},
-	{ deep: false }
+	{ deep: false },
 )
 </script>
 

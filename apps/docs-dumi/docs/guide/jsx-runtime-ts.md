@@ -43,14 +43,11 @@ import type { SceneNode } from '@jiujue/weave-types'
 
 export function buildScene(): SceneNode {
 	return (
-		<container
-			id='root'
-			style={{ padding: 16, flexDirection: 'column', gap: 8 }}
-		>
-			<text id='title' textStyle={{ fontSize: 18, fontWeight: 700 }}>
+		<container id="root" style={{ padding: 16, flexDirection: 'column', gap: 8 }}>
+			<text id="title" textStyle={{ fontSize: 18, fontWeight: 700 }}>
 				Hello Weave
 			</text>
-			<text id='desc' textStyle={{ fontSize: 14, opacity: 0.8 }}>
+			<text id="desc" textStyle={{ fontSize: 14, opacity: 0.8 }}>
 				This is TSX → SceneNode
 			</text>
 		</container>

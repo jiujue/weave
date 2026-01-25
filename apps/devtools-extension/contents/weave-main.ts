@@ -26,13 +26,8 @@ type WeaveHook = {
 				canvas: HTMLCanvasElement
 				getScene?: () => any
 				getNodeById?: (id: string) => any
-				hitTest: (
-					x: number,
-					y: number
-				) => Promise<{ id: string | null; path: readonly string[] }>
-				getNodeInfo: (
-					id: string
-				) => Promise<{
+				hitTest: (x: number, y: number) => Promise<{ id: string | null; path: readonly string[] }>
+				getNodeInfo: (id: string) => Promise<{
 					x: number
 					y: number
 					width: number
@@ -52,7 +47,7 @@ const postEvent = (event: BridgeEvent) => {
 			kind: 'event',
 			event,
 		},
-		'*'
+		'*',
 	)
 }
 
@@ -66,12 +61,9 @@ const ensureHookSubscription = () => {
 	})
 }
 
-const handleRequest = async (
-	payload: BridgeRequest
-): Promise<BridgeResponse> => {
+const handleRequest = async (payload: BridgeRequest): Promise<BridgeResponse> => {
 	const hook = (window as any).__WEAVE_DEVTOOLS_HOOK__ as WeaveHook | undefined
-	if (!hook || hook.version !== 1)
-		return { ok: false, error: 'WEAVE_DEVTOOLS_HOOK_NOT_FOUND' }
+	if (!hook || hook.version !== 1) return { ok: false, error: 'WEAVE_DEVTOOLS_HOOK_NOT_FOUND' }
 
 	ensureHookSubscription()
 	if (DEBUG) console.log('[weave devtools][bridge] request', payload.method)
@@ -83,8 +75,7 @@ const handleRequest = async (
 	const inst = hook.get(payload.instanceId)
 	if (!inst) return { ok: false, error: 'INSTANCE_NOT_FOUND' }
 
-	if (payload.method === 'getScene')
-		return { ok: true, result: inst.getScene?.() ?? null }
+	if (payload.method === 'getScene') return { ok: true, result: inst.getScene?.() ?? null }
 	if (payload.method === 'getNode')
 		return { ok: true, result: inst.getNodeById?.(payload.nodeId) ?? null }
 
@@ -152,8 +143,7 @@ const handleRequest = async (
 window.addEventListener('message', (event) => {
 	if (event.source !== window) return
 	const data = event.data as any
-	if (!data || data.source !== BRIDGE_SOURCE || data.version !== BRIDGE_VERSION)
-		return
+	if (!data || data.source !== BRIDGE_SOURCE || data.version !== BRIDGE_VERSION) return
 	if (data.kind !== 'request') return
 
 	const requestId = data.requestId as number
@@ -170,7 +160,7 @@ window.addEventListener('message', (event) => {
 					requestId,
 					...res,
 				},
-				'*'
+				'*',
 			)
 		})
 })

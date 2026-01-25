@@ -1,8 +1,4 @@
-import {
-	CHANNEL,
-	type ContentEventMessage,
-	type PanelRequestMessage,
-} from './protocol'
+import { CHANNEL, type ContentEventMessage, type PanelRequestMessage } from './protocol'
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 	const msg = message as any
@@ -36,7 +32,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 					return
 				}
 				sendResponse(res)
-			}
+			},
 		)
 		return true
 	}

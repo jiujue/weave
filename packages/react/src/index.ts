@@ -5,7 +5,7 @@ import type {
 	RelativeNode,
 	SceneNode,
 	TableNode,
-	TextNode
+	TextNode,
 } from '@jiujue/weave-types'
 
 const REACT_ELEMENT_TYPE = Symbol.for('react.element')
@@ -32,11 +32,7 @@ function isSceneNodeLike(value: unknown): value is SceneNode {
 }
 
 function isReactElementLike(value: unknown): value is ReactElementLike {
-	return (
-		!!value &&
-		typeof value === 'object' &&
-		(value as any).$$typeof === REACT_ELEMENT_TYPE
-	)
+	return !!value && typeof value === 'object' && (value as any).$$typeof === REACT_ELEMENT_TYPE
 }
 
 type Child = SceneNode | string | number | boolean | null | undefined
@@ -87,15 +83,12 @@ function fromReactElement(el: ReactElementLike): SceneNode {
 		const children: Child[] = []
 		flattenChildren(el.props?.children, children)
 		const nodes = childrenToNodes(children)
-		if (nodes.length !== 1)
-			throw new Error('Fragment must have exactly one SceneNode child')
+		if (nodes.length !== 1) throw new Error('Fragment must have exactly one SceneNode child')
 		return nodes[0]
 	}
 
 	if (typeof el.type !== 'string') {
-		throw new Error(
-			`Only intrinsic elements are supported. Got: ${String(el.type)}`
-		)
+		throw new Error(`Only intrinsic elements are supported. Got: ${String(el.type)}`)
 	}
 
 	const type = el.type
@@ -107,9 +100,7 @@ function fromReactElement(el: ReactElementLike): SceneNode {
 				: undefined
 	const label = typeof el.props?.label === 'string' ? el.props.label : undefined
 	const meta =
-		el.props?.meta &&
-		typeof el.props.meta === 'object' &&
-		!Array.isArray(el.props.meta)
+		el.props?.meta && typeof el.props.meta === 'object' && !Array.isArray(el.props.meta)
 			? (el.props.meta as Readonly<Record<string, unknown>>)
 			: undefined
 	const children: Child[] = []
@@ -124,7 +115,7 @@ function fromReactElement(el: ReactElementLike): SceneNode {
 			type: 'container',
 			style: el.props?.style,
 			paint: el.props?.paint,
-			children: childrenToNodes(children)
+			children: childrenToNodes(children),
 		}
 		return node
 	}
@@ -138,7 +129,7 @@ function fromReactElement(el: ReactElementLike): SceneNode {
 			type: 'relative',
 			style: el.props?.style,
 			paint: el.props?.paint,
-			children: childrenToNodes(children)
+			children: childrenToNodes(children),
 		}
 		return node
 	}
@@ -152,11 +143,8 @@ function fromReactElement(el: ReactElementLike): SceneNode {
 			type: 'text',
 			style: el.props?.style,
 			textStyle: el.props?.textStyle,
-			text:
-				typeof el.props?.text === 'string'
-					? el.props.text
-					: childrenToText(children),
-			children: []
+			text: typeof el.props?.text === 'string' ? el.props.text : childrenToText(children),
+			children: [],
 		}
 		return node
 	}
@@ -171,7 +159,7 @@ function fromReactElement(el: ReactElementLike): SceneNode {
 			style: el.props?.style,
 			points: el.props?.points,
 			paint: el.props?.paint,
-			children: []
+			children: [],
 		}
 		return node
 	}
@@ -187,7 +175,7 @@ function fromReactElement(el: ReactElementLike): SceneNode {
 			columns: el.props?.columns,
 			header: el.props?.header,
 			rows: el.props?.rows,
-			tableStyle: el.props?.tableStyle
+			tableStyle: el.props?.tableStyle,
 		}
 		return node
 	}
@@ -218,9 +206,7 @@ export function sceneToJSX(node: SceneNode, indent = 0): string {
 		node.children &&
 		node.children.length > 0
 	) {
-		const children = node.children
-			.map(child => sceneToJSX(child, indent + 1))
-			.join('\n')
+		const children = node.children.map((child) => sceneToJSX(child, indent + 1)).join('\n')
 		return `${spaces}<${node.type} ${props}>\n${children}\n${spaces}</${node.type}>`
 	}
 

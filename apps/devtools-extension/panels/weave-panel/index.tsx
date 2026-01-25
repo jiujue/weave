@@ -1,9 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import {
-	CHANNEL,
-	type BridgeRequest,
-	type ContentEventMessage,
-} from '../../protocol'
+import { CHANNEL, type BridgeRequest, type ContentEventMessage } from '../../protocol'
 
 type SceneNode = any
 
@@ -17,30 +13,24 @@ const getInspectedTabId = (): number => {
 
 const evalInInspectedWindow = async <T,>(expression: string): Promise<T> => {
 	return new Promise((resolve, reject) => {
-		chrome.devtools.inspectedWindow.eval(
-			expression,
-			(result: unknown, exceptionInfo: any) => {
-				if (exceptionInfo?.isException) {
-					reject(
-						new Error(
-							exceptionInfo?.value?.message ??
-								exceptionInfo?.value ??
-								'INSPECTED_EVAL_EXCEPTION'
-						)
-					)
-					return
-				}
-				resolve(result as T)
+		chrome.devtools.inspectedWindow.eval(expression, (result: unknown, exceptionInfo: any) => {
+			if (exceptionInfo?.isException) {
+				reject(
+					new Error(
+						exceptionInfo?.value?.message ?? exceptionInfo?.value ?? 'INSPECTED_EVAL_EXCEPTION',
+					),
+				)
+				return
 			}
-		)
+			resolve(result as T)
+		})
 	})
 }
 
 async function sendToBackground<T>(payload: BridgeRequest): Promise<T> {
 	const tabId = getInspectedTabId()
 	const requestId = Math.floor(Math.random() * 1e9)
-	if (DEBUG)
-		console.log('[weave devtools][panel] request', requestId, payload.method)
+	if (DEBUG) console.log('[weave devtools][panel] request', requestId, payload.method)
 	const res = (await chrome.runtime.sendMessage({
 		channel: CHANNEL,
 		kind: 'panelRequest',
@@ -70,9 +60,7 @@ const TreeNode = (props: {
 			: typeof node?.label === 'string'
 				? node.label
 				: undefined
-	const children = Array.isArray(node?.children)
-		? (node.children as SceneNode[])
-		: []
+	const children = Array.isArray(node?.children) ? (node.children as SceneNode[]) : []
 	const isExpanded = props.expanded[id] ?? true
 	const isSelected = props.selectedId === id
 
@@ -81,15 +69,12 @@ const TreeNode = (props: {
 			<div
 				style={{
 					paddingLeft: props.depth * 12,
-					fontFamily:
-						'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+					fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
 					fontSize: 12,
 					lineHeight: '20px',
 					cursor: 'pointer',
 					background: isSelected ? 'rgba(59,130,246,0.12)' : undefined,
-					borderLeft: isSelected
-						? '2px solid rgb(59 130 246)'
-						: '2px solid transparent',
+					borderLeft: isSelected ? '2px solid rgb(59 130 246)' : '2px solid transparent',
 				}}
 				onClick={() => props.onSelect(id)}
 			>
@@ -104,13 +89,9 @@ const TreeNode = (props: {
 						{isExpanded ? '▾' : '▸'}
 					</span>
 				)}
-				{children.length === 0 && (
-					<span style={{ display: 'inline-block', width: 16 }} />
-				)}
+				{children.length === 0 && <span style={{ display: 'inline-block', width: 16 }} />}
 				<span style={{ opacity: 0.7 }}>{type}</span>
-				<span style={{ marginLeft: 6 }}>
-					{displayName ? `${displayName} (${id})` : id}
-				</span>
+				<span style={{ marginLeft: 6 }}>{displayName ? `${displayName} (${id})` : id}</span>
 			</div>
 			{children.length > 0 &&
 				isExpanded &&
@@ -130,12 +111,8 @@ const TreeNode = (props: {
 }
 
 export default function WeavePanel() {
-	const [instances, setInstances] = useState<{ id: string; name?: string }[]>(
-		[]
-	)
-	const [instancesSource, setInstancesSource] = useState<
-		'bridge' | 'eval' | null
-	>(null)
+	const [instances, setInstances] = useState<{ id: string; name?: string }[]>([])
+	const [instancesSource, setInstancesSource] = useState<'bridge' | 'eval' | null>(null)
 	const [instanceId, setInstanceId] = useState<string | null>(null)
 	const [scene, setScene] = useState<SceneNode | null>(null)
 	const [selectedId, setSelectedId] = useState<string | null>(null)
@@ -173,7 +150,7 @@ export default function WeavePanel() {
   const hook = window.__WEAVE_DEVTOOLS_HOOK__
   if (!hook || hook.version !== 1) return []
   return hook.list()
-})()`
+})()`,
 			)
 			setInstances(list)
 			setInstancesSource('eval')
@@ -201,7 +178,7 @@ export default function WeavePanel() {
   const inst = hook.get(${JSON.stringify(id)})
   if (!inst) return null
   return inst.getScene ? inst.getScene() : null
-})()`
+})()`,
 			)
 			setScene(s)
 		} catch (e) {
@@ -228,7 +205,7 @@ export default function WeavePanel() {
   const inst = hook.get(${JSON.stringify(id)})
   if (!inst) return null
   return inst.getNodeById ? inst.getNodeById(${JSON.stringify(nodeId)}) : null
-})()`
+})()`,
 			)
 			setSelectedNode(n)
 		} catch (e) {
@@ -266,13 +243,9 @@ export default function WeavePanel() {
 			const ev = msg as ContentEventMessage
 			const tabId = getInspectedTabId()
 			if (ev.tabId !== tabId) return
-			if (DEBUG)
-				console.log('[weave devtools][panel] contentEvent', ev.event?.type)
+			if (DEBUG) console.log('[weave devtools][panel] contentEvent', ev.event?.type)
 
-			if (
-				ev.event.type === 'bridgeEvent' &&
-				ev.event.event.type === 'instancesChanged'
-			) {
+			if (ev.event.type === 'bridgeEvent' && ev.event.event.type === 'instancesChanged') {
 				void refreshInstances()
 				return
 			}
@@ -380,7 +353,7 @@ export default function WeavePanel() {
 					value={instanceId ?? ''}
 					onChange={(e) => setInstanceId(e.target.value)}
 				>
-					<option value='' disabled>
+					<option value="" disabled>
 						No instance
 					</option>
 					{instances.map((i) => (
@@ -420,8 +393,7 @@ export default function WeavePanel() {
 							fontSize: 11,
 							lineHeight: '16px',
 							whiteSpace: 'pre-wrap',
-							fontFamily:
-								'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+							fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
 							background: '#F9FAFB',
 							border: '1px solid #E5E7EB',
 						}}
@@ -436,16 +408,13 @@ export default function WeavePanel() {
 				style={{
 					display: 'grid',
 					gridTemplateColumns: '1fr 1fr',
-					height:
-						pingBg || pingTab ? 'calc(100vh - 112px)' : 'calc(100vh - 42px)',
+					height: pingBg || pingTab ? 'calc(100vh - 112px)' : 'calc(100vh - 42px)',
 				}}
 			>
 				<div style={{ overflow: 'auto', borderRight: '1px solid #e5e7eb' }}>
 					<div style={{ padding: 8, fontSize: 12, color: '#6b7280' }}>
 						{title}
-						{instancesSource
-							? ` · instances: ${instances.length} · ${instancesSource}`
-							: ''}
+						{instancesSource ? ` · instances: ${instances.length} · ${instancesSource}` : ''}
 					</div>
 					{scene ? (
 						<TreeNode
@@ -470,9 +439,7 @@ export default function WeavePanel() {
 				<div style={{ overflow: 'auto' }}>
 					<div style={{ padding: 8, borderBottom: '1px solid #e5e7eb' }}>
 						<div style={{ fontSize: 12, color: '#6b7280' }}>Selected</div>
-						<div
-							style={{ fontSize: 12, fontFamily: 'ui-monospace, monospace' }}
-						>
+						<div style={{ fontSize: 12, fontFamily: 'ui-monospace, monospace' }}>
 							{selectedId ?? '-'}
 						</div>
 					</div>
@@ -482,13 +449,10 @@ export default function WeavePanel() {
 							padding: 8,
 							fontSize: 11,
 							lineHeight: '16px',
-							fontFamily:
-								'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+							fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
 						}}
 					>
-						{selectedNode
-							? JSON.stringify(selectedNode, null, 2)
-							: 'Select a node'}
+						{selectedNode ? JSON.stringify(selectedNode, null, 2) : 'Select a node'}
 					</pre>
 				</div>
 			</div>

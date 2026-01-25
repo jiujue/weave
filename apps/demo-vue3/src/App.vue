@@ -39,28 +39,14 @@
 					</label>
 				</div>
 				<div class="row">
-					<button
-						class="btn"
-						type="button"
-						:disabled="exporting"
-						@click="generatePng"
-					>
+					<button class="btn" type="button" :disabled="exporting" @click="generatePng">
 						{{ exporting ? '生成中...' : '生成 PNG' }}
 					</button>
-					<a
-						v-if="exportUrl"
-						class="link"
-						:href="exportUrl"
-						:download="downloadName"
-					>
-						下载
-					</a>
+					<a v-if="exportUrl" class="link" :href="exportUrl" :download="downloadName"> 下载 </a>
 				</div>
 				<div class="row">
 					<div class="status">
-						<div>
-							状态：{{ exporting ? 'rendering' : exportUrl ? 'ready' : 'idle' }}
-						</div>
+						<div>状态：{{ exporting ? 'rendering' : exportUrl ? 'ready' : 'idle' }}</div>
 						<div v-if="exportMs != null">耗时：{{ exportMs }}ms</div>
 						<div v-if="exportError" class="error">{{ exportError }}</div>
 					</div>
@@ -94,7 +80,7 @@ import {
 	buildReportScene,
 	columnsFor,
 	type ReportDataset,
-	type ReportVariant
+	type ReportVariant,
 } from './weave/buildScene.tsx'
 
 const variant = ref<ReportVariant>('invoice')
@@ -110,7 +96,7 @@ const dataset = computed<ReportDataset>(() => {
 		customer: '某某有限公司',
 		project: '年度咨询',
 		date: '2026-01-16',
-		owner: '张三'
+		owner: '张三',
 	}
 })
 
@@ -124,8 +110,8 @@ const rows = computed<readonly TableRow[]>(() => {
 					period: '2026-01',
 					qty: '1',
 					unit: '399.00',
-					amount: '399.00'
-				}
+					amount: '399.00',
+				},
 			},
 			{
 				id: 'r2',
@@ -134,9 +120,9 @@ const rows = computed<readonly TableRow[]>(() => {
 					period: '2026-01',
 					qty: '2',
 					unit: '199.00',
-					amount: '398.00'
-				}
-			}
+					amount: '398.00',
+				},
+			},
 		]
 	}
 	if (variant.value === 'reimburse') {
@@ -148,8 +134,8 @@ const rows = computed<readonly TableRow[]>(() => {
 					cat: '项目',
 					invoiceNo: 'FP00101',
 					amount: '128.50',
-					note: '含税'
-				}
+					note: '含税',
+				},
 			},
 			{
 				id: 'r2',
@@ -158,9 +144,9 @@ const rows = computed<readonly TableRow[]>(() => {
 					cat: '项目',
 					invoiceNo: 'FP00102',
 					amount: '399.00',
-					note: '—'
-				}
-			}
+					note: '—',
+				},
+			},
 		]
 	}
 	return [
@@ -171,8 +157,8 @@ const rows = computed<readonly TableRow[]>(() => {
 				memo: '业务流水 001-01',
 				debit: '500.00',
 				credit: '',
-				balance: '6500.00'
-			}
+				balance: '6500.00',
+			},
 		},
 		{
 			id: 'r2',
@@ -181,9 +167,9 @@ const rows = computed<readonly TableRow[]>(() => {
 				memo: '业务流水 001-02',
 				debit: '',
 				credit: '120.00',
-				balance: '6380.00'
-			}
-		}
+				balance: '6380.00',
+			},
+		},
 	]
 })
 
@@ -194,7 +180,7 @@ const scene = computed(() => {
 		variant: variant.value,
 		dataset: dataset.value,
 		columns: columnsFor(variant.value),
-		rows: rows.value
+		rows: rows.value,
 	})
 })
 
@@ -222,7 +208,7 @@ const generatePng = async () => {
 		height: 1123,
 		dpr: exportDpr.value,
 		scene: scene.value,
-		clearColor: '#ffffff'
+		clearColor: '#ffffff',
 	})
 
 	try {

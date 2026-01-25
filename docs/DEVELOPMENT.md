@@ -8,9 +8,18 @@
 
 ```bash
 pnpm install
-pnpm -r build
-pnpm test
 pnpm lint
+pnpm lint:fix
+pnpm format
+pnpm test
+pnpm check
+pnpm -r build
+```
+
+## 提交规范
+
+```bash
+pnpm commit
 ```
 
 ## 启动 demo

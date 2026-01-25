@@ -14,4 +14,3 @@ if (!root) {
 	if (loading) loading.remove()
 	createRoot(root).render(<WeavePanel />)
 }
-

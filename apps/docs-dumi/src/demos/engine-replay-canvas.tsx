@@ -26,38 +26,31 @@ function createBrowserTextMeasurer(): TextMeasurer {
 			const width = Math.ceil(ctx.measureText(text).width)
 			const lineHeight = style.lineHeight ?? Math.ceil(style.fontSize * 1.2)
 			return { width, height: lineHeight, lineHeight }
-		}
+		},
 	}
 }
 
 function createSceneElement() {
 	return (
 		<Container
-			id='root'
+			id="root"
 			style={{ width: 480, padding: 16, flexDirection: 'column' }}
 			paint={{ background: { color: '#0b1021' } }}
 		>
-			<Text
-				id='t1'
-				textStyle={{ fontSize: 16, color: '#e6e6e6', fontWeight: 'bold' }}
-			>
+			<Text id="t1" textStyle={{ fontSize: 16, color: '#e6e6e6', fontWeight: 'bold' }}>
 				createEngine + replay(canvas)
 			</Text>
-			<Text
-				id='t2'
-				style={{ marginTop: 8 }}
-				textStyle={{ fontSize: 12, color: '#b7c0ff' }}
-			>
-				这个示例在页面内直接跑 core（无 Worker），用于理解 data → layout →
-				displaylist → replay 的最短链路。
+			<Text id="t2" style={{ marginTop: 8 }} textStyle={{ fontSize: 12, color: '#b7c0ff' }}>
+				这个示例在页面内直接跑 core（无 Worker），用于理解 data → layout → displaylist → replay
+				的最短链路。
 			</Text>
 			<Polygon
-				id='tri'
+				id="tri"
 				style={{ marginTop: 12, width: 120, height: 80 }}
 				points={[
 					{ x: 0, y: 80 },
 					{ x: 60, y: 0 },
-					{ x: 120, y: 80 }
+					{ x: 120, y: 80 },
 				]}
 				paint={{ fill: { color: '#4ade80' } }}
 			/>
@@ -66,8 +59,7 @@ function createSceneElement() {
 }
 
 export default function Demo(): JSX.Element {
-	const { ref: containerRef, width: containerWidth } =
-		useContainerWidth<HTMLDivElement>(720)
+	const { ref: containerRef, width: containerWidth } = useContainerWidth<HTMLDivElement>(720)
 	const canvasRef = useRef<HTMLCanvasElement | null>(null)
 	const textMeasurer = useMemo(() => createBrowserTextMeasurer(), [])
 	const [ready, setReady] = useState(false)
@@ -83,7 +75,7 @@ export default function Demo(): JSX.Element {
 		const run = async () => {
 			engine = await createEngine({
 				textMeasurer,
-				root: sceneFromJSX(createSceneElement())
+				root: sceneFromJSX(createSceneElement()),
 			})
 			if (disposed) return
 
@@ -123,7 +115,7 @@ export default function Demo(): JSX.Element {
 					display: 'block',
 					width: '100%',
 					borderRadius: 8,
-					border: '1px solid #e5e7eb'
+					border: '1px solid #e5e7eb',
 				}}
 			/>
 			<div style={{ color: '#6b7280', fontSize: 12 }}>

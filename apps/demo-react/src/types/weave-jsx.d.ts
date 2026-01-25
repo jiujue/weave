@@ -7,7 +7,7 @@ import type {
 	TableHeaderGroup,
 	TableRow,
 	TableStyle,
-	TextStyle
+	TextStyle,
 } from '@jiujue/weave-types'
 
 declare global {

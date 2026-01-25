@@ -79,4 +79,3 @@ toc: content
   - 输入为 viewport 坐标，返回 `{ instanceId, nodeId, path, highlight } | null`
 - `startInspect` / `stopInspect`
   - 由 content script 直接处理（不下沉到 main world）
-

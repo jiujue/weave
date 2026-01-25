@@ -17,7 +17,7 @@ export function WeaveCanvas(props: Readonly<{ scene: SceneNode }>) {
 			devtools: { enabled: true, name: 'demo-react', log: true },
 			onError(message) {
 				console.error('[weave worker error]', message)
-			}
+			},
 		})
 		appRef.current = app
 		app.render()
@@ -42,10 +42,5 @@ export function WeaveCanvas(props: Readonly<{ scene: SceneNode }>) {
 		app.render()
 	}, [props.scene])
 
-	return (
-		<canvas
-			ref={canvasRef}
-			style={{ width: '100%', height: '100%', display: 'block' }}
-		/>
-	)
+	return <canvas ref={canvasRef} style={{ width: '100%', height: '100%', display: 'block' }} />
 }

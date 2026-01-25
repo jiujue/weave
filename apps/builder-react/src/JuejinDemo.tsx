@@ -10,7 +10,7 @@ const articles = [
 		author: 'JarvanMo',
 		views: '2.0k',
 		likes: 13,
-		tags: ['前端', 'React Native']
+		tags: ['前端', 'React Native'],
 	},
 	{
 		title: '前端必学-完美组件封装原则',
@@ -18,7 +18,7 @@ const articles = [
 		author: 'Freedom风间',
 		views: '28k',
 		likes: 695,
-		tags: ['前端', 'JavaScript', '设计模式']
+		tags: ['前端', 'JavaScript', '设计模式'],
 	},
 	{
 		title: '我用 Cursor + Trae 手搓了一个 App，上架了 App Store',
@@ -26,7 +26,7 @@ const articles = [
 		author: 'Stay_Thinking',
 		views: '4.1k',
 		likes: 28,
-		tags: ['AI编程', 'Cursor']
+		tags: ['AI编程', 'Cursor'],
 	},
 	{
 		title: '如何知道同事的工资？',
@@ -34,8 +34,8 @@ const articles = [
 		author: '野生的码农',
 		views: '37k',
 		likes: 210,
-		tags: ['程序员', '职场']
-	}
+		tags: ['程序员', '职场'],
+	},
 ]
 
 const rightSideCards = [
@@ -46,9 +46,9 @@ const rightSideCards = [
 			'"死了么"用户数翻800倍',
 			'普通前端仔的 2025',
 			'我的2025: 做项目、跑副业',
-			'2025年总结: 我还在往前走'
-		]
-	}
+			'2025年总结: 我还在往前走',
+		],
+	},
 ]
 
 // Components (Helper functions to generate SceneNode)
@@ -68,7 +68,7 @@ const Header = (): SceneNode => ({
 		position: 'absolute',
 		top: 0,
 		left: 0,
-		right: 0
+		right: 0,
 	},
 	children: [
 		{
@@ -80,33 +80,33 @@ const Header = (): SceneNode => ({
 					id: 'logo',
 					type: 'text',
 					text: '稀土掘金',
-					textStyle: { fontSize: 18, fontWeight: 700, color: '#1e80ff' }
+					textStyle: { fontSize: 18, fontWeight: 700, color: '#1e80ff' },
 				},
 				{
 					id: 'nav-home',
 					type: 'text',
 					text: '首页',
-					textStyle: { fontSize: 14, color: '#1e80ff' }
+					textStyle: { fontSize: 14, color: '#1e80ff' },
 				},
 				{
 					id: 'nav-ai',
 					type: 'text',
 					text: 'AI Coding',
-					textStyle: { fontSize: 14, color: '#515767' }
+					textStyle: { fontSize: 14, color: '#515767' },
 				},
 				{
 					id: 'nav-course',
 					type: 'text',
 					text: '课程',
-					textStyle: { fontSize: 14, color: '#515767' }
+					textStyle: { fontSize: 14, color: '#515767' },
 				},
 				{
 					id: 'nav-live',
 					type: 'text',
 					text: '直播',
-					textStyle: { fontSize: 14, color: '#515767' }
-				}
-			]
+					textStyle: { fontSize: 14, color: '#515767' },
+				},
+			],
 		},
 		{
 			id: 'header-right',
@@ -122,16 +122,16 @@ const Header = (): SceneNode => ({
 						background: { color: '#f2f3f5' },
 						borderRadius: 4,
 						justifyContent: 'center',
-						paddingLeft: 10
+						paddingLeft: 10,
 					},
 					children: [
 						{
 							id: 'search-text',
 							type: 'text',
 							text: '搜索稀土掘金',
-							textStyle: { fontSize: 12, color: '#86909c' }
-						}
-					]
+							textStyle: { fontSize: 12, color: '#86909c' },
+						},
+					],
 				},
 				{
 					id: 'creator-btn',
@@ -142,20 +142,20 @@ const Header = (): SceneNode => ({
 						background: { color: '#1e80ff' },
 						borderRadius: 4,
 						justifyContent: 'center',
-						alignItems: 'center'
+						alignItems: 'center',
 					},
 					children: [
 						{
 							id: 'creator-text',
 							type: 'text',
 							text: '创作者中心',
-							textStyle: { fontSize: 12, color: '#ffffff' }
-						}
-					]
-				}
-			]
-		}
-	]
+							textStyle: { fontSize: 12, color: '#ffffff' },
+						},
+					],
+				},
+			],
+		},
+	],
 })
 
 const Sidebar = (): SceneNode => ({
@@ -167,7 +167,7 @@ const Sidebar = (): SceneNode => ({
 		gap: 5,
 		background: { color: '#ffffff' },
 		marginRight: 20,
-		borderRadius: 4
+		borderRadius: 4,
 	},
 	children: [
 		'关注',
@@ -179,7 +179,7 @@ const Sidebar = (): SceneNode => ({
 		'人工智能',
 		'开发工具',
 		'代码人生',
-		'阅读'
+		'阅读',
 	].map((item, index) => ({
 		id: `sidebar-${index}`,
 		type: 'container',
@@ -187,7 +187,7 @@ const Sidebar = (): SceneNode => ({
 			paddingVertical: 10,
 			paddingHorizontal: 15,
 			background: item === '综合' ? { color: '#eaf2ff' } : undefined,
-			borderRadius: 4
+			borderRadius: 4,
 		},
 		children: [
 			{
@@ -196,11 +196,11 @@ const Sidebar = (): SceneNode => ({
 				text: item,
 				textStyle: {
 					fontSize: 14,
-					color: item === '综合' ? '#1e80ff' : '#515767'
-				}
-			}
-		]
-	}))
+					color: item === '综合' ? '#1e80ff' : '#515767',
+				},
+			},
+		],
+	})),
 })
 
 const ArticleCard = (article: any, index: number): SceneNode => ({
@@ -211,20 +211,20 @@ const ArticleCard = (article: any, index: number): SceneNode => ({
 		background: { color: '#ffffff' },
 		borderBottomWidth: 1,
 		borderColor: '#e5e7eb',
-		gap: 8
+		gap: 8,
 	},
 	children: [
 		{
 			id: `title-${index}`,
 			type: 'text',
 			text: article.title,
-			textStyle: { fontSize: 16, fontWeight: 700, color: '#1d2129' }
+			textStyle: { fontSize: 16, fontWeight: 700, color: '#1d2129' },
 		},
 		{
 			id: `desc-${index}`,
 			type: 'text',
 			text: article.desc,
-			textStyle: { fontSize: 13, color: '#86909c' }
+			textStyle: { fontSize: 13, color: '#86909c' },
 		},
 		{
 			id: `meta-${index}`,
@@ -233,36 +233,36 @@ const ArticleCard = (article: any, index: number): SceneNode => ({
 				flexDirection: 'row',
 				alignItems: 'center',
 				gap: 10,
-				marginTop: 4
+				marginTop: 4,
 			},
 			children: [
 				{
 					id: `author-${index}`,
 					type: 'text',
 					text: article.author,
-					textStyle: { fontSize: 12, color: '#4e5969' }
+					textStyle: { fontSize: 12, color: '#4e5969' },
 				},
 				{
 					id: `views-${index}`,
 					type: 'text',
 					text: `${article.views} 浏览`,
-					textStyle: { fontSize: 12, color: '#86909c' }
+					textStyle: { fontSize: 12, color: '#86909c' },
 				},
 				{
 					id: `likes-${index}`,
 					type: 'text',
 					text: `${article.likes} 赞`,
-					textStyle: { fontSize: 12, color: '#86909c' }
+					textStyle: { fontSize: 12, color: '#86909c' },
 				},
 				...(article.tags || []).map((tag: string, tIdx: number) => ({
 					id: `tag-${index}-${tIdx}`,
 					type: 'text',
 					text: tag,
-					textStyle: { fontSize: 12, color: '#86909c' }
-				}))
-			]
-		}
-	]
+					textStyle: { fontSize: 12, color: '#86909c' },
+				})),
+			],
+		},
+	],
 })
 
 const MainContent = (): SceneNode => ({
@@ -271,7 +271,7 @@ const MainContent = (): SceneNode => ({
 	style: {
 		flex: 1,
 		background: { color: '#ffffff' },
-		borderRadius: 4
+		borderRadius: 4,
 	},
 	children: [
 		{
@@ -282,25 +282,25 @@ const MainContent = (): SceneNode => ({
 				padding: 15,
 				borderBottomWidth: 1,
 				borderColor: '#e5e7eb',
-				gap: 20
+				gap: 20,
 			},
 			children: [
 				{
 					id: 'sort-rec',
 					type: 'text',
 					text: '推荐',
-					textStyle: { fontSize: 14, color: '#1e80ff' }
+					textStyle: { fontSize: 14, color: '#1e80ff' },
 				},
 				{
 					id: 'sort-new',
 					type: 'text',
 					text: '最新',
-					textStyle: { fontSize: 14, color: '#515767' }
-				}
-			]
+					textStyle: { fontSize: 14, color: '#515767' },
+				},
+			],
 		},
-		...articles.map((article, index) => ArticleCard(article, index))
-	]
+		...articles.map((article, index) => ArticleCard(article, index)),
+	],
 })
 
 const RightSidebar = (): SceneNode => ({
@@ -309,7 +309,7 @@ const RightSidebar = (): SceneNode => ({
 	style: {
 		width: 260,
 		marginLeft: 20,
-		gap: 20
+		gap: 20,
 	},
 	children: [
 		// Sign in card
@@ -320,7 +320,7 @@ const RightSidebar = (): SceneNode => ({
 				padding: 20,
 				background: { color: '#ffffff' },
 				borderRadius: 4,
-				gap: 10
+				gap: 10,
 			},
 			children: [
 				{
@@ -329,14 +329,14 @@ const RightSidebar = (): SceneNode => ({
 					style: {
 						flexDirection: 'row',
 						justifyContent: 'space-between',
-						alignItems: 'center'
+						alignItems: 'center',
 					},
 					children: [
 						{
 							id: 'greet-title',
 							type: 'text',
 							text: '晚上好!',
-							textStyle: { fontSize: 16, fontWeight: 600 }
+							textStyle: { fontSize: 16, fontWeight: 600 },
 						},
 						{
 							id: 'checkin-btn',
@@ -346,26 +346,26 @@ const RightSidebar = (): SceneNode => ({
 								paddingVertical: 5,
 								borderWidth: 1,
 								borderColor: '#1e80ff',
-								borderRadius: 4
+								borderRadius: 4,
 							},
 							children: [
 								{
 									id: 'checkin-text',
 									type: 'text',
 									text: '去签到',
-									textStyle: { fontSize: 12, color: '#1e80ff' }
-								}
-							]
-						}
-					]
+									textStyle: { fontSize: 12, color: '#1e80ff' },
+								},
+							],
+						},
+					],
 				},
 				{
 					id: 'slogan',
 					type: 'text',
 					text: '点亮在社区的每一天',
-					textStyle: { fontSize: 12, color: '#86909c' }
-				}
-			]
+					textStyle: { fontSize: 12, color: '#86909c' },
+				},
+			],
 		},
 		// Ad banner
 		{
@@ -376,22 +376,22 @@ const RightSidebar = (): SceneNode => ({
 				background: { color: '#1e1e1e' },
 				borderRadius: 4,
 				justifyContent: 'center',
-				alignItems: 'center'
+				alignItems: 'center',
 			},
 			children: [
 				{
 					id: 'ad-text',
 					type: 'text',
 					text: '「AI/Vibe Coding」',
-					textStyle: { fontSize: 18, color: '#ffffff', fontWeight: 700 }
+					textStyle: { fontSize: 18, color: '#ffffff', fontWeight: 700 },
 				},
 				{
 					id: 'ad-sub',
 					type: 'text',
 					text: '对我的影响',
-					textStyle: { fontSize: 14, color: '#cccccc' }
-				}
-			]
+					textStyle: { fontSize: 14, color: '#cccccc' },
+				},
+			],
 		},
 		// Rank list
 		{
@@ -401,14 +401,14 @@ const RightSidebar = (): SceneNode => ({
 				padding: 15,
 				background: { color: '#ffffff' },
 				borderRadius: 4,
-				gap: 10
+				gap: 10,
 			},
 			children: [
 				{
 					id: 'rank-title',
 					type: 'text',
 					text: '📝 文章榜',
-					textStyle: { fontSize: 14, fontWeight: 600 }
+					textStyle: { fontSize: 14, fontWeight: 600 },
 				},
 				...rightSideCards[1].items.map((item, idx) => ({
 					id: `rank-item-${idx}`,
@@ -422,20 +422,20 @@ const RightSidebar = (): SceneNode => ({
 							textStyle: {
 								fontSize: 14,
 								color: idx < 3 ? '#ff5132' : '#86909c',
-								fontWeight: 700
-							}
+								fontWeight: 700,
+							},
 						},
 						{
 							id: `rank-text-${idx}`,
 							type: 'text',
 							text: item,
-							textStyle: { fontSize: 13, color: '#333' }
-						}
-					]
-				}))
-			]
-		}
-	]
+							textStyle: { fontSize: 13, color: '#333' },
+						},
+					],
+				})),
+			],
+		},
+	],
 })
 
 export const JuejinPage = (): SceneNode => ({
@@ -446,7 +446,7 @@ export const JuejinPage = (): SceneNode => ({
 		height: '100%',
 		background: { color: '#f4f5f9' },
 		alignItems: 'center',
-		paddingTop: 80 // Space for fixed header
+		paddingTop: 80, // Space for fixed header
 	},
 	children: [
 		Header(),
@@ -457,11 +457,11 @@ export const JuejinPage = (): SceneNode => ({
 				width: 960, // Max width
 				maxWidth: '100%',
 				flexDirection: 'row',
-				alignItems: 'flex-start'
+				alignItems: 'flex-start',
 			},
-			children: [Sidebar(), MainContent(), RightSidebar()]
-		}
-	]
+			children: [Sidebar(), MainContent(), RightSidebar()],
+		},
+	],
 })
 
 // React Component Wrapper
@@ -487,9 +487,9 @@ export default function JuejinDemo() {
 					return {
 						width: metrics.width,
 						height: (style.fontSize || 14) * 1.4,
-						lines: []
+						lines: [],
 					}
-				}
+				},
 			}
 
 			const engine = await createEngine({ textMeasurer })
@@ -526,10 +526,7 @@ export default function JuejinDemo() {
 
 	return (
 		<div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
-			<canvas
-				ref={canvasRef}
-				style={{ width: '100%', height: '100%', display: 'block' }}
-			/>
+			<canvas ref={canvasRef} style={{ width: '100%', height: '100%', display: 'block' }} />
 		</div>
 	)
 }

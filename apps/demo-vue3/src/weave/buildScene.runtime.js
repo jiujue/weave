@@ -1,35 +1,35 @@
 import { jsx, jsxs } from '@jiujue/weave-types/jsx-runtime'
 
-const variantName = v => {
+const variantName = (v) => {
 	if (v === 'invoice') return '结算单'
 	if (v === 'reimburse') return '报销单'
 	return '对账单'
 }
 
-const variantTheme = v => {
+const variantTheme = (v) => {
 	if (v === 'invoice') return { primary: '#2563eb', tint: '#eff6ff' }
 	if (v === 'reimburse') return { primary: '#16a34a', tint: '#ecfdf5' }
 	return { primary: '#7c3aed', tint: '#f5f3ff' }
 }
 
-export const columnsForRuntimeJs = v => {
+export const columnsForRuntimeJs = (v) => {
 	if (v === 'invoice') {
 		return [
 			{
 				id: 'item',
 				title: '项目',
 				width: { type: 'flex', weight: 3 },
-				align: 'left'
+				align: 'left',
 			},
 			{
 				id: 'period',
 				title: '周期',
 				width: { type: 'flex', weight: 2 },
-				align: 'left'
+				align: 'left',
 			},
 			{ id: 'qty', title: '数量', width: 72, align: 'right' },
 			{ id: 'unit', title: '单价', width: 88, align: 'right' },
-			{ id: 'amount', title: '金额', width: 96, align: 'right' }
+			{ id: 'amount', title: '金额', width: 96, align: 'right' },
 		]
 	}
 	if (v === 'reimburse') {
@@ -38,13 +38,13 @@ export const columnsForRuntimeJs = v => {
 				id: 'item',
 				title: '费用项',
 				width: { type: 'flex', weight: 2 },
-				align: 'left'
+				align: 'left',
 			},
 			{
 				id: 'cat',
 				title: '类别',
 				width: { type: 'flex', weight: 1 },
-				align: 'left'
+				align: 'left',
 			},
 			{ id: 'invoiceNo', title: '票据', width: 120, align: 'left' },
 			{ id: 'amount', title: '金额', width: 96, align: 'right' },
@@ -52,8 +52,8 @@ export const columnsForRuntimeJs = v => {
 				id: 'note',
 				title: '备注',
 				width: { type: 'flex', weight: 2 },
-				align: 'left'
-			}
+				align: 'left',
+			},
 		]
 	}
 	return [
@@ -61,17 +61,17 @@ export const columnsForRuntimeJs = v => {
 			id: 'subject',
 			title: '科目',
 			width: { type: 'flex', weight: 2 },
-			align: 'left'
+			align: 'left',
 		},
 		{
 			id: 'memo',
 			title: '摘要',
 			width: { type: 'flex', weight: 3 },
-			align: 'left'
+			align: 'left',
 		},
 		{ id: 'debit', title: '借', width: 96, align: 'right' },
 		{ id: 'credit', title: '贷', width: 96, align: 'right' },
-		{ id: 'balance', title: '余额', width: 110, align: 'right' }
+		{ id: 'balance', title: '余额', width: 110, align: 'right' },
 	]
 }
 
@@ -81,7 +81,7 @@ const sumAmount = (rows, colId) => {
 	return sum
 }
 
-export const buildReportSceneRuntimeJs = input => {
+export const buildReportSceneRuntimeJs = (input) => {
 	const theme = variantTheme(input.variant)
 	const padding = 56
 	const contentW = input.pageW - padding * 2
@@ -91,32 +91,30 @@ export const buildReportSceneRuntimeJs = input => {
 		color: '#0f172a',
 		fontWeight: 'bold',
 		whiteSpace: 'nowrap',
-		textBaseline: 'top'
+		textBaseline: 'top',
 	}
 	const h2 = {
 		fontSize: 14,
 		color: '#0f172a',
 		fontWeight: 'bold',
 		whiteSpace: 'nowrap',
-		textBaseline: 'top'
+		textBaseline: 'top',
 	}
 	const subtle = {
 		fontSize: 11,
 		color: '#475569',
 		whiteSpace: 'normal',
-		textBaseline: 'top'
+		textBaseline: 'top',
 	}
 	const mono = {
 		fontSize: 11,
 		color: '#0f172a',
-		fontFamily:
-			'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+		fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
 		whiteSpace: 'nowrap',
-		textBaseline: 'top'
+		textBaseline: 'top',
 	}
 
-	const subtotal =
-		input.variant === 'statement' ? 0 : sumAmount(input.rows, 'amount')
+	const subtotal = input.variant === 'statement' ? 0 : sumAmount(input.rows, 'amount')
 	const tax = input.variant === 'invoice' ? subtotal * 0.06 : 0
 	const total = subtotal + tax
 
@@ -127,11 +125,11 @@ export const buildReportSceneRuntimeJs = input => {
 			height: input.pageH,
 			flexDirection: 'column',
 			padding,
-			gap: 18
+			gap: 18,
 		},
 		paint: {
 			background: { color: '#ffffff' },
-			border: { color: '#e2e8f0', width: 1 }
+			border: { color: '#e2e8f0', width: 1 },
 		},
 		children: [
 			jsxs('container', {
@@ -140,7 +138,7 @@ export const buildReportSceneRuntimeJs = input => {
 					flexDirection: 'row',
 					alignItems: 'center',
 					justifyContent: 'space-between',
-					gap: 16
+					gap: 16,
 				},
 				children: [
 					jsxs('container', {
@@ -150,40 +148,40 @@ export const buildReportSceneRuntimeJs = input => {
 							flexGrow: 1,
 							flexShrink: 1,
 							minWidth: 0,
-							gap: 4
+							gap: 4,
 						},
 						children: [
 							jsx('text', {
 								id: 'docTitle',
 								textStyle: titleStyle,
-								children: variantName(input.variant)
+								children: variantName(input.variant),
 							}),
 							jsx('text', {
 								id: 'docSub',
 								textStyle: subtle,
-								children: `客户：${input.dataset.customer}｜项目：${input.dataset.project}｜经办：${input.dataset.owner}`
-							})
-						]
+								children: `客户：${input.dataset.customer}｜项目：${input.dataset.project}｜经办：${input.dataset.owner}`,
+							}),
+						],
 					}),
 					jsx('container', {
 						id: 'headerBadge',
 						style: { padding: 10 },
 						paint: {
 							background: { color: theme.tint },
-							border: { color: theme.primary, width: 1 }
+							border: { color: theme.primary, width: 1 },
 						},
 						children: jsx('text', {
 							id: 'headerBadgeText',
 							textStyle: mono,
-							children: `ID ${String(input.dataset.id).padStart(3, '0')} · ${input.dataset.date}`
-						})
-					})
-				]
+							children: `ID ${String(input.dataset.id).padStart(3, '0')} · ${input.dataset.date}`,
+						}),
+					}),
+				],
 			}),
 			jsx('container', {
 				id: 'dividerTop',
 				style: { height: 1 },
-				paint: { background: { color: '#e2e8f0' } }
+				paint: { background: { color: '#e2e8f0' } },
 			}),
 			jsxs('container', {
 				id: 'detailSection',
@@ -196,7 +194,7 @@ export const buildReportSceneRuntimeJs = input => {
 							width: contentW,
 							height: 420,
 							overflowY: 'visible',
-							overflowX: 'visible'
+							overflowX: 'visible',
 						},
 						columns: input.columns,
 						rows: input.rows,
@@ -212,10 +210,10 @@ export const buildReportSceneRuntimeJs = input => {
 							headerTextStyle: {
 								fontSize: 12,
 								color: '#0f172a',
-								fontWeight: 'bold'
+								fontWeight: 'bold',
 							},
-							cellTextStyle: { fontSize: 12, color: '#0f172a' }
-						}
+							cellTextStyle: { fontSize: 12, color: '#0f172a' },
+						},
 					}),
 					input.variant === 'statement'
 						? null
@@ -230,20 +228,20 @@ export const buildReportSceneRuntimeJs = input => {
 											id: 'totalLine1',
 											style: {
 												flexDirection: 'row',
-												justifyContent: 'space-between'
+												justifyContent: 'space-between',
 											},
 											children: [
 												jsx('text', {
 													id: 'subtotalLabel',
 													textStyle: subtle,
-													children: '小计'
+													children: '小计',
 												}),
 												jsx('text', {
 													id: 'subtotalValue',
 													textStyle: mono,
-													children: subtotal.toFixed(2)
-												})
-											]
+													children: subtotal.toFixed(2),
+												}),
+											],
 										}),
 										input.variant !== 'invoice'
 											? null
@@ -251,49 +249,49 @@ export const buildReportSceneRuntimeJs = input => {
 													id: 'totalLine2',
 													style: {
 														flexDirection: 'row',
-														justifyContent: 'space-between'
+														justifyContent: 'space-between',
 													},
 													children: [
 														jsx('text', {
 															id: 'taxLabel',
 															textStyle: subtle,
-															children: '税额（6%）'
+															children: '税额（6%）',
 														}),
 														jsx('text', {
 															id: 'taxValue',
 															textStyle: mono,
-															children: tax.toFixed(2)
-														})
-													]
+															children: tax.toFixed(2),
+														}),
+													],
 												}),
 										jsx('container', {
 											id: 'totalDivider',
 											style: { height: 1 },
-											paint: { background: { color: '#e2e8f0' } }
+											paint: { background: { color: '#e2e8f0' } },
 										}),
 										jsxs('container', {
 											id: 'totalLine3',
 											style: {
 												flexDirection: 'row',
-												justifyContent: 'space-between'
+												justifyContent: 'space-between',
 											},
 											children: [
 												jsx('text', {
 													id: 'grandTotalLabel',
 													textStyle: h2,
-													children: '合计'
+													children: '合计',
 												}),
 												jsx('text', {
 													id: 'grandTotalValue',
 													textStyle: mono,
-													children: total.toFixed(2)
-												})
-											]
-										})
-									]
-								})
-							})
-				]
+													children: total.toFixed(2),
+												}),
+											],
+										}),
+									],
+								}),
+							}),
+				],
 			}),
 			jsxs('container', {
 				id: 'footer',
@@ -302,15 +300,15 @@ export const buildReportSceneRuntimeJs = input => {
 					jsx('text', {
 						id: 'footerLeft',
 						textStyle: mono,
-						children: 'weave / vue3-runtime-js'
+						children: 'weave / vue3-runtime-js',
 					}),
 					jsx('text', {
 						id: 'footerRight',
 						textStyle: mono,
-						children: 'page 1 / 1'
-					})
-				]
-			})
-		]
+						children: 'page 1 / 1',
+					}),
+				],
+			}),
+		],
 	})
 }

@@ -10,9 +10,7 @@ type OverlayRect = {
 	height: number
 }
 
-export function WeaveCanvas(
-	props: Readonly<{ scene: SceneNode; version?: number }>
-) {
+export function WeaveCanvas(props: Readonly<{ scene: SceneNode; version?: number }>) {
 	const canvasRef = useRef<HTMLCanvasElement | null>(null)
 	const appRef = useRef<ReturnType<typeof createWeaveApp> | null>(null)
 	const [overlay, setOverlay] = useState<OverlayRect | null>(null)
@@ -36,7 +34,7 @@ export function WeaveCanvas(
 			devtools: { enabled: true, name: 'builder-react', log: true },
 			onError(message) {
 				console.error('[weave worker error]', message)
-			}
+			},
 		})
 		appRef.current = app
 		app.render()
@@ -55,7 +53,7 @@ export function WeaveCanvas(
 		ro.observe(canvas)
 
 		// Subscribe to zoom/dpr changes
-		const unsubscribe = editor.subscribe(state => {
+		const unsubscribe = editor.subscribe((state) => {
 			app.resize(state.dpr, state.zoom)
 			if (state.canvasBackgroundColor !== appRef.current?.clearColor) {
 				// We don't have direct access to clearColor prop on app,
@@ -87,7 +85,7 @@ export function WeaveCanvas(
 
 	// Sync selection from editor state to overlay
 	useEffect(() => {
-		return editor.subscribe(state => {
+		return editor.subscribe((state) => {
 			const id = state.selection[0]
 			setSelectionId(id)
 		})
@@ -146,29 +144,29 @@ export function WeaveCanvas(
 	}
 
 	return (
-		<div className='relative w-full h-full'>
+		<div className="relative w-full h-full">
 			<canvas
-				id='weave-canvas'
+				id="weave-canvas"
 				ref={canvasRef}
 				style={{
 					width: '100%',
 					height: '100%',
 					display: 'block',
-					touchAction: 'none'
+					touchAction: 'none',
 				}}
 				onPointerDown={handlePointerDown}
 			/>
 			{overlay && (
 				<div
-					className='absolute border-2 border-blue-500 pointer-events-none'
+					className="absolute border-2 border-blue-500 pointer-events-none"
 					style={{
 						left: overlay.x,
 						top: overlay.y,
 						width: overlay.width,
-						height: overlay.height
+						height: overlay.height,
 					}}
 				>
-					<div className='absolute -top-6 left-0 bg-blue-500 text-white text-[10px] px-1 rounded-sm'>
+					<div className="absolute -top-6 left-0 bg-blue-500 text-white text-[10px] px-1 rounded-sm">
 						{selectionId}
 					</div>
 				</div>

@@ -2,12 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { createEngine } from '@jiujue/weave-core'
 import type { Engine } from '@jiujue/weave-core'
 import { sceneFromJSX } from '@jiujue/weave-react'
-import type {
-	ScenePatch,
-	TextMeasureInput,
-	TextMeasurer,
-	TextStyle
-} from '@jiujue/weave-types'
+import type { ScenePatch, TextMeasureInput, TextMeasurer, TextStyle } from '@jiujue/weave-types'
 import { useContainerWidth } from './useContainerWidth'
 
 const Container = 'container' as any
@@ -28,15 +23,11 @@ function createBrowserTextMeasurer(): TextMeasurer {
 		measure(input: TextMeasureInput) {
 			ctx.font = fontFromTextStyle(input.style)
 			const width = Math.ceil(
-				Math.min(
-					input.maxWidth ?? Number.POSITIVE_INFINITY,
-					ctx.measureText(input.text).width
-				)
+				Math.min(input.maxWidth ?? Number.POSITIVE_INFINITY, ctx.measureText(input.text).width),
 			)
-			const lineHeight =
-				input.style.lineHeight ?? Math.ceil(input.style.fontSize * 1.2)
+			const lineHeight = input.style.lineHeight ?? Math.ceil(input.style.fontSize * 1.2)
 			return { width, height: lineHeight, lineHeight }
-		}
+		},
 	}
 }
 
@@ -51,12 +42,7 @@ function ensureCanvasEnv(canvas: HTMLCanvasElement): CanvasEnv | null {
 	return { canvas, ctx }
 }
 
-function renderEngineToCanvas(
-	engine: Engine,
-	env: CanvasEnv,
-	width: number,
-	height: number
-): void {
+function renderEngineToCanvas(engine: Engine, env: CanvasEnv, width: number, height: number): void {
 	const dpr = window.devicePixelRatio || 1
 	env.canvas.style.height = `${height}px`
 	env.canvas.width = Math.floor(width * dpr)
@@ -73,34 +59,29 @@ function createGrid(): readonly string[] {
 	return Array.from({ length: 40 }, (_, r) => {
 		return Array.from(
 			{ length: 12 },
-			(_, c) =>
-				`R${String(r + 1).padStart(2, '0')}-C${String(c + 1).padStart(2, '0')}`
+			(_, c) => `R${String(r + 1).padStart(2, '0')}-C${String(c + 1).padStart(2, '0')}`,
 		).join('    ')
 	})
 }
 
-function buildScene(
-	lines: readonly string[],
-	w: number,
-	h: number
-): JSX.Element {
+function buildScene(lines: readonly string[], w: number, h: number): JSX.Element {
 	return (
 		<Container
-			id='root'
+			id="root"
 			style={{ padding: 16, flexDirection: 'column', gap: 10 }}
 			paint={{
 				background: { color: '#0b1021' },
-				border: { color: '#334155', width: 1 }
+				border: { color: '#334155', width: 1 },
 			}}
 		>
-			<Text id='title' textStyle={{ fontSize: 16, color: '#e5e7eb' }}>
+			<Text id="title" textStyle={{ fontSize: 16, color: '#e5e7eb' }}>
 				双向滚动容器：overflowX/overflowY + scrollX/scrollY
 			</Text>
-			<Text id='state' textStyle={{ fontSize: 12, color: '#93c5fd' }}>
+			<Text id="state" textStyle={{ fontSize: 12, color: '#93c5fd' }}>
 				scrollX=0, scrollY=0, viewport={w}x{h}
 			</Text>
 			<Container
-				id='panel'
+				id="panel"
 				style={{
 					width: w,
 					height: h,
@@ -108,11 +89,11 @@ function buildScene(
 					gap: 6,
 					padding: 10,
 					overflowX: 'auto',
-					overflowY: 'auto'
+					overflowY: 'auto',
 				}}
 				paint={{
 					background: { color: '#0f172a', alpha: 0.7 },
-					border: { color: '#334155', width: 1 }
+					border: { color: '#334155', width: 1 },
 				}}
 			>
 				{lines.map((t, idx) => (
@@ -125,17 +106,15 @@ function buildScene(
 					</Text>
 				))}
 			</Container>
-			<Text id='hint' textStyle={{ fontSize: 12, color: '#94a3b8' }}>
-				提示：在面板上滚轮竖向滚动；按住 Shift
-				可更容易触发横向滚动（或触控板横滑）。
+			<Text id="hint" textStyle={{ fontSize: 12, color: '#94a3b8' }}>
+				提示：在面板上滚轮竖向滚动；按住 Shift 可更容易触发横向滚动（或触控板横滑）。
 			</Text>
 		</Container>
 	)
 }
 
 export default function Demo(): JSX.Element {
-	const { ref: containerRef, width: containerWidth } =
-		useContainerWidth<HTMLDivElement>(960)
+	const { ref: containerRef, width: containerWidth } = useContainerWidth<HTMLDivElement>(960)
 	const canvasRef = useRef<HTMLCanvasElement | null>(null)
 	const envRef = useRef<CanvasEnv | null>(null)
 	const engineRef = useRef<Engine | null>(null)
@@ -170,7 +149,7 @@ export default function Demo(): JSX.Element {
 
 			const engine = await createEngine({
 				textMeasurer,
-				root: sceneFromJSX(buildScene(lines, viewportW, viewportH))
+				root: sceneFromJSX(buildScene(lines, viewportW, viewportH)),
 			})
 			if (disposed) {
 				engine.dispose()
@@ -201,17 +180,17 @@ export default function Demo(): JSX.Element {
 					gap: 6,
 					padding: 10,
 					overflowX: 'auto',
-					overflowY: 'auto'
-				}
+					overflowY: 'auto',
+				},
 			},
 			{ op: 'updateScroll', id: 'panel', scroll: { x: scrollX, y: scrollY } },
 			{
 				op: 'updateText',
 				id: 'state',
 				text: `scrollX=${Math.round(scrollX)}, scrollY=${Math.round(scrollY)}, viewport=${Math.round(
-					viewportW
-				)}x${Math.round(viewportH)}`
-			}
+					viewportW,
+				)}x${Math.round(viewportH)}`,
+			},
 		]
 		engine.applyPatches(patches)
 		rerender(engine)
@@ -231,8 +210,8 @@ export default function Demo(): JSX.Element {
 			event.preventDefault()
 			const dx = event.shiftKey ? event.deltaY : event.deltaX
 			const dy = event.shiftKey ? 0 : event.deltaY
-			setScrollX(v => v + dx)
-			setScrollY(v => v + dy)
+			setScrollX((v) => v + dx)
+			setScrollY((v) => v + dy)
 		}
 		canvas.addEventListener('wheel', onWheel, { passive: false })
 		return () => canvas.removeEventListener('wheel', onWheel)
@@ -243,11 +222,11 @@ export default function Demo(): JSX.Element {
 			<div style={{ fontSize: 12, color: '#334155' }}>
 				{metrics
 					? `viewport=${Math.round(metrics.viewportWidth)}x${Math.round(
-							metrics.viewportHeight
+							metrics.viewportHeight,
 						)}, content=${Math.round(metrics.contentWidth)}x${Math.round(
-							metrics.contentHeight
+							metrics.contentHeight,
 						)}, scroll=(${Math.round(metrics.scrollX)}/${Math.round(
-							metrics.maxScrollX
+							metrics.maxScrollX,
 						)}, ${Math.round(metrics.scrollY)}/${Math.round(metrics.maxScrollY)})`
 					: 'viewport/content/maxScroll 计算中...'}
 			</div>
@@ -255,43 +234,41 @@ export default function Demo(): JSX.Element {
 				<label style={{ display: 'grid', gap: 4 }}>
 					<span style={{ fontSize: 12, color: '#334155' }}>viewport width</span>
 					<input
-						type='range'
+						type="range"
 						min={260}
 						max={760}
 						value={viewportW}
-						onChange={e => setViewportW(Number(e.target.value))}
+						onChange={(e) => setViewportW(Number(e.target.value))}
 					/>
 				</label>
 				<label style={{ display: 'grid', gap: 4 }}>
-					<span style={{ fontSize: 12, color: '#334155' }}>
-						viewport height
-					</span>
+					<span style={{ fontSize: 12, color: '#334155' }}>viewport height</span>
 					<input
-						type='range'
+						type="range"
 						min={140}
 						max={320}
 						value={viewportH}
-						onChange={e => setViewportH(Number(e.target.value))}
+						onChange={(e) => setViewportH(Number(e.target.value))}
 					/>
 				</label>
 				<label style={{ display: 'grid', gap: 4 }}>
 					<span style={{ fontSize: 12, color: '#334155' }}>scrollX</span>
 					<input
-						type='range'
+						type="range"
 						min={0}
 						max={1600}
 						value={scrollX}
-						onChange={e => setScrollX(Number(e.target.value))}
+						onChange={(e) => setScrollX(Number(e.target.value))}
 					/>
 				</label>
 				<label style={{ display: 'grid', gap: 4 }}>
 					<span style={{ fontSize: 12, color: '#334155' }}>scrollY</span>
 					<input
-						type='range'
+						type="range"
 						min={0}
 						max={1600}
 						value={scrollY}
-						onChange={e => setScrollY(Number(e.target.value))}
+						onChange={(e) => setScrollY(Number(e.target.value))}
 					/>
 				</label>
 			</div>

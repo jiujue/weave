@@ -40,9 +40,7 @@ type ScrollOffset = { x?: number; y?: number }
 用 patch 更新滚动状态：
 
 ```ts
-const patches: ScenePatch[] = [
-	{ op: 'updateScroll', id: 'panel', scroll: { y: 120 } }
-]
+const patches: ScenePatch[] = [{ op: 'updateScroll', id: 'panel', scroll: { y: 120 } }]
 engine.applyPatches(patches)
 engine.render({ width, height })
 engine.replay(ctx, { dpr })

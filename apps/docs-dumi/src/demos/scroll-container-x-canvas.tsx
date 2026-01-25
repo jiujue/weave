@@ -2,12 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { createEngine } from '@jiujue/weave-core'
 import type { Engine } from '@jiujue/weave-core'
 import { sceneFromJSX } from '@jiujue/weave-react'
-import type {
-	ScenePatch,
-	TextMeasureInput,
-	TextMeasurer,
-	TextStyle
-} from '@jiujue/weave-types'
+import type { ScenePatch, TextMeasureInput, TextMeasurer, TextStyle } from '@jiujue/weave-types'
 import { useContainerWidth } from './useContainerWidth'
 
 const Container = 'container' as any
@@ -28,15 +23,11 @@ function createBrowserTextMeasurer(): TextMeasurer {
 		measure(input: TextMeasureInput) {
 			ctx.font = fontFromTextStyle(input.style)
 			const width = Math.ceil(
-				Math.min(
-					input.maxWidth ?? Number.POSITIVE_INFINITY,
-					ctx.measureText(input.text).width
-				)
+				Math.min(input.maxWidth ?? Number.POSITIVE_INFINITY, ctx.measureText(input.text).width),
 			)
-			const lineHeight =
-				input.style.lineHeight ?? Math.ceil(input.style.fontSize * 1.2)
+			const lineHeight = input.style.lineHeight ?? Math.ceil(input.style.fontSize * 1.2)
 			return { width, height: lineHeight, lineHeight }
-		}
+		},
 	}
 }
 
@@ -51,12 +42,7 @@ function ensureCanvasEnv(canvas: HTMLCanvasElement): CanvasEnv | null {
 	return { canvas, ctx }
 }
 
-function renderEngineToCanvas(
-	engine: Engine,
-	env: CanvasEnv,
-	width: number,
-	height: number
-): void {
+function renderEngineToCanvas(engine: Engine, env: CanvasEnv, width: number, height: number): void {
 	const dpr = window.devicePixelRatio || 1
 	env.canvas.style.height = `${height}px`
 	env.canvas.width = Math.floor(width * dpr)
@@ -72,45 +58,42 @@ function renderEngineToCanvas(
 function buildScene(longText: string, maxWidth: number): JSX.Element {
 	return (
 		<Container
-			id='root'
+			id="root"
 			style={{ padding: 16, flexDirection: 'column', gap: 10 }}
 			paint={{
 				background: { color: '#0b1021' },
-				border: { color: '#334155', width: 1 }
+				border: { color: '#334155', width: 1 },
 			}}
 		>
-			<Text id='title' textStyle={{ fontSize: 16, color: '#e5e7eb' }}>
+			<Text id="title" textStyle={{ fontSize: 16, color: '#e5e7eb' }}>
 				横向滚动容器：maxWidth + overflowX + scrollX
 			</Text>
-			<Text id='state' textStyle={{ fontSize: 12, color: '#93c5fd' }}>
+			<Text id="state" textStyle={{ fontSize: 12, color: '#93c5fd' }}>
 				scrollX=0, maxWidth={maxWidth}
 			</Text>
 			<Container
-				id='panel'
+				id="panel"
 				style={{
 					maxWidth,
 					height: 90,
 					flexDirection: 'column',
 					gap: 8,
 					padding: 10,
-					overflowX: 'auto'
+					overflowX: 'auto',
 				}}
 				paint={{
 					background: { color: '#0f172a', alpha: 0.7 },
-					border: { color: '#334155', width: 1 }
+					border: { color: '#334155', width: 1 },
 				}}
 			>
-				<Text
-					id='line'
-					textStyle={{ fontSize: 14, color: '#e5e7eb', whiteSpace: 'nowrap' }}
-				>
+				<Text id="line" textStyle={{ fontSize: 14, color: '#e5e7eb', whiteSpace: 'nowrap' }}>
 					{longText}
 				</Text>
-				<Text id='hint2' textStyle={{ fontSize: 12, color: '#94a3b8' }}>
+				<Text id="hint2" textStyle={{ fontSize: 12, color: '#94a3b8' }}>
 					滚轮横滚：触控板可直接横滚；鼠标建议按住 Shift 再滚轮。
 				</Text>
 			</Container>
-			<Text id='hint' textStyle={{ fontSize: 12, color: '#94a3b8' }}>
+			<Text id="hint" textStyle={{ fontSize: 12, color: '#94a3b8' }}>
 				提示：将鼠标移到面板上滚动；或使用下方滑块调 scrollX。
 			</Text>
 		</Container>
@@ -118,8 +101,7 @@ function buildScene(longText: string, maxWidth: number): JSX.Element {
 }
 
 export default function Demo(): JSX.Element {
-	const { ref: containerRef, width: containerWidth } =
-		useContainerWidth<HTMLDivElement>(960)
+	const { ref: containerRef, width: containerWidth } = useContainerWidth<HTMLDivElement>(960)
 	const canvasRef = useRef<HTMLCanvasElement | null>(null)
 	const envRef = useRef<CanvasEnv | null>(null)
 	const engineRef = useRef<Engine | null>(null)
@@ -129,9 +111,9 @@ export default function Demo(): JSX.Element {
 		() =>
 			Array.from(
 				{ length: 30 },
-				(_, i) => `[${String(i + 1).padStart(2, '0')}] Horizontal scroll demo`
+				(_, i) => `[${String(i + 1).padStart(2, '0')}] Horizontal scroll demo`,
 			).join('   '),
-		[]
+		[],
 	)
 
 	const width = Math.max(420, Math.min(containerWidth, 980))
@@ -159,7 +141,7 @@ export default function Demo(): JSX.Element {
 
 			const engine = await createEngine({
 				textMeasurer,
-				root: sceneFromJSX(buildScene(longText, maxWidth))
+				root: sceneFromJSX(buildScene(longText, maxWidth)),
 			})
 			if (disposed) {
 				engine.dispose()
@@ -189,15 +171,15 @@ export default function Demo(): JSX.Element {
 					flexDirection: 'column',
 					gap: 8,
 					padding: 10,
-					overflowX: 'auto'
-				}
+					overflowX: 'auto',
+				},
 			},
 			{ op: 'updateScroll', id: 'panel', scroll: { x: scrollX } },
 			{
 				op: 'updateText',
 				id: 'state',
-				text: `scrollX=${Math.round(scrollX)}, maxWidth=${Math.round(maxWidth)}`
-			}
+				text: `scrollX=${Math.round(scrollX)}, maxWidth=${Math.round(maxWidth)}`,
+			},
 		]
 		engine.applyPatches(patches)
 		rerender(engine)
@@ -216,7 +198,7 @@ export default function Demo(): JSX.Element {
 			if (!hit.path.includes('panel')) return
 			event.preventDefault()
 			const dx = event.shiftKey ? event.deltaY : event.deltaX
-			setScrollX(v => v + dx)
+			setScrollX((v) => v + dx)
 		}
 		canvas.addEventListener('wheel', onWheel, { passive: false })
 		return () => canvas.removeEventListener('wheel', onWheel)
@@ -227,33 +209,31 @@ export default function Demo(): JSX.Element {
 			<div style={{ fontSize: 12, color: '#334155' }}>
 				{metrics
 					? `viewport=${Math.round(metrics.viewportWidth)}x${Math.round(
-							metrics.viewportHeight
+							metrics.viewportHeight,
 						)}, content=${Math.round(metrics.contentWidth)}x${Math.round(
-							metrics.contentHeight
-						)}, scroll=${Math.round(metrics.scrollX)}/${Math.round(
-							metrics.maxScrollX
-						)}`
+							metrics.contentHeight,
+						)}, scroll=${Math.round(metrics.scrollX)}/${Math.round(metrics.maxScrollX)}`
 					: 'viewport/content/maxScroll 计算中...'}
 			</div>
 			<div style={{ display: 'grid', gap: 8 }}>
 				<label style={{ display: 'grid', gap: 4 }}>
 					<span style={{ fontSize: 12, color: '#334155' }}>maxWidth</span>
 					<input
-						type='range'
+						type="range"
 						min={260}
 						max={760}
 						value={maxWidth}
-						onChange={e => setMaxWidth(Number(e.target.value))}
+						onChange={(e) => setMaxWidth(Number(e.target.value))}
 					/>
 				</label>
 				<label style={{ display: 'grid', gap: 4 }}>
 					<span style={{ fontSize: 12, color: '#334155' }}>scrollX</span>
 					<input
-						type='range'
+						type="range"
 						min={0}
 						max={1200}
 						value={scrollX}
-						onChange={e => setScrollX(Number(e.target.value))}
+						onChange={(e) => setScrollX(Number(e.target.value))}
 					/>
 				</label>
 			</div>

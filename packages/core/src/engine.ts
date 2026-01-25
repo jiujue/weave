@@ -17,7 +17,7 @@ import type {
 	TextMeasureOutput,
 	TextMeasurer,
 	TextNode,
-	TextStyle
+	TextStyle,
 } from '@jiujue/weave-types'
 import { loadYoga } from 'yoga-layout/load'
 
@@ -59,9 +59,7 @@ export type Engine = Readonly<{
 		id: string | null
 		path: readonly string[]
 	}
-	getNodeInfo(
-		id: string
-	): { x: number; y: number; width: number; height: number } | null
+	getNodeInfo(id: string): { x: number; y: number; width: number; height: number } | null
 	dispose(): void
 }>
 
@@ -98,9 +96,7 @@ class TextMeasureCache {
 		if (this.map.has(key)) this.map.delete(key)
 		this.map.set(key, value)
 		if (this.map.size <= this.maxSize) return
-		const firstKey = this.map.keys().next().value as
-			| TextMeasureCacheKey
-			| undefined
+		const firstKey = this.map.keys().next().value as TextMeasureCacheKey | undefined
 		if (firstKey) this.map.delete(firstKey)
 	}
 }
@@ -111,10 +107,7 @@ function normalizeChildren(node: SceneNode): SceneNode[] {
 	return []
 }
 
-function cloneNodeWithChildren(
-	node: SceneNode,
-	children: SceneNode[]
-): SceneNode {
+function cloneNodeWithChildren(node: SceneNode, children: SceneNode[]): SceneNode {
 	if (node.type === 'container') return { ...node, children }
 	if (node.type === 'relative') return { ...node, children }
 	if (node.type === 'text') return { ...node, children }
@@ -126,11 +119,7 @@ function createDefaultRoot(): SceneNode {
 	return { id: 'root', type: 'container', children: [] }
 }
 
-function makeTextCacheKey(
-	text: string,
-	style: TextStyle,
-	maxWidth?: number
-): string {
+function makeTextCacheKey(text: string, style: TextStyle, maxWidth?: number): string {
 	return [
 		text,
 		style.fontFamily ?? '',
@@ -140,15 +129,11 @@ function makeTextCacheKey(
 		style.letterSpacing ?? '',
 		style.lineHeight ?? '',
 		style.whiteSpace ?? '',
-		maxWidth ?? ''
+		maxWidth ?? '',
 	].join('|')
 }
 
-function applyLayoutStyle(
-	Yoga: Yoga,
-	yogaNode: any,
-	style: LayoutStyle | undefined
-): void {
+function applyLayoutStyle(Yoga: Yoga, yogaNode: any, style: LayoutStyle | undefined): void {
 	yogaNode.setFlexDirection(
 		style?.flexDirection === 'row'
 			? Yoga.FLEX_DIRECTION_ROW
@@ -156,7 +141,7 @@ function applyLayoutStyle(
 				? Yoga.FLEX_DIRECTION_ROW_REVERSE
 				: style?.flexDirection === 'column-reverse'
 					? Yoga.FLEX_DIRECTION_COLUMN_REVERSE
-					: Yoga.FLEX_DIRECTION_COLUMN
+					: Yoga.FLEX_DIRECTION_COLUMN,
 	)
 
 	yogaNode.setJustifyContent(
@@ -170,7 +155,7 @@ function applyLayoutStyle(
 						? Yoga.JUSTIFY_SPACE_AROUND
 						: style?.justifyContent === 'space-evenly'
 							? Yoga.JUSTIFY_SPACE_EVENLY
-							: Yoga.JUSTIFY_FLEX_START
+							: Yoga.JUSTIFY_FLEX_START,
 	)
 
 	yogaNode.setAlignItems(
@@ -182,7 +167,7 @@ function applyLayoutStyle(
 					? Yoga.ALIGN_BASELINE
 					: style?.alignItems === 'flex-start'
 						? Yoga.ALIGN_FLEX_START
-						: Yoga.ALIGN_STRETCH
+						: Yoga.ALIGN_STRETCH,
 	)
 
 	yogaNode.setFlexWrap(
@@ -190,7 +175,7 @@ function applyLayoutStyle(
 			? Yoga.WRAP_WRAP
 			: style?.flexWrap === 'wrap-reverse'
 				? Yoga.WRAP_WRAP_REVERSE
-				: Yoga.WRAP_NO_WRAP
+				: Yoga.WRAP_NO_WRAP,
 	)
 
 	if (style?.flex != null) yogaNode.setFlex(style.flex)
@@ -205,11 +190,7 @@ function applyLayoutStyle(
 		}
 	}
 
-	const setDim = (
-		method: string,
-		val: number | string | undefined,
-		autoMethod: string
-	) => {
+	const setDim = (method: string, val: number | string | undefined, autoMethod: string) => {
 		if (val != null) {
 			if (typeof val === 'string' && val.endsWith('%')) {
 				yogaNode[method + 'Percent'](parseFloat(val))
@@ -243,7 +224,7 @@ function applyLayoutStyle(
 		method: string,
 		edge: any,
 		val: number | string | undefined,
-		fallback?: number | string | undefined
+		fallback?: number | string | undefined,
 	) => {
 		const v = val ?? fallback
 		if (v != null) {
@@ -258,60 +239,23 @@ function applyLayoutStyle(
 	if (style?.padding != null) {
 		setEdge('setPadding', Yoga.EDGE_ALL, style.padding)
 	} else {
-		setEdge(
-			'setPadding',
-			Yoga.EDGE_LEFT,
-			style?.paddingLeft,
-			style?.paddingHorizontal
-		)
-		setEdge(
-			'setPadding',
-			Yoga.EDGE_RIGHT,
-			style?.paddingRight,
-			style?.paddingHorizontal
-		)
-		setEdge(
-			'setPadding',
-			Yoga.EDGE_TOP,
-			style?.paddingTop,
-			style?.paddingVertical
-		)
-		setEdge(
-			'setPadding',
-			Yoga.EDGE_BOTTOM,
-			style?.paddingBottom,
-			style?.paddingVertical
-		)
+		setEdge('setPadding', Yoga.EDGE_LEFT, style?.paddingLeft, style?.paddingHorizontal)
+		setEdge('setPadding', Yoga.EDGE_RIGHT, style?.paddingRight, style?.paddingHorizontal)
+		setEdge('setPadding', Yoga.EDGE_TOP, style?.paddingTop, style?.paddingVertical)
+		setEdge('setPadding', Yoga.EDGE_BOTTOM, style?.paddingBottom, style?.paddingVertical)
 	}
 
 	if (style?.margin != null) {
 		setEdge('setMargin', Yoga.EDGE_ALL, style.margin)
 	} else {
-		setEdge(
-			'setMargin',
-			Yoga.EDGE_LEFT,
-			style?.marginLeft,
-			style?.marginHorizontal
-		)
-		setEdge(
-			'setMargin',
-			Yoga.EDGE_RIGHT,
-			style?.marginRight,
-			style?.marginHorizontal
-		)
+		setEdge('setMargin', Yoga.EDGE_LEFT, style?.marginLeft, style?.marginHorizontal)
+		setEdge('setMargin', Yoga.EDGE_RIGHT, style?.marginRight, style?.marginHorizontal)
 		setEdge('setMargin', Yoga.EDGE_TOP, style?.marginTop, style?.marginVertical)
-		setEdge(
-			'setMargin',
-			Yoga.EDGE_BOTTOM,
-			style?.marginBottom,
-			style?.marginVertical
-		)
+		setEdge('setMargin', Yoga.EDGE_BOTTOM, style?.marginBottom, style?.marginVertical)
 	}
 
 	yogaNode.setPositionType(
-		style?.position === 'absolute'
-			? Yoga.POSITION_TYPE_ABSOLUTE
-			: Yoga.POSITION_TYPE_RELATIVE
+		style?.position === 'absolute' ? Yoga.POSITION_TYPE_ABSOLUTE : Yoga.POSITION_TYPE_RELATIVE,
 	)
 	setEdge('setPosition', Yoga.EDGE_LEFT, style?.left)
 	setEdge('setPosition', Yoga.EDGE_RIGHT, style?.right)
@@ -321,8 +265,7 @@ function applyLayoutStyle(
 	const setGapIfSupported = (axis: 'row' | 'column', value?: number) => {
 		const method = (yogaNode as any)[axis === 'row' ? 'setGap' : 'setGap']
 		if (typeof method !== 'function') return
-		const gapAxis =
-			axis === 'row' ? (Yoga as any).GUTTER_ROW : (Yoga as any).GUTTER_COLUMN
+		const gapAxis = axis === 'row' ? (Yoga as any).GUTTER_ROW : (Yoga as any).GUTTER_COLUMN
 		if (gapAxis == null) return
 		if (value != null) method.call(yogaNode, gapAxis, value)
 	}
@@ -376,21 +319,21 @@ function resolveTablePadding(style: TableStyle | undefined): TablePadding {
 		left: style?.cellPaddingLeft ?? ph ?? 8,
 		right: style?.cellPaddingRight ?? ph ?? 8,
 		top: style?.cellPaddingTop ?? pv ?? 6,
-		bottom: style?.cellPaddingBottom ?? pv ?? 6
+		bottom: style?.cellPaddingBottom ?? pv ?? 6,
 	}
 }
 
 function normalizeHeader(
 	columns: readonly TableColumn[],
-	header: readonly TableHeaderGroup[] | undefined
+	header: readonly TableHeaderGroup[] | undefined,
 ): readonly TableHeaderGroup[] {
 	if (header && header.length) return header
 	return [
 		{
 			id: 'header',
 			label: '',
-			children: columns.map(c => ({ type: 'col', colId: c.id }) as const)
-		}
+			children: columns.map((c) => ({ type: 'col', colId: c.id }) as const),
+		},
 	]
 }
 
@@ -408,7 +351,7 @@ type HeaderCellLayout = Readonly<{
 
 function computeHeaderLayout(
 	columns: readonly TableColumn[],
-	header: readonly TableHeaderGroup[] | undefined
+	header: readonly TableHeaderGroup[] | undefined,
 ): Readonly<{ depth: number; cells: readonly HeaderCellLayout[] }> {
 	const colIndex = new Map(columns.map((c, i) => [c.id, i] as const))
 	const root = normalizeHeader(columns, header)
@@ -424,14 +367,12 @@ function computeHeaderLayout(
 	}
 
 	let depth = 1
-	for (const n of root as unknown as Node[])
-		depth = Math.max(depth, maxDepth(n, 0))
+	for (const n of root as unknown as Node[]) depth = Math.max(depth, maxDepth(n, 0))
 
 	const leafRange = (node: Node): Readonly<{ start: number; end: number }> => {
 		if ((node as any).type === 'col') {
 			const idx = colIndex.get((node as any).colId)
-			if (idx == null)
-				throw new Error(`Unknown column id: ${(node as any).colId}`)
+			if (idx == null) throw new Error(`Unknown column id: ${(node as any).colId}`)
 			return { start: idx, end: idx }
 		}
 		let start = Infinity
@@ -441,8 +382,7 @@ function computeHeaderLayout(
 			start = Math.min(start, r.start)
 			end = Math.max(end, r.end)
 		}
-		if (!Number.isFinite(start) || !Number.isFinite(end))
-			return { start: 0, end: -1 }
+		if (!Number.isFinite(start) || !Number.isFinite(end)) return { start: 0, end: -1 }
 		return { start, end }
 	}
 
@@ -456,7 +396,7 @@ function computeHeaderLayout(
 				level,
 				colStart: idx,
 				colSpan: 1,
-				rowSpan: Math.max(1, depth - level)
+				rowSpan: Math.max(1, depth - level),
 			})
 			return
 		}
@@ -471,7 +411,7 @@ function computeHeaderLayout(
 			level,
 			colStart: range.start,
 			colSpan: Math.max(0, range.end - range.start + 1),
-			rowSpan: 1
+			rowSpan: 1,
 		})
 		for (const ch of grp.children) visit(ch as any, level + 1)
 	}
@@ -486,7 +426,7 @@ function defaultHeaderTextStyle(): TextStyle {
 		fontSize: 13,
 		fontWeight: 600,
 		whiteSpace: 'nowrap',
-		textBaseline: 'top'
+		textBaseline: 'top',
 	}
 }
 
@@ -495,38 +435,33 @@ function defaultCellTextStyle(): TextStyle {
 		color: '#cbd5e1',
 		fontSize: 13,
 		whiteSpace: 'nowrap',
-		textBaseline: 'top'
+		textBaseline: 'top',
 	}
 }
 
-function textWidth(
-	textMeasurer: TextMeasurer,
-	text: string,
-	style: TextStyle
-): number {
+function textWidth(textMeasurer: TextMeasurer, text: string, style: TextStyle): number {
 	return textMeasurer.measure({ text, style, maxWidth: undefined }).width
 }
 
 function computeTableColumnWidths(
 	textMeasurer: TextMeasurer,
 	table: TableNode,
-	maxWidth: number | undefined
+	maxWidth: number | undefined,
 ): Readonly<{ widths: readonly number[]; total: number }> {
 	const pad = resolveTablePadding(table.tableStyle)
 	const padX = pad.left + pad.right
 	const headerStyle: TextStyle = {
 		...defaultHeaderTextStyle(),
-		...table.tableStyle?.headerTextStyle
+		...table.tableStyle?.headerTextStyle,
 	}
 	const cellDefault: TextStyle = {
 		...defaultCellTextStyle(),
-		...table.tableStyle?.cellTextStyle
+		...table.tableStyle?.cellTextStyle,
 	}
 	const headerLayout = computeHeaderLayout(table.columns, table.header)
 	const headerLabels: string[] = []
 	for (const c of headerLayout.cells) {
-		if (c.level === headerLayout.depth - 1 && c.colSpan === 1)
-			headerLabels[c.colStart] = c.text
+		if (c.level === headerLayout.depth - 1 && c.colSpan === 1) headerLabels[c.colStart] = c.text
 	}
 
 	const fixed: number[] = new Array(table.columns.length).fill(0)
@@ -545,11 +480,7 @@ function computeTableColumnWidths(
 			isFixed[i] = true
 			continue
 		}
-		if (
-			col.width &&
-			typeof col.width === 'object' &&
-			(col.width as any).type === 'flex'
-		) {
+		if (col.width && typeof col.width === 'object' && (col.width as any).type === 'flex') {
 			flexWeights[i] = Math.max(0, (col.width as any).weight ?? 1)
 		}
 		const hs = col.headerTextStyle ?? headerStyle
@@ -583,13 +514,10 @@ function computeTableColumnWidths(
 
 		if (total > maxWidth) {
 			let excess = total - maxWidth
-			const mins = table.columns.map(
-				(c, i) => c.minWidth ?? (isFixed[i] ? fixed[i] : 0)
-			)
+			const mins = table.columns.map((c, i) => c.minWidth ?? (isFixed[i] ? fixed[i] : 0))
 			while (excess > 0.5) {
 				let capacity = 0
-				for (let i = 0; i < fixed.length; i++)
-					capacity += Math.max(0, fixed[i] - mins[i])
+				for (let i = 0; i < fixed.length; i++) capacity += Math.max(0, fixed[i] - mins[i])
 				if (capacity <= 0.5) break
 				for (let i = 0; i < fixed.length; i++) {
 					const cap = Math.max(0, fixed[i] - mins[i])
@@ -610,7 +538,7 @@ function computeTableColumnWidths(
 function resolveRowHeight(
 	style: TextStyle,
 	padding: TablePadding,
-	override: number | undefined
+	override: number | undefined,
 ): number {
 	if (override != null) return override
 	const line = style.lineHeight ?? Math.ceil(style.fontSize * 1.2)
@@ -621,16 +549,14 @@ function resolveFill(style: FillStyle | undefined): FillStyle | undefined {
 	return style
 }
 
-function resolveStroke(
-	style: StrokeStyle | undefined
-): StrokeStyle | undefined {
+function resolveStroke(style: StrokeStyle | undefined): StrokeStyle | undefined {
 	return style
 }
 
 function resolveAlign(
 	align: 'left' | 'center' | 'right' | undefined,
 	styleAlign: TextStyle['textAlign'] | undefined,
-	fallback: 'left' | 'center' | 'right'
+	fallback: 'left' | 'center' | 'right',
 ): 'left' | 'center' | 'right' {
 	const a = align ?? styleAlign ?? fallback
 	if (a === 'center' || a === 'right') return a
@@ -639,7 +565,7 @@ function resolveAlign(
 
 function resolveVAlign(
 	align: 'top' | 'middle' | 'bottom' | undefined,
-	fallback: 'top' | 'middle' | 'bottom'
+	fallback: 'top' | 'middle' | 'bottom',
 ): 'top' | 'middle' | 'bottom' {
 	const a = align ?? fallback
 	if (a === 'top' || a === 'bottom') return a
@@ -655,7 +581,7 @@ function computeTextY(
 	cellHeight: number,
 	padding: TablePadding,
 	textStyle: TextStyle,
-	vAlign: 'top' | 'middle' | 'bottom'
+	vAlign: 'top' | 'middle' | 'bottom',
 ): number {
 	const innerH = Math.max(0, cellHeight - padding.top - padding.bottom)
 	const lineH = textLineHeight(textStyle)
@@ -664,9 +590,7 @@ function computeTextY(
 	return cellY + padding.top + dy
 }
 
-export async function createEngine(
-	options: EngineCreateOptions
-): Promise<Engine> {
+export async function createEngine(options: EngineCreateOptions): Promise<Engine> {
 	// Engine 的职责：维护 scene tree（纯数据）→ Yoga layout（几何）→ DisplayList（绘制指令）。
 	// 所有布局与绘制坐标均以“逻辑像素”为单位；DPR 由上层 replay 阶段统一处理。
 	const Yoga: Yoga = await loadYoga()
@@ -690,7 +614,7 @@ export async function createEngine(
 			yogaNode,
 			dirtyStyle: true,
 			dirtyMeasure: true,
-			measureResult: { width: 0, height: 0 }
+			measureResult: { width: 0, height: 0 },
 		}
 		layoutRecords.set(id, record)
 		return record
@@ -705,7 +629,7 @@ export async function createEngine(
 		records.set(node.id, {
 			node,
 			parentId,
-			children: children.map(c => c.id)
+			children: children.map((c) => c.id),
 		})
 		ensureLayoutRecord(node.id)
 		for (const child of children) upsertTree(child, node.id)
@@ -741,10 +665,10 @@ export async function createEngine(
 		if (!rec?.parentId) return
 		const parent = records.get(rec.parentId)
 		if (!parent) return
-		parent.children = parent.children.filter(cid => cid !== id)
+		parent.children = parent.children.filter((cid) => cid !== id)
 		const parentNode = cloneNodeWithChildren(
 			parent.node,
-			parent.children.map(cid => records.get(cid)!.node)
+			parent.children.map((cid) => records.get(cid)!.node),
 		)
 		parent.node = parentNode
 	}
@@ -763,14 +687,10 @@ export async function createEngine(
 			const newNode = patch.node
 			upsertTree(newNode, patch.parentId)
 			const idx = patch.index ?? parent.children.length
-			parent.children.splice(
-				Math.max(0, Math.min(idx, parent.children.length)),
-				0,
-				newNode.id
-			)
+			parent.children.splice(Math.max(0, Math.min(idx, parent.children.length)), 0, newNode.id)
 			parent.node = cloneNodeWithChildren(
 				parent.node,
-				parent.children.map(cid => records.get(cid)!.node)
+				parent.children.map((cid) => records.get(cid)!.node),
 			)
 			structureDirty = true
 			return
@@ -794,8 +714,7 @@ export async function createEngine(
 
 		if (patch.op === 'updateScroll') {
 			const rec = records.get(patch.id)
-			if (!rec || (rec.node.type !== 'container' && rec.node.type !== 'table'))
-				return
+			if (!rec || (rec.node.type !== 'container' && rec.node.type !== 'table')) return
 			rec.node = { ...rec.node, scroll: patch.scroll } as any
 			return
 		}
@@ -839,7 +758,7 @@ export async function createEngine(
 			rec.node = {
 				...rec.node,
 				columns: patch.columns,
-				header: patch.header
+				header: patch.header,
 			} as any
 			markDirty(patch.id, 'measure')
 			return
@@ -867,10 +786,7 @@ export async function createEngine(
 			}
 			for (const childId of rec.children) {
 				const childLayout = ensureLayoutRecord(childId)
-				layout.yogaNode.insertChild(
-					childLayout.yogaNode,
-					layout.yogaNode.getChildCount()
-				)
+				layout.yogaNode.insertChild(childLayout.yogaNode, layout.yogaNode.getChildCount())
 			}
 			for (const childId of rec.children) visit(childId)
 		}
@@ -883,17 +799,13 @@ export async function createEngine(
 			const layout = ensureLayoutRecord(id)
 			if (layout.dirtyStyle) {
 				applyLayoutStyle(Yoga, layout.yogaNode, rec.node.style)
-				const parent =
-					rec.parentId != null ? records.get(rec.parentId)?.node : null
+				const parent = rec.parentId != null ? records.get(rec.parentId)?.node : null
 				const hasInset =
 					rec.node.style?.left != null ||
 					rec.node.style?.right != null ||
 					rec.node.style?.top != null ||
 					rec.node.style?.bottom != null
-				if (
-					parent?.type === 'relative' &&
-					(rec.node.style?.position == null || hasInset)
-				) {
+				if (parent?.type === 'relative' && (rec.node.style?.position == null || hasInset)) {
 					layout.yogaNode.setPositionType((Yoga as any).POSITION_TYPE_ABSOLUTE)
 				}
 				layout.dirtyStyle = false
@@ -904,12 +816,7 @@ export async function createEngine(
 					const textNode = rec.node as TextNode
 					const measureResult = layout.measureResult!
 					layout.yogaNode.setMeasureFunc(
-						(
-							width: number,
-							widthMode: number,
-							height: number,
-							heightMode: number
-						) => {
+						(width: number, widthMode: number, height: number, heightMode: number) => {
 							const nowrap = textNode.textStyle.whiteSpace === 'nowrap'
 							const maxWidth =
 								widthMode === (Yoga as any).MEASURE_MODE_AT_MOST ||
@@ -918,18 +825,14 @@ export async function createEngine(
 										? undefined
 										: width
 									: undefined
-							const key = makeTextCacheKey(
-								textNode.text,
-								textNode.textStyle,
-								maxWidth
-							)
+							const key = makeTextCacheKey(textNode.text, textNode.textStyle, maxWidth)
 							const cached = textCache.get(key)
 							const measured =
 								cached ??
 								textMeasurer.measure({
 									text: textNode.text,
 									style: textNode.textStyle,
-									maxWidth
+									maxWidth,
 								})
 							if (!cached) textCache.set(key, measured)
 							const w =
@@ -949,19 +852,14 @@ export async function createEngine(
 							measureResult.width = w
 							measureResult.height = h
 							return measureResult
-						}
+						},
 					)
 				} else if (rec.node.type === 'polygon') {
 					const polygonNode = rec.node as PolygonNode
 					const measureResult = layout.measureResult!
 					const bounds = computePolygonBounds(polygonNode)
 					layout.yogaNode.setMeasureFunc(
-						(
-							width: number,
-							widthMode: number,
-							height: number,
-							heightMode: number
-						) => {
+						(width: number, widthMode: number, height: number, heightMode: number) => {
 							const w =
 								widthMode === (Yoga as any).MEASURE_MODE_EXACTLY
 									? width
@@ -977,70 +875,51 @@ export async function createEngine(
 							measureResult.width = w
 							measureResult.height = h
 							return measureResult
-						}
+						},
 					)
 				} else if (rec.node.type === 'table') {
 					const tableNode = rec.node as TableNode
 					const measureResult = layout.measureResult!
 					layout.yogaNode.setMeasureFunc(
-						(
-							width: number,
-							widthMode: number,
-							height: number,
-							heightMode: number
-						) => {
+						(width: number, widthMode: number, height: number, heightMode: number) => {
 							const maxWidth =
 								widthMode === (Yoga as any).MEASURE_MODE_AT_MOST ||
 								widthMode === (Yoga as any).MEASURE_MODE_EXACTLY
 									? width
 									: undefined
-							const cols = computeTableColumnWidths(
-								textMeasurer,
-								tableNode,
-								maxWidth
-							)
+							const cols = computeTableColumnWidths(textMeasurer, tableNode, maxWidth)
 							const pad = resolveTablePadding(tableNode.tableStyle)
-							const headerLayout = computeHeaderLayout(
-								tableNode.columns,
-								tableNode.header
-							)
+							const headerLayout = computeHeaderLayout(tableNode.columns, tableNode.header)
 
 							let headerFontSize = defaultHeaderTextStyle().fontSize
 							for (const c of tableNode.columns) {
 								const s = c.headerTextStyle
-								if (s?.fontSize != null)
-									headerFontSize = Math.max(headerFontSize, s.fontSize)
+								if (s?.fontSize != null) headerFontSize = Math.max(headerFontSize, s.fontSize)
 							}
 							const headerStyle: TextStyle = {
 								...defaultHeaderTextStyle(),
-								fontSize: headerFontSize
+								fontSize: headerFontSize,
 							}
 							const headerRowHeight = resolveRowHeight(
 								headerStyle,
 								pad,
-								tableNode.tableStyle?.headerRowHeight
+								tableNode.tableStyle?.headerRowHeight,
 							)
 
 							let cellFontSize = defaultCellTextStyle().fontSize
 							for (const c of tableNode.columns) {
 								const s = c.cellTextStyle
-								if (s?.fontSize != null)
-									cellFontSize = Math.max(cellFontSize, s.fontSize)
+								if (s?.fontSize != null) cellFontSize = Math.max(cellFontSize, s.fontSize)
 							}
 							const cellStyle: TextStyle = {
 								...defaultCellTextStyle(),
-								fontSize: cellFontSize
+								fontSize: cellFontSize,
 							}
-							const rowHeight = resolveRowHeight(
-								cellStyle,
-								pad,
-								tableNode.tableStyle?.rowHeight
-							)
+							const rowHeight = resolveRowHeight(cellStyle, pad, tableNode.tableStyle?.rowHeight)
 
 							const intrinsicW = cols.total
 							const intrinsicH =
-								headerLayout.depth * headerRowHeight +
-								tableNode.rows.length * rowHeight
+								headerLayout.depth * headerRowHeight + tableNode.rows.length * rowHeight
 
 							const w =
 								widthMode === (Yoga as any).MEASURE_MODE_EXACTLY
@@ -1057,7 +936,7 @@ export async function createEngine(
 							measureResult.width = w
 							measureResult.height = h
 							return measureResult
-						}
+						},
 					)
 				} else {
 					layout.yogaNode.setMeasureFunc(null)
@@ -1079,8 +958,8 @@ export async function createEngine(
 					left: layout.getComputedLeft(),
 					top: layout.getComputedTop(),
 					width: layout.getComputedWidth(),
-					height: layout.getComputedHeight()
-				}
+					height: layout.getComputedHeight(),
+				},
 			}
 			frames.set(id, frame)
 			out.push(frame)
@@ -1094,8 +973,7 @@ export async function createEngine(
 
 	const computeScrollMetas = (): void => {
 		scrollMetas.clear()
-		const clamp = (v: number, min: number, max: number): number =>
-			Math.max(min, Math.min(max, v))
+		const clamp = (v: number, min: number, max: number): number => Math.max(min, Math.min(max, v))
 
 		for (const [id, rec] of records) {
 			const frame = frames.get(id)
@@ -1124,18 +1002,14 @@ export async function createEngine(
 					if (childRec?.node.type === 'text') {
 						const textNode = childRec.node as TextNode
 						if (textNode.textStyle.whiteSpace === 'nowrap') {
-							const key = makeTextCacheKey(
-								textNode.text,
-								textNode.textStyle,
-								undefined
-							)
+							const key = makeTextCacheKey(textNode.text, textNode.textStyle, undefined)
 							const cached = textCache.get(key)
 							const measured =
 								cached ??
 								textMeasurer.measure({
 									text: textNode.text,
 									style: textNode.textStyle,
-									maxWidth: undefined
+									maxWidth: undefined,
 								})
 							if (!cached) textCache.set(key, measured)
 							extraW = Math.max(0, measured.width - child.rect.width)
@@ -1144,14 +1018,8 @@ export async function createEngine(
 					}
 					minLeft = Math.min(minLeft, child.rect.left)
 					minTop = Math.min(minTop, child.rect.top)
-					maxRight = Math.max(
-						maxRight,
-						child.rect.left + child.rect.width + extraW
-					)
-					maxBottom = Math.max(
-						maxBottom,
-						child.rect.top + child.rect.height + extraH
-					)
+					maxRight = Math.max(maxRight, child.rect.left + child.rect.width + extraW)
+					maxBottom = Math.max(maxBottom, child.rect.top + child.rect.height + extraH)
 				}
 				const contentWidth = Math.max(0, maxRight - minLeft)
 				const contentHeight = Math.max(0, maxBottom - minTop)
@@ -1167,7 +1035,7 @@ export async function createEngine(
 				if (scrollX !== rawX || scrollY !== rawY) {
 					rec.node = {
 						...rec.node,
-						scroll: { x: scrollX, y: scrollY }
+						scroll: { x: scrollX, y: scrollY },
 					} as any
 				}
 
@@ -1179,7 +1047,7 @@ export async function createEngine(
 					scrollX,
 					scrollY,
 					maxScrollX,
-					maxScrollY
+					maxScrollY,
 				})
 			}
 
@@ -1191,60 +1059,44 @@ export async function createEngine(
 				const shouldScrollY = overflowY === 'scroll' || overflowY === 'auto'
 
 				const pad = resolveTablePadding(tableNode.tableStyle)
-				const headerLayout = computeHeaderLayout(
-					tableNode.columns,
-					tableNode.header
-				)
-				const col = computeTableColumnWidths(
-					textMeasurer,
-					tableNode,
-					viewportWidth
-				)
+				const headerLayout = computeHeaderLayout(tableNode.columns, tableNode.header)
+				const col = computeTableColumnWidths(textMeasurer, tableNode, viewportWidth)
 				const widths = col.widths
 				const totalW = widths.reduce((a, b) => a + b, 0)
 
 				let headerFontSize =
-					tableNode.tableStyle?.headerTextStyle?.fontSize ??
-					defaultHeaderTextStyle().fontSize
+					tableNode.tableStyle?.headerTextStyle?.fontSize ?? defaultHeaderTextStyle().fontSize
 				for (const c of headerLayout.cells) {
 					const s = c.textStyle
-					if (s?.fontSize != null)
-						headerFontSize = Math.max(headerFontSize, s.fontSize)
+					if (s?.fontSize != null) headerFontSize = Math.max(headerFontSize, s.fontSize)
 				}
 				for (const c of tableNode.columns) {
 					const s = c.headerTextStyle
-					if (s?.fontSize != null)
-						headerFontSize = Math.max(headerFontSize, s.fontSize)
+					if (s?.fontSize != null) headerFontSize = Math.max(headerFontSize, s.fontSize)
 				}
 				const headerStyleBase: TextStyle = {
 					...defaultHeaderTextStyle(),
 					...tableNode.tableStyle?.headerTextStyle,
-					fontSize: headerFontSize
+					fontSize: headerFontSize,
 				}
 				const headerRowHeight = resolveRowHeight(
 					headerStyleBase,
 					pad,
-					tableNode.tableStyle?.headerRowHeight
+					tableNode.tableStyle?.headerRowHeight,
 				)
 
 				let cellFontSize =
-					tableNode.tableStyle?.cellTextStyle?.fontSize ??
-					defaultCellTextStyle().fontSize
+					tableNode.tableStyle?.cellTextStyle?.fontSize ?? defaultCellTextStyle().fontSize
 				for (const c of tableNode.columns) {
 					const s = c.cellTextStyle
-					if (s?.fontSize != null)
-						cellFontSize = Math.max(cellFontSize, s.fontSize)
+					if (s?.fontSize != null) cellFontSize = Math.max(cellFontSize, s.fontSize)
 				}
 				const cellStyleBase: TextStyle = {
 					...defaultCellTextStyle(),
 					...tableNode.tableStyle?.cellTextStyle,
-					fontSize: cellFontSize
+					fontSize: cellFontSize,
 				}
-				const rowHeight = resolveRowHeight(
-					cellStyleBase,
-					pad,
-					tableNode.tableStyle?.rowHeight
-				)
+				const rowHeight = resolveRowHeight(cellStyleBase, pad, tableNode.tableStyle?.rowHeight)
 
 				const headerH = headerLayout.depth * headerRowHeight
 				const bodyViewportH = Math.max(0, viewportHeight - headerH)
@@ -1253,12 +1105,8 @@ export async function createEngine(
 				const contentWidth = totalW
 				const contentHeight = headerH + bodyTotalH
 
-				const maxScrollX = shouldScrollX
-					? Math.max(0, contentWidth - viewportWidth)
-					: 0
-				const maxScrollY = shouldScrollY
-					? Math.max(0, bodyTotalH - bodyViewportH)
-					: 0
+				const maxScrollX = shouldScrollX ? Math.max(0, contentWidth - viewportWidth) : 0
+				const maxScrollY = shouldScrollY ? Math.max(0, bodyTotalH - bodyViewportH) : 0
 
 				const rawX = (rec.node as any).scroll?.x ?? 0
 				const rawY = (rec.node as any).scroll?.y ?? 0
@@ -1276,7 +1124,7 @@ export async function createEngine(
 					scrollX,
 					scrollY,
 					maxScrollX,
-					maxScrollY
+					maxScrollY,
 				})
 			}
 		}
@@ -1284,8 +1132,7 @@ export async function createEngine(
 
 	const buildDisplayList = (): DisplayList => {
 		const ops: any[] = []
-		const clamp = (v: number, min: number, max: number): number =>
-			Math.max(min, Math.min(max, v))
+		const clamp = (v: number, min: number, max: number): number => Math.max(min, Math.min(max, v))
 
 		const pushScrollbar = (input: {
 			trackX: number
@@ -1305,9 +1152,9 @@ export async function createEngine(
 					x: input.trackX,
 					y: input.trackY,
 					width: input.trackW,
-					height: input.trackH
+					height: input.trackH,
 				},
-				style: track
+				style: track,
 			})
 			ops.push({
 				op: 'fillRect',
@@ -1315,9 +1162,9 @@ export async function createEngine(
 					x: input.thumbX,
 					y: input.thumbY,
 					width: input.thumbW,
-					height: input.thumbH
+					height: input.thumbH,
 				},
-				style: thumb
+				style: thumb,
 			})
 		}
 
@@ -1326,14 +1173,13 @@ export async function createEngine(
 			viewportH: number,
 			meta: ScrollMetrics,
 			overflowX: string,
-			overflowY: string
+			overflowY: string,
 		): void => {
 			const inset = 2
 			const thickness = 8
 			const minThumb = 18
 
-			const showY =
-				(overflowY === 'scroll' || overflowY === 'auto') && meta.maxScrollY > 0
+			const showY = (overflowY === 'scroll' || overflowY === 'auto') && meta.maxScrollY > 0
 			if (showY) {
 				const trackX = viewportW - thickness - inset
 				const trackY = inset
@@ -1341,12 +1187,10 @@ export async function createEngine(
 				const trackH = Math.max(0, viewportH - inset * 2)
 				const thumbH = Math.max(
 					minThumb,
-					(trackH * meta.viewportHeight) / Math.max(1, meta.contentHeight)
+					(trackH * meta.viewportHeight) / Math.max(1, meta.contentHeight),
 				)
 				const thumbY =
-					trackY +
-					(clamp(meta.scrollY, 0, meta.maxScrollY) / meta.maxScrollY) *
-						(trackH - thumbH)
+					trackY + (clamp(meta.scrollY, 0, meta.maxScrollY) / meta.maxScrollY) * (trackH - thumbH)
 				pushScrollbar({
 					trackX,
 					trackY,
@@ -1355,12 +1199,11 @@ export async function createEngine(
 					thumbX: trackX,
 					thumbY,
 					thumbW: trackW,
-					thumbH
+					thumbH,
 				})
 			}
 
-			const showX =
-				(overflowX === 'scroll' || overflowX === 'auto') && meta.maxScrollX > 0
+			const showX = (overflowX === 'scroll' || overflowX === 'auto') && meta.maxScrollX > 0
 			if (showX) {
 				const trackX = inset
 				const trackY = viewportH - thickness - inset
@@ -1368,12 +1211,10 @@ export async function createEngine(
 				const trackH = thickness
 				const thumbW = Math.max(
 					minThumb,
-					(trackW * meta.viewportWidth) / Math.max(1, meta.contentWidth)
+					(trackW * meta.viewportWidth) / Math.max(1, meta.contentWidth),
 				)
 				const thumbX =
-					trackX +
-					(clamp(meta.scrollX, 0, meta.maxScrollX) / meta.maxScrollX) *
-						(trackW - thumbW)
+					trackX + (clamp(meta.scrollX, 0, meta.maxScrollX) / meta.maxScrollX) * (trackW - thumbW)
 				pushScrollbar({
 					trackX,
 					trackY,
@@ -1382,7 +1223,7 @@ export async function createEngine(
 					thumbX,
 					thumbY: trackY,
 					thumbW,
-					thumbH: trackH
+					thumbH: trackH,
 				})
 			}
 		}
@@ -1404,9 +1245,9 @@ export async function createEngine(
 							x: 0,
 							y: 0,
 							width: frame.rect.width,
-							height: frame.rect.height
+							height: frame.rect.height,
 						},
-						style: paint.background
+						style: paint.background,
 					})
 				}
 				if (paint?.border) {
@@ -1416,9 +1257,9 @@ export async function createEngine(
 							x: 0,
 							y: 0,
 							width: frame.rect.width,
-							height: frame.rect.height
+							height: frame.rect.height,
 						},
-						style: paint.border
+						style: paint.border,
 					})
 				}
 
@@ -1432,8 +1273,8 @@ export async function createEngine(
 							x: 0,
 							y: 0,
 							width: frame.rect.width,
-							height: frame.rect.height
-						}
+							height: frame.rect.height,
+						},
 					})
 				}
 
@@ -1454,35 +1295,23 @@ export async function createEngine(
 				}
 
 				if (meta)
-					pushContainerScrollbars(
-						frame.rect.width,
-						frame.rect.height,
-						meta,
-						overflowX,
-						overflowY
-					)
+					pushContainerScrollbars(frame.rect.width, frame.rect.height, meta, overflowX, overflowY)
 			} else if (rec.node.type === 'text') {
 				const textNode = rec.node as TextNode
 				const maxWidth =
-					typeof textNode.style?.width === 'number'
-						? textNode.style.width
-						: frame.rect.width
-				const key = makeTextCacheKey(
-					textNode.text,
-					textNode.textStyle,
-					maxWidth
-				)
+					typeof textNode.style?.width === 'number' ? textNode.style.width : frame.rect.width
+				const key = makeTextCacheKey(textNode.text, textNode.textStyle, maxWidth)
 				const measured =
 					textCache.get(key) ??
 					textMeasurer.measure({
 						text: textNode.text,
 						style: textNode.textStyle,
-						maxWidth
+						maxWidth,
 					})
 				if (!textCache.get(key)) textCache.set(key, measured)
 				const baselineStyle: TextStyle = {
 					...textNode.textStyle,
-					textBaseline: textNode.textStyle.textBaseline ?? 'top'
+					textBaseline: textNode.textStyle.textBaseline ?? 'top',
 				}
 				const lineHeight =
 					measured.lineHeight ??
@@ -1497,7 +1326,7 @@ export async function createEngine(
 							text: line.text,
 							x: 0,
 							y,
-							style: baselineStyle
+							style: baselineStyle,
 						})
 						y += lineHeight
 					}
@@ -1507,21 +1336,19 @@ export async function createEngine(
 						text: textNode.text,
 						x: 0,
 						y: 0,
-						style: baselineStyle
+						style: baselineStyle,
 					})
 				}
 			} else if (rec.node.type === 'polygon') {
 				const polygonNode = rec.node as PolygonNode
 				const path = polygonNode.points.map((p, idx) =>
-					idx === 0
-						? { op: 'moveTo', x: p.x, y: p.y }
-						: { op: 'lineTo', x: p.x, y: p.y }
+					idx === 0 ? { op: 'moveTo', x: p.x, y: p.y } : { op: 'lineTo', x: p.x, y: p.y },
 				)
 				ops.push({
 					op: 'drawPath',
 					path: [...path, { op: 'closePath' }],
 					fill: polygonNode.paint?.fill,
-					stroke: polygonNode.paint?.stroke
+					stroke: polygonNode.paint?.stroke,
 				})
 			} else if (rec.node.type === 'table') {
 				const tableNode = rec.node as TableNode
@@ -1533,67 +1360,49 @@ export async function createEngine(
 				const viewportH = frame.rect.height
 
 				const pad = resolveTablePadding(tableNode.tableStyle)
-				const headerLayout = computeHeaderLayout(
-					tableNode.columns,
-					tableNode.header
-				)
-				const col = computeTableColumnWidths(
-					textMeasurer,
-					tableNode,
-					frame.rect.width
-				)
+				const headerLayout = computeHeaderLayout(tableNode.columns, tableNode.header)
+				const col = computeTableColumnWidths(textMeasurer, tableNode, frame.rect.width)
 				const widths = col.widths
 				const totalW = widths.reduce((a, b) => a + b, 0)
 
 				let headerFontSize =
-					tableNode.tableStyle?.headerTextStyle?.fontSize ??
-					defaultHeaderTextStyle().fontSize
+					tableNode.tableStyle?.headerTextStyle?.fontSize ?? defaultHeaderTextStyle().fontSize
 				for (const c of headerLayout.cells) {
 					const s = c.textStyle
-					if (s?.fontSize != null)
-						headerFontSize = Math.max(headerFontSize, s.fontSize)
+					if (s?.fontSize != null) headerFontSize = Math.max(headerFontSize, s.fontSize)
 				}
 				for (const c of tableNode.columns) {
 					const s = c.headerTextStyle
-					if (s?.fontSize != null)
-						headerFontSize = Math.max(headerFontSize, s.fontSize)
+					if (s?.fontSize != null) headerFontSize = Math.max(headerFontSize, s.fontSize)
 				}
 				const headerStyleBase: TextStyle = {
 					...defaultHeaderTextStyle(),
 					...tableNode.tableStyle?.headerTextStyle,
-					fontSize: headerFontSize
+					fontSize: headerFontSize,
 				}
 				const headerRowHeight = resolveRowHeight(
 					headerStyleBase,
 					pad,
-					tableNode.tableStyle?.headerRowHeight
+					tableNode.tableStyle?.headerRowHeight,
 				)
 
 				let cellFontSize =
-					tableNode.tableStyle?.cellTextStyle?.fontSize ??
-					defaultCellTextStyle().fontSize
+					tableNode.tableStyle?.cellTextStyle?.fontSize ?? defaultCellTextStyle().fontSize
 				for (const c of tableNode.columns) {
 					const s = c.cellTextStyle
-					if (s?.fontSize != null)
-						cellFontSize = Math.max(cellFontSize, s.fontSize)
+					if (s?.fontSize != null) cellFontSize = Math.max(cellFontSize, s.fontSize)
 				}
 				const cellStyleBase: TextStyle = {
 					...defaultCellTextStyle(),
 					...tableNode.tableStyle?.cellTextStyle,
-					fontSize: cellFontSize
+					fontSize: cellFontSize,
 				}
-				const rowHeight = resolveRowHeight(
-					cellStyleBase,
-					pad,
-					tableNode.tableStyle?.rowHeight
-				)
+				const rowHeight = resolveRowHeight(cellStyleBase, pad, tableNode.tableStyle?.rowHeight)
 
 				const headerH = headerLayout.depth * headerRowHeight
 				const bodyViewportH = Math.max(0, viewportH - headerH)
 				const bodyTotalH = Math.max(0, tableNode.rows.length * rowHeight)
-				const maxScrollY = shouldScrollY
-					? Math.max(0, bodyTotalH - bodyViewportH)
-					: 0
+				const maxScrollY = shouldScrollY ? Math.max(0, bodyTotalH - bodyViewportH) : 0
 				const maxScrollX = shouldScrollX ? Math.max(0, totalW - viewportW) : 0
 				const meta = scrollMetas.get(id)
 				const scrollX = meta?.scrollX ?? tableNode.scroll?.x ?? 0
@@ -1603,26 +1412,24 @@ export async function createEngine(
 				const headerBackground = resolveFill(
 					tableNode.tableStyle?.headerBackground ?? {
 						color: '#111827',
-						alpha: 0.9
-					}
+						alpha: 0.9,
+					},
 				)
 				const rowBackground = resolveFill(tableNode.tableStyle?.rowBackground)
 				const altRowBackground = resolveFill(
 					tableNode.tableStyle?.altRowBackground ?? {
 						color: '#0f172a',
-						alpha: 0.65
-					}
+						alpha: 0.65,
+					},
 				)
 				const grid = resolveStroke(
 					tableNode.tableStyle?.grid ?? {
 						color: '#334155',
 						width: 1,
-						alpha: 0.9
-					}
+						alpha: 0.9,
+					},
 				)
-				const headerGrid = resolveStroke(
-					tableNode.tableStyle?.headerGrid ?? grid
-				)
+				const headerGrid = resolveStroke(tableNode.tableStyle?.headerGrid ?? grid)
 
 				ops.push({
 					op: 'clipRect',
@@ -1630,8 +1437,8 @@ export async function createEngine(
 						x: 0,
 						y: 0,
 						width: viewportW,
-						height: viewportH
-					}
+						height: viewportH,
+					},
 				})
 
 				if (background) {
@@ -1641,29 +1448,28 @@ export async function createEngine(
 							x: 0,
 							y: 0,
 							width: viewportW,
-							height: viewportH
+							height: viewportH,
 						},
-						style: background
+						style: background,
 					})
 				}
 
 				const xStarts: number[] = [0]
-				for (let i = 0; i < widths.length; i++)
-					xStarts.push(xStarts[i] + widths[i])
+				for (let i = 0; i < widths.length; i++) xStarts.push(xStarts[i] + widths[i])
 
 				const headerClipH = Math.min(headerH, viewportH)
 				if (headerClipH > 0) {
 					ops.push({ op: 'save' })
 					ops.push({
 						op: 'clipRect',
-						rect: { x: 0, y: 0, width: viewportW, height: headerClipH }
+						rect: { x: 0, y: 0, width: viewportW, height: headerClipH },
 					})
 					if (scrollX !== 0) ops.push({ op: 'translate', x: -scrollX, y: 0 })
 					if (headerBackground && headerH > 0) {
 						ops.push({
 							op: 'fillRect',
 							rect: { x: 0, y: 0, width: totalW, height: headerH },
-							style: headerBackground
+							style: headerBackground,
 						})
 					}
 
@@ -1671,45 +1477,43 @@ export async function createEngine(
 						if (cell.colSpan <= 0 || cell.rowSpan <= 0) continue
 						const x = xStarts[cell.colStart] ?? 0
 						let w = 0
-						for (let i = 0; i < cell.colSpan; i++)
-							w += widths[cell.colStart + i] ?? 0
+						for (let i = 0; i < cell.colSpan; i++) w += widths[cell.colStart + i] ?? 0
 						const y = cell.level * headerRowHeight
 						const h = cell.rowSpan * headerRowHeight
 
 						const isLeaf = tableNode.columns[cell.colStart]?.id === cell.id
 						const colDef = isLeaf ? tableNode.columns[cell.colStart] : undefined
-						const override = (
-							isLeaf ? colDef?.headerTextStyle : cell.textStyle
-						) as TextStyle | undefined
+						const override = (isLeaf ? colDef?.headerTextStyle : cell.textStyle) as
+							| TextStyle
+							| undefined
 
 						const defaultHeaderAlign = resolveAlign(
 							tableNode.tableStyle?.headerAlign,
-							tableNode.tableStyle?.headerTextStyle?.textAlign ??
-								headerStyleBase.textAlign,
-							'left'
+							tableNode.tableStyle?.headerTextStyle?.textAlign ?? headerStyleBase.textAlign,
+							'left',
 						)
 						const align = isLeaf
 							? resolveAlign(
 									colDef?.align,
 									override?.textAlign ?? headerStyleBase.textAlign,
-									defaultHeaderAlign
+									defaultHeaderAlign,
 								)
 							: resolveAlign(
 									cell.align,
 									override?.textAlign ?? headerStyleBase.textAlign,
-									defaultHeaderAlign
+									defaultHeaderAlign,
 								)
 
 						const styleWithAlign: TextStyle = {
 							...headerStyleBase,
 							...override,
 							textBaseline: 'top',
-							textAlign: align
+							textAlign: align,
 						}
 
 						const vAlign = resolveVAlign(
 							isLeaf ? colDef?.vAlign : cell.vAlign,
-							resolveVAlign(tableNode.tableStyle?.headerVAlign, 'middle')
+							resolveVAlign(tableNode.tableStyle?.headerVAlign, 'middle'),
 						)
 
 						const tx =
@@ -1724,14 +1528,14 @@ export async function createEngine(
 							text: cell.text,
 							x: tx,
 							y: computeTextY(y, h, pad, styleWithAlign, vAlign),
-							style: styleWithAlign
+							style: styleWithAlign,
 						})
 
 						if (headerGrid) {
 							ops.push({
 								op: 'strokeRect',
 								rect: { x, y, width: w, height: h },
-								style: headerGrid
+								style: headerGrid,
 							})
 						}
 					}
@@ -1740,32 +1544,23 @@ export async function createEngine(
 
 				const defaultCellAlign = resolveAlign(
 					tableNode.tableStyle?.cellAlign,
-					tableNode.tableStyle?.cellTextStyle?.textAlign ??
-						cellStyleBase.textAlign,
-					'left'
+					tableNode.tableStyle?.cellTextStyle?.textAlign ?? cellStyleBase.textAlign,
+					'left',
 				)
-				const defaultCellVAlign = resolveVAlign(
-					tableNode.tableStyle?.cellVAlign,
-					'middle'
-				)
+				const defaultCellVAlign = resolveVAlign(tableNode.tableStyle?.cellVAlign, 'middle')
 
 				if (bodyViewportH > 0) {
 					ops.push({ op: 'save' })
 					ops.push({
 						op: 'clipRect',
-						rect: { x: 0, y: headerH, width: viewportW, height: bodyViewportH }
+						rect: { x: 0, y: headerH, width: viewportW, height: bodyViewportH },
 					})
 					if (scrollX !== 0 || scrollY !== 0)
 						ops.push({ op: 'translate', x: -scrollX, y: -scrollY })
 
-					const startRow =
-						rowHeight > 0 ? Math.max(0, Math.floor(scrollY / rowHeight)) : 0
-					const visibleRowCount =
-						rowHeight > 0 ? Math.ceil(bodyViewportH / rowHeight) + 1 : 0
-					const endRow = Math.min(
-						tableNode.rows.length,
-						startRow + visibleRowCount
-					)
+					const startRow = rowHeight > 0 ? Math.max(0, Math.floor(scrollY / rowHeight)) : 0
+					const visibleRowCount = rowHeight > 0 ? Math.ceil(bodyViewportH / rowHeight) + 1 : 0
+					const endRow = Math.min(tableNode.rows.length, startRow + visibleRowCount)
 
 					for (let r = startRow; r < endRow; r++) {
 						const row = tableNode.rows[r]
@@ -1775,7 +1570,7 @@ export async function createEngine(
 							ops.push({
 								op: 'fillRect',
 								rect: { x: 0, y, width: totalW, height: rowHeight },
-								style: bg
+								style: bg,
 							})
 						}
 						for (let c = 0; c < tableNode.columns.length; c++) {
@@ -1788,13 +1583,13 @@ export async function createEngine(
 							const align = resolveAlign(
 								colDef.align,
 								override?.textAlign ?? cellStyleBase.textAlign,
-								defaultCellAlign
+								defaultCellAlign,
 							)
 							const styleWithAlign: TextStyle = {
 								...cellStyleBase,
 								...override,
 								textBaseline: 'top',
-								textAlign: align
+								textAlign: align,
 							}
 							const tx =
 								align === 'center'
@@ -1811,9 +1606,9 @@ export async function createEngine(
 									rowHeight,
 									pad,
 									styleWithAlign,
-									resolveVAlign(colDef.vAlign, defaultCellVAlign)
+									resolveVAlign(colDef.vAlign, defaultCellVAlign),
 								),
-								style: styleWithAlign
+								style: styleWithAlign,
 							})
 						}
 					}
@@ -1845,12 +1640,8 @@ export async function createEngine(
 					const trackY = headerH + inset
 					const trackW = thickness
 					const trackH = Math.max(0, bodyViewportH - inset * 2)
-					const thumbH = Math.max(
-						minThumb,
-						(trackH * bodyViewportH) / Math.max(1, bodyTotalH)
-					)
-					const thumbY =
-						trackY + (scrollY / maxScrollY) * Math.max(0, trackH - thumbH)
+					const thumbH = Math.max(minThumb, (trackH * bodyViewportH) / Math.max(1, bodyTotalH))
+					const thumbY = trackY + (scrollY / maxScrollY) * Math.max(0, trackH - thumbH)
 					pushScrollbar({
 						trackX,
 						trackY,
@@ -1859,7 +1650,7 @@ export async function createEngine(
 						thumbX: trackX,
 						thumbY,
 						thumbW: trackW,
-						thumbH
+						thumbH,
 					})
 				}
 
@@ -1870,12 +1661,8 @@ export async function createEngine(
 					const trackY = viewportH - thickness - inset
 					const trackW = Math.max(0, viewportW - inset * 2 - rightPad)
 					const trackH = thickness
-					const thumbW = Math.max(
-						minThumb,
-						(trackW * viewportW) / Math.max(1, totalW)
-					)
-					const thumbX =
-						trackX + (scrollX / maxScrollX) * Math.max(0, trackW - thumbW)
+					const thumbW = Math.max(minThumb, (trackW * viewportW) / Math.max(1, totalW))
+					const thumbX = trackX + (scrollX / maxScrollX) * Math.max(0, trackW - thumbW)
 					pushScrollbar({
 						trackX,
 						trackY,
@@ -1884,7 +1671,7 @@ export async function createEngine(
 						thumbX,
 						thumbY: trackY,
 						thumbW,
-						thumbH: trackH
+						thumbH: trackH,
 					})
 				}
 			}
@@ -1901,11 +1688,7 @@ export async function createEngine(
 		if (structureDirty) syncStructure()
 		syncDirty()
 		const rootLayout = ensureLayoutRecord(rootId).yogaNode
-		rootLayout.calculateLayout(
-			constraints.width,
-			constraints.height,
-			(Yoga as any).DIRECTION_LTR
-		)
+		rootLayout.calculateLayout(constraints.width, constraints.height, (Yoga as any).DIRECTION_LTR)
 		const out = computeFrames()
 		computeScrollMetas()
 		return out
@@ -1923,8 +1706,7 @@ export async function createEngine(
 		return paint()
 	}
 
-	const getScrollMetrics = (id: string): ScrollMetrics | null =>
-		scrollMetas.get(id) ?? null
+	const getScrollMetrics = (id: string): ScrollMetrics | null => scrollMetas.get(id) ?? null
 
 	const hitTest = (point: {
 		x: number
@@ -1936,7 +1718,7 @@ export async function createEngine(
 		const pointInPolygon = (
 			x: number,
 			y: number,
-			points: readonly { x: number; y: number }[]
+			points: readonly { x: number; y: number }[],
 		): boolean => {
 			let inside = false
 			for (let i = 0, j = points.length - 1; i < points.length; j = i++) {
@@ -1944,8 +1726,7 @@ export async function createEngine(
 				const yi = points[i]?.y ?? 0
 				const xj = points[j]?.x ?? 0
 				const yj = points[j]?.y ?? 0
-				const intersect =
-					yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi
+				const intersect = yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi
 				if (intersect) inside = !inside
 			}
 			return inside
@@ -1954,7 +1735,7 @@ export async function createEngine(
 		const visit = (
 			id: string,
 			localX: number,
-			localY: number
+			localY: number,
 		): { id: string; path: readonly string[] } | null => {
 			const rec = records.get(id)
 			const frame = frames.get(id)
@@ -1967,8 +1748,7 @@ export async function createEngine(
 
 				const viewportW = frame.rect.width
 				const viewportH = frame.rect.height
-				if (shouldClip && !isInRect(localX, localY, viewportW, viewportH))
-					return null
+				if (shouldClip && !isInRect(localX, localY, viewportW, viewportH)) return null
 
 				const meta = scrollMetas.get(id)
 				const shouldScrollX = overflowX === 'scroll' || overflowX === 'auto'
@@ -1985,13 +1765,12 @@ export async function createEngine(
 					const hit = visit(
 						childId,
 						contentX - childFrame.rect.left,
-						contentY - childFrame.rect.top
+						contentY - childFrame.rect.top,
 					)
 					if (hit) return { id: hit.id, path: [...hit.path, id] }
 				}
 
-				if (isInRect(localX, localY, viewportW, viewportH))
-					return { id, path: [id] }
+				if (isInRect(localX, localY, viewportW, viewportH)) return { id, path: [id] }
 				return null
 			}
 
@@ -2013,16 +1792,12 @@ export async function createEngine(
 
 		const rootFrame = frames.get(rootId)
 		if (!rootFrame) return { id: null, path: [] }
-		const hit = visit(
-			rootId,
-			point.x - rootFrame.rect.left,
-			point.y - rootFrame.rect.top
-		)
+		const hit = visit(rootId, point.x - rootFrame.rect.left, point.y - rootFrame.rect.top)
 		return hit ? { id: hit.id, path: hit.path } : { id: null, path: [] }
 	}
 
 	const getNodeInfo = (
-		id: string
+		id: string,
 	): { x: number; y: number; width: number; height: number } | null => {
 		const frame = frames.get(id)
 		if (!frame) return null
@@ -2060,7 +1835,7 @@ export async function createEngine(
 			x,
 			y,
 			width: frame.rect.width,
-			height: frame.rect.height
+			height: frame.rect.height,
 		}
 	}
 
@@ -2091,6 +1866,6 @@ export async function createEngine(
 		hitTest,
 		getNodeInfo,
 		replay,
-		dispose
+		dispose,
 	}
 }

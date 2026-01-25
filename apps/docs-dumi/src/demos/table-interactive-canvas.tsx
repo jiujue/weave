@@ -10,7 +10,7 @@ import type {
 	TableRow,
 	TableStyle,
 	TextMeasurer,
-	TextStyle
+	TextStyle,
 } from '@jiujue/weave-types'
 
 const Text = 'text' as any
@@ -34,7 +34,7 @@ function createBrowserTextMeasurer(): TextMeasurer {
 			const width = Math.ceil(ctx.measureText(text).width)
 			const lineHeight = style.lineHeight ?? Math.ceil(style.fontSize * 1.2)
 			return { width, height: lineHeight, lineHeight }
-		}
+		},
 	}
 }
 
@@ -53,7 +53,7 @@ function renderEngineToCanvas(
 	engine: Engine,
 	env: CanvasEnv,
 	width: number,
-	height: number
+	height: number,
 ): number {
 	const dpr = window.devicePixelRatio || 1
 	env.canvas.style.height = `${height}px`
@@ -74,22 +74,22 @@ function createColumns(): readonly TableColumn[] {
 			id: 'name',
 			title: 'Name',
 			width: { type: 'flex', weight: 2 },
-			cellTextStyle: { fontSize: 12, color: '#e5e7eb' }
+			cellTextStyle: { fontSize: 12, color: '#e5e7eb' },
 		},
 		{
 			id: 'status',
 			title: 'Status',
 			width: 120,
 			align: 'center',
-			cellTextStyle: { fontSize: 12, color: '#e5e7eb' }
+			cellTextStyle: { fontSize: 12, color: '#e5e7eb' },
 		},
 		{
 			id: 'score',
 			title: 'Score',
 			width: 100,
 			align: 'right',
-			cellTextStyle: { fontSize: 12, color: '#e5e7eb' }
-		}
+			cellTextStyle: { fontSize: 12, color: '#e5e7eb' },
+		},
 	]
 }
 
@@ -101,15 +101,15 @@ function createGroupedHeader(): readonly TableHeaderGroup[] {
 			align: 'left',
 			children: [
 				{ type: 'col', colId: 'name' },
-				{ type: 'col', colId: 'status' }
-			]
+				{ type: 'col', colId: 'status' },
+			],
 		},
 		{
 			id: 'g-metrics',
 			label: 'Metrics',
 			align: 'right',
-			children: [{ type: 'col', colId: 'score' }]
-		}
+			children: [{ type: 'col', colId: 'score' }],
+		},
 	]
 }
 
@@ -125,8 +125,8 @@ function randomRow(i: number): TableRow {
 		cells: {
 			name,
 			status,
-			score
-		}
+			score,
+		},
 	}
 }
 
@@ -150,32 +150,29 @@ function tableStyleFromState(input: {
 		headerRowHeight: 34,
 		rowHeight: input.rowHeight,
 		headerTextStyle: { fontSize: 12, color: '#e5e7eb', fontWeight: 'bold' },
-		cellTextStyle: { fontSize: 12, color: '#e5e7eb' }
+		cellTextStyle: { fontSize: 12, color: '#e5e7eb' },
 	}
 }
 
 function initialScene(): JSX.Element {
 	return (
 		<container
-			id='root'
+			id="root"
 			style={{
 				padding: 16,
 				flexDirection: 'column',
-				gap: 12
+				gap: 12,
 			}}
 			paint={{
 				background: { color: '#0b1021' },
-				border: { color: '#334155', width: 1 }
+				border: { color: '#334155', width: 1 },
 			}}
 		>
-			<Text
-				id='title'
-				textStyle={{ fontSize: 16, color: '#e6e6e6', fontWeight: 'bold' }}
-			>
+			<Text id="title" textStyle={{ fontSize: 16, color: '#e6e6e6', fontWeight: 'bold' }}>
 				Table：列定义 + Header Group + 数据更新
 			</Text>
 			<Table
-				id='tbl'
+				id="tbl"
 				style={{ height: 260 }}
 				columns={createColumns()}
 				header={createGroupedHeader()}
@@ -183,7 +180,7 @@ function initialScene(): JSX.Element {
 				tableStyle={tableStyleFromState({
 					zebra: true,
 					cellPadding: 10,
-					rowHeight: 30
+					rowHeight: 30,
 				})}
 			/>
 		</container>
@@ -196,8 +193,7 @@ function clampInt(v: number, min: number, max: number): number {
 }
 
 export default function Demo(): JSX.Element {
-	const { ref: containerRef, width: containerWidth } =
-		useContainerWidth<HTMLDivElement>(960)
+	const { ref: containerRef, width: containerWidth } = useContainerWidth<HTMLDivElement>(960)
 	const canvasRef = useRef<HTMLCanvasElement | null>(null)
 	const engineRef = useRef<Engine | null>(null)
 	const canvasEnvRef = useRef<CanvasEnv | null>(null)
@@ -233,7 +229,7 @@ export default function Demo(): JSX.Element {
 
 			const engine = await createEngine({
 				textMeasurer,
-				root: sceneFromJSX(initialScene())
+				root: sceneFromJSX(initialScene()),
 			})
 			if (disposed) {
 				engine.dispose()
@@ -260,65 +256,54 @@ export default function Demo(): JSX.Element {
 			{
 				op: 'updateStyle',
 				id: 'root',
-				style: { padding: 16, flexDirection: 'column', gap: 12 }
+				style: { padding: 16, flexDirection: 'column', gap: 12 },
 			},
 			{
 				op: 'updateStyle',
 				id: 'tbl',
-				style: { width: Math.max(320, width - 32), height: tableHeight }
+				style: { width: Math.max(320, width - 32), height: tableHeight },
 			},
 			{ op: 'updateTableData', id: 'tbl', rows },
 			{
 				op: 'updateTableStyle',
 				id: 'tbl',
-				tableStyle: tableStyleFromState({ zebra, cellPadding, rowHeight })
+				tableStyle: tableStyleFromState({ zebra, cellPadding, rowHeight }),
 			},
 			{
 				op: 'updateTableColumns',
 				id: 'tbl',
 				columns: createColumns(),
-				header: groupedHeader ? createGroupedHeader() : undefined
-			}
+				header: groupedHeader ? createGroupedHeader() : undefined,
+			},
 		]
 
 		engine.applyPatches(patches)
 		rerender(engine)
-	}, [
-		rows,
-		groupedHeader,
-		zebra,
-		cellPadding,
-		rowHeight,
-		tableHeight,
-		width,
-		height
-	])
+	}, [rows, groupedHeader, zebra, cellPadding, rowHeight, tableHeight, width, height])
 
 	const addRow = () => {
-		setRows(prev => [...prev, randomRow(prev.length)])
+		setRows((prev) => [...prev, randomRow(prev.length)])
 	}
 
 	const removeRow = () => {
-		setRows(prev => prev.slice(0, Math.max(0, prev.length - 1)))
+		setRows((prev) => prev.slice(0, Math.max(0, prev.length - 1)))
 	}
 
 	const randomizeScores = () => {
-		setRows(prev =>
-			prev.map(r => ({
+		setRows((prev) =>
+			prev.map((r) => ({
 				...r,
 				cells: {
 					...r.cells,
-					score: String(Math.floor(50 + Math.random() * 50))
-				}
-			}))
+					score: String(Math.floor(50 + Math.random() * 50)),
+				},
+			})),
 		)
 	}
 
 	const sortByScore = () => {
-		setRows(prev =>
-			[...prev].sort(
-				(a, b) => Number(b.cells.score ?? '0') - Number(a.cells.score ?? '0')
-			)
+		setRows((prev) =>
+			[...prev].sort((a, b) => Number(b.cells.score ?? '0') - Number(a.cells.score ?? '0')),
 		)
 	}
 
@@ -329,7 +314,7 @@ export default function Demo(): JSX.Element {
 					display: 'grid',
 					gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
 					gap: 12,
-					alignItems: 'end'
+					alignItems: 'end',
 				}}
 			>
 				<div style={{ display: 'grid', gap: 6 }}>
@@ -348,9 +333,9 @@ export default function Demo(): JSX.Element {
 					<div style={{ fontSize: 12, color: '#6b7280' }}>Header Group</div>
 					<div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
 						<input
-							type='checkbox'
+							type="checkbox"
 							checked={groupedHeader}
-							onChange={e => setGroupedHeader(e.target.checked)}
+							onChange={(e) => setGroupedHeader(e.target.checked)}
 						/>
 						<span style={{ fontSize: 12, color: '#6b7280' }}>
 							{groupedHeader ? 'enabled' : 'disabled'}
@@ -361,14 +346,8 @@ export default function Demo(): JSX.Element {
 				<label style={{ display: 'grid', gap: 6 }}>
 					<div style={{ fontSize: 12, color: '#6b7280' }}>Zebra Rows</div>
 					<div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-						<input
-							type='checkbox'
-							checked={zebra}
-							onChange={e => setZebra(e.target.checked)}
-						/>
-						<span style={{ fontSize: 12, color: '#6b7280' }}>
-							{zebra ? 'enabled' : 'disabled'}
-						</span>
+						<input type="checkbox" checked={zebra} onChange={(e) => setZebra(e.target.checked)} />
+						<span style={{ fontSize: 12, color: '#6b7280' }}>{zebra ? 'enabled' : 'disabled'}</span>
 					</div>
 				</label>
 
@@ -376,17 +355,13 @@ export default function Demo(): JSX.Element {
 					<div style={{ fontSize: 12, color: '#6b7280' }}>Cell Padding</div>
 					<div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
 						<input
-							type='range'
+							type="range"
 							min={0}
 							max={18}
 							value={cellPadding}
-							onChange={e =>
-								setCellPadding(clampInt(Number(e.target.value), 0, 18))
-							}
+							onChange={(e) => setCellPadding(clampInt(Number(e.target.value), 0, 18))}
 						/>
-						<span style={{ fontSize: 12, color: '#6b7280' }}>
-							{cellPadding}
-						</span>
+						<span style={{ fontSize: 12, color: '#6b7280' }}>{cellPadding}</span>
 					</div>
 				</label>
 
@@ -394,35 +369,27 @@ export default function Demo(): JSX.Element {
 					<div style={{ fontSize: 12, color: '#6b7280' }}>Row Height</div>
 					<div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
 						<input
-							type='range'
+							type="range"
 							min={22}
 							max={44}
 							value={rowHeight}
-							onChange={e =>
-								setRowHeight(clampInt(Number(e.target.value), 22, 44))
-							}
+							onChange={(e) => setRowHeight(clampInt(Number(e.target.value), 22, 44))}
 						/>
 						<span style={{ fontSize: 12, color: '#6b7280' }}>{rowHeight}</span>
 					</div>
 				</label>
 
 				<label style={{ display: 'grid', gap: 6 }}>
-					<div style={{ fontSize: 12, color: '#6b7280' }}>
-						Table Height（溢出裁剪）
-					</div>
+					<div style={{ fontSize: 12, color: '#6b7280' }}>Table Height（溢出裁剪）</div>
 					<div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
 						<input
-							type='range'
+							type="range"
 							min={120}
 							max={420}
 							value={tableHeight}
-							onChange={e =>
-								setTableHeight(clampInt(Number(e.target.value), 120, 420))
-							}
+							onChange={(e) => setTableHeight(clampInt(Number(e.target.value), 120, 420))}
 						/>
-						<span style={{ fontSize: 12, color: '#6b7280' }}>
-							{tableHeight}
-						</span>
+						<span style={{ fontSize: 12, color: '#6b7280' }}>{tableHeight}</span>
 					</div>
 				</label>
 
@@ -440,12 +407,10 @@ export default function Demo(): JSX.Element {
 						width: '100%',
 						maxWidth: `${width}px`,
 						borderRadius: 10,
-						border: '1px solid #e5e7eb'
+						border: '1px solid #e5e7eb',
 					}}
 				/>
-				<div style={{ color: '#6b7280', fontSize: 12 }}>
-					DrawOps：{opCount ?? '-'}
-				</div>
+				<div style={{ color: '#6b7280', fontSize: 12 }}>DrawOps：{opCount ?? '-'}</div>
 			</div>
 		</div>
 	)

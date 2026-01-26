@@ -304,7 +304,10 @@ export type WeaveBrowserApp = Readonly<{
 }>
 
 export function createWeaveBrowserApp(options: WeaveBrowserAppOptions): WeaveBrowserApp {
-	const worker = new Worker(new URL('./worker.js', import.meta.url), {
+	// @ts-ignore injected by tsup
+	const workerCode = __WEAVE_WORKER_CODE__
+	const blob = new Blob([workerCode], { type: 'application/javascript' })
+	const worker = new Worker(URL.createObjectURL(blob), {
 		type: 'module',
 	})
 	const devtoolsEnabled = options.devtools?.enabled ?? false

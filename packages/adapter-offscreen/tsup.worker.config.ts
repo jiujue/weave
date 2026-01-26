@@ -8,6 +8,6 @@ export default defineConfig({
 	splitting: false,
 	dts: true,
 	outDir: 'dist',
-	clean: false,
+	clean: true,
 	noExternal: [/.*/],
 })

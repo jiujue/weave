@@ -58,8 +58,10 @@ export type WeaveImageClient = Readonly<{
 }>
 
 export function createWeaveImageClient(options: WeaveImageClientOptions): WeaveImageClient {
-	const worker =
-		options.worker ?? new Worker(new URL('./worker.js', import.meta.url), { type: 'module' })
+	// @ts-ignore injected by tsup
+	const workerCode = __WEAVE_WORKER_CODE__
+	const blob = new Blob([workerCode], { type: 'application/javascript' })
+	const worker = options.worker ?? new Worker(URL.createObjectURL(blob), { type: 'module' })
 
 	const dpr = options.dpr ?? (globalThis.devicePixelRatio || 1)
 	let requestId = 0

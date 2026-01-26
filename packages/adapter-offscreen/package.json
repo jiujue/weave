@@ -1,6 +1,6 @@
 {
 	"name": "@jiujue/weave-adapter-offscreen",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"type": "module",
 	"sideEffects": false,
 	"exports": {
@@ -23,7 +23,7 @@
 		"@jiujue/weave-types": "workspace:*"
 	},
 	"scripts": {
-		"build": "tsup src/index.ts --format esm --dts --clean && tsup --config tsup.worker.config.ts",
+		"build": "tsup --config tsup.worker.config.ts && tsup",
 		"test": "node -e \"process.exit(0)\"",
 		"lint": "node -e \"process.exit(0)\""
 	}

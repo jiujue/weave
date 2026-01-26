@@ -1,0 +1,54 @@
+name: Release devtools-extension
+
+on:
+  push:
+    tags:
+      - devtools-extension-v*
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Package extension
+        run: pnpm -C apps/devtools-extension package
+
+      - name: Verify tag matches package version
+        run: |
+          VERSION="$(node -p "require('./apps/devtools-extension/package.json').version")"
+          TAG="devtools-extension-v${VERSION}"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          if [ "${GITHUB_REF_NAME}" != "${TAG}" ]; then
+            echo "Tag mismatch: expected ${TAG}, got ${GITHUB_REF_NAME}"
+            exit 1
+          fi
+        id: meta
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: weave-devtools-extension v${{ steps.meta.outputs.version }}
+          files: |
+            apps/devtools-extension/build/chrome-mv3-prod.zip
+            apps/devtools-extension/build/weave-chrome-plugin.zip

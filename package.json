@@ -24,6 +24,7 @@
 		"version-packages": "changeset version",
 		"release": "changeset publish",
 		"release-flow": "node scripts/release.js",
+		"release:devtools-extension": "node scripts/release-devtools-extension.js",
 		"commitlint": "commitlint",
 		"commit": "cz",
 		"push": "git push --follow-tags"

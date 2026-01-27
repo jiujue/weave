@@ -8,6 +8,11 @@
 			"default": "./dist/index.js"
 		}
 	},
+	"files": [
+		"dist",
+		"skills",
+		"AI_GUIDE.md"
+	],
 	"scripts": {
 		"build": "tsup src/index.ts --format esm --dts --clean"
 	},

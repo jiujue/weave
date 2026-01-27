@@ -18,7 +18,9 @@
 		}
 	},
 	"files": [
-		"dist"
+		"dist",
+		"skills",
+		"AI_GUIDE.md"
 	],
 	"scripts": {
 		"build": "tsup src/index.ts src/jsx-runtime.ts src/jsx-dev-runtime.ts --format esm --dts --clean",

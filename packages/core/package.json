@@ -10,7 +10,9 @@
 		}
 	},
 	"files": [
-		"dist"
+		"dist",
+		"skills",
+		"AI_GUIDE.md"
 	],
 	"dependencies": {
 		"@jiujue/weave-displaylist": "workspace:*",

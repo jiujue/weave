@@ -22,7 +22,7 @@
 		"format:check": "prettier . --check",
 		"check": "pnpm lint && pnpm test",
 		"change": "changeset",
-		"version-packages": "changeset version",
+		"version-packages": "changeset version && git add . && git commit -m \"chore: version packages v$(node -p \"require('./packages/core/package.json').version\")\"",
 		"release": "changeset publish",
 		"release:devtools-extension": "node scripts/release-devtools-extension.js",
 		"deploy:gh-pages": "./scripts/deploy-gh-pages.sh",

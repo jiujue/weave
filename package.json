@@ -1,5 +1,6 @@
 {
 	"name": "weave",
+	"version": "0.0.0",
 	"private": true,
 	"packageManager": "pnpm@9.15.4",
 	"type": "module",
@@ -24,6 +25,7 @@
 		"version-packages": "changeset version",
 		"release": "changeset publish",
 		"release:devtools-extension": "node scripts/release-devtools-extension.js",
+		"deploy:gh-pages": "./scripts/deploy-gh-pages.sh",
 		"commitlint": "commitlint",
 		"commit": "cz",
 		"push": "git push --follow-tags"

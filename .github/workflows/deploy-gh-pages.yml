@@ -2,9 +2,8 @@ name: Deploy gh-pages
 
 on:
   push:
-    branches:
-      - main
-      - master
+    tags:
+      - 'deploy-gh-pages-tag-*'
   workflow_dispatch:
 
 permissions:

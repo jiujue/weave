@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react'
-import { createWeaveApp } from '@jiujue/weave-app'
+import { createWeaveApp, type WeaveBrowserApp } from '@jiujue/weave-app'
 import type { SceneNode } from '@jiujue/weave-types'
 
 export function WeaveCanvas(props: Readonly<{ scene: SceneNode }>) {
 	const canvasRef = useRef<HTMLCanvasElement | null>(null)
-	const appRef = useRef<ReturnType<typeof createWeaveApp> | null>(null)
+	const appRef = useRef<WeaveBrowserApp | null>(null)
 
 	useEffect(() => {
 		const canvas = canvasRef.current

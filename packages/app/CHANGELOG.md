@@ -1,5 +1,20 @@
 # @jiujue/weave-app
 
+## 3.0.0
+
+### Major Changes
+
+- e5fe83e: add skills, ai guide
+
+### Patch Changes
+
+- Updated dependencies [e5fe83e]
+  - @jiujue/weave-adapter-node@3.0.0
+  - @jiujue/weave-adapter-offscreen@3.0.0
+  - @jiujue/weave-core@3.0.0
+  - @jiujue/weave-displaylist@3.0.0
+  - @jiujue/weave-types@3.0.0
+
 ## 2.0.0
 
 ### Major Changes

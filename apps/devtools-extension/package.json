@@ -1,6 +1,6 @@
 {
 	"name": "weave-devtools-extension",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"description": "Weave DevTools extension",
 	"private": true,
 	"type": "module",

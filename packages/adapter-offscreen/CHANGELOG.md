@@ -1,5 +1,19 @@
 # @jiujue/weave-adapter-offscreen
 
+## 2.0.0
+
+### Major Changes
+
+- empty version
+
+### Patch Changes
+
+- Updated dependencies
+  - @jiujue/weave-core@2.0.0
+  - @jiujue/weave-devtools-runtime@2.0.0
+  - @jiujue/weave-displaylist@2.0.0
+  - @jiujue/weave-types@2.0.0
+
 ## 1.0.1
 
 ### Patch Changes

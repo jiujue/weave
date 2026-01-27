@@ -1,5 +1,16 @@
 # @jiujue/weave-displaylist
 
+## 2.0.0
+
+### Major Changes
+
+- empty version
+
+### Patch Changes
+
+- Updated dependencies
+  - @jiujue/weave-types@2.0.0
+
 ## 1.0.1
 
 ### Patch Changes

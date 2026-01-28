@@ -3,7 +3,7 @@
 	"private": true,
 	"type": "module",
 	"description": "Weave Node demo（离屏渲染导出 PNG）。",
-	"homepage": "https://github.com/jiujue/weave/tree/master/apps/demo-node",
+	"homepage": "https://jiujue.github.io/weave/",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/jiujue/weave.git",

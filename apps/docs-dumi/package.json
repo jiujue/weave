@@ -3,7 +3,7 @@
 	"private": true,
 	"type": "module",
 	"description": "Weave 文档站点（dumi）。",
-	"homepage": "https://github.com/jiujue/weave/tree/master/apps/docs-dumi",
+	"homepage": "https://jiujue.github.io/weave/",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/jiujue/weave.git",

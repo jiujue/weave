@@ -3,7 +3,7 @@
 	"private": true,
 	"type": "module",
 	"description": "Weave 浏览器 demo（Worker + OffscreenCanvas）。",
-	"homepage": "https://github.com/jiujue/weave/tree/master/apps/demo",
+	"homepage": "https://jiujue.github.io/weave/",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/jiujue/weave.git",

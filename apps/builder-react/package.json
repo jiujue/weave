@@ -3,7 +3,7 @@
 	"private": true,
 	"type": "module",
 	"description": "Weave 可视化编辑器原型（React）。",
-	"homepage": "https://github.com/jiujue/weave/tree/master/apps/builder-react",
+	"homepage": "https://jiujue.github.io/weave/",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/jiujue/weave.git",

@@ -4,7 +4,7 @@
 	"description": "Weave DevTools extension",
 	"private": true,
 	"type": "module",
-	"homepage": "https://github.com/jiujue/weave/tree/master/apps/devtools-extension",
+	"homepage": "https://jiujue.github.io/weave/",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/jiujue/weave.git",

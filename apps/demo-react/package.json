@@ -3,7 +3,7 @@
 	"private": true,
 	"type": "module",
 	"description": "Weave React demo（对照 sceneFromJSX 与 types JSX runtime）。",
-	"homepage": "https://github.com/jiujue/weave/tree/master/apps/demo-react",
+	"homepage": "https://jiujue.github.io/weave/",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/jiujue/weave.git",

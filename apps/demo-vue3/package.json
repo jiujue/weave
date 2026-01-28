@@ -3,7 +3,7 @@
 	"private": true,
 	"type": "module",
 	"description": "Weave Vue3 demo（使用 @jiujue/weave-adapter-worker-image）。",
-	"homepage": "https://github.com/jiujue/weave/tree/master/apps/demo-vue3",
+	"homepage": "https://jiujue.github.io/weave/",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/jiujue/weave.git",

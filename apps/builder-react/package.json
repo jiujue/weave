@@ -2,10 +2,24 @@
 	"name": "@jiujue/weave-builder-react",
 	"private": true,
 	"type": "module",
+	"description": "Weave 可视化编辑器原型（React）。",
+	"homepage": "https://github.com/jiujue/weave/tree/master/apps/builder-react",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jiujue/weave.git",
+		"directory": "apps/builder-react"
+	},
+	"keywords": [
+		"weave",
+		"builder",
+		"editor",
+		"react"
+	],
 	"scripts": {
 		"dev": "vite --port 5174",
 		"build": "vite build",
 		"preview": "vite preview",
+		"typecheck": "pnpm -w tsc -p apps/builder-react/tsconfig.json --noEmit",
 		"test": "node -e \"process.exit(0)\"",
 		"lint": "node -e \"process.exit(0)\""
 	},

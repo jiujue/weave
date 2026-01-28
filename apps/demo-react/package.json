@@ -2,10 +2,24 @@
 	"name": "weave-demo-react",
 	"private": true,
 	"type": "module",
+	"description": "Weave React demo（对照 sceneFromJSX 与 types JSX runtime）。",
+	"homepage": "https://github.com/jiujue/weave/tree/master/apps/demo-react",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jiujue/weave.git",
+		"directory": "apps/demo-react"
+	},
+	"keywords": [
+		"weave",
+		"demo",
+		"react",
+		"jsx"
+	],
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
 		"preview": "vite preview",
+		"typecheck": "pnpm -w tsc -p apps/demo-react/tsconfig.json --noEmit",
 		"test": "node -e \"process.exit(0)\"",
 		"lint": "node -e \"process.exit(0)\""
 	},

@@ -8,7 +8,7 @@ export default function DevtoolsPage() {
 		if (g.__WEAVE_DEVTOOLS_PANEL_CREATED__) return
 		g.__WEAVE_DEVTOOLS_PANEL_CREATED__ = true
 
-		chrome.devtools.panels.create('Weave', null, panelPath)
+		chrome.devtools.panels.create('Weave', 'assets/icon.png', panelPath)
 	}, [])
 
 	return null

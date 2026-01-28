@@ -68,18 +68,27 @@ const handleRequest = async (payload: BridgeRequest): Promise<BridgeResponse> =>
 	ensureHookSubscription()
 	if (DEBUG) console.log('[weave devtools][bridge] request', payload.method)
 
+	if (payload.method === 'ping') {
+		return { ok: true, result: 'pong' }
+	}
+
 	if (payload.method === 'listInstances') {
 		return { ok: true, result: hook.list() }
 	}
 
-	const inst = hook.get(payload.instanceId)
-	if (!inst) return { ok: false, error: 'INSTANCE_NOT_FOUND' }
+	if (
+		payload.method === 'getScene' ||
+		payload.method === 'getNode' ||
+		payload.method === 'getHighlightRect'
+	) {
+		const inst = hook.get(payload.instanceId)
+		if (!inst) return { ok: false, error: 'INSTANCE_NOT_FOUND' }
 
-	if (payload.method === 'getScene') return { ok: true, result: inst.getScene?.() ?? null }
-	if (payload.method === 'getNode')
-		return { ok: true, result: inst.getNodeById?.(payload.nodeId) ?? null }
+		if (payload.method === 'getScene') return { ok: true, result: inst.getScene?.() ?? null }
 
-	if (payload.method === 'getHighlightRect') {
+		if (payload.method === 'getNode')
+			return { ok: true, result: inst.getNodeById?.(payload.nodeId) ?? null }
+
 		const info = await inst.getNodeInfo(payload.nodeId)
 		if (!info) return { ok: true, result: null }
 		const rect = inst.canvas.getBoundingClientRect()
@@ -134,6 +143,10 @@ const handleRequest = async (payload: BridgeRequest): Promise<BridgeResponse> =>
 				}
 			}
 		}
+		return { ok: true, result: null }
+	}
+
+	if (payload.method === 'startInspect' || payload.method === 'stopInspect') {
 		return { ok: true, result: null }
 	}
 

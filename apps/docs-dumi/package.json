@@ -2,12 +2,25 @@
 	"name": "weave-docs",
 	"private": true,
 	"type": "module",
+	"description": "Weave 文档站点（dumi）。",
+	"homepage": "https://github.com/jiujue/weave/tree/master/apps/docs-dumi",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jiujue/weave.git",
+		"directory": "apps/docs-dumi"
+	},
+	"keywords": [
+		"weave",
+		"docs",
+		"dumi"
+	],
 	"scripts": {
 		"predev": "pnpm -C ../../packages/adapter-worker-image build",
 		"dev": "dumi dev",
 		"prebuild": "pnpm -C ../../packages/adapter-worker-image build",
 		"build": "dumi build",
 		"preview": "dumi preview",
+		"typecheck": "pnpm -w tsc -p apps/docs-dumi/tsconfig.json --noEmit",
 		"test": "node -e \"process.exit(0)\"",
 		"lint": "node -e \"process.exit(0)\""
 	},

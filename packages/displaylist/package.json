@@ -1,8 +1,29 @@
 {
 	"name": "@jiujue/weave-displaylist",
 	"version": "3.0.0",
+	"description": "Weave DisplayList schema + replay：把绘制指令解释执行到 2D context。",
+	"keywords": [
+		"weave",
+		"rendering",
+		"display-list",
+		"canvas"
+	],
+	"homepage": "https://github.com/jiujue/weave/tree/master/packages/displaylist",
+	"bugs": {
+		"url": "https://github.com/jiujue/weave/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jiujue/weave.git",
+		"directory": "packages/displaylist"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"type": "module",
 	"sideEffects": false,
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
@@ -12,13 +33,16 @@
 	"files": [
 		"dist",
 		"skills",
-		"AI_GUIDE.md"
+		"AI_GUIDE.md",
+		"README.md",
+		"CHANGELOG.md"
 	],
 	"dependencies": {
 		"@jiujue/weave-types": "workspace:*"
 	},
 	"scripts": {
 		"build": "tsup src/index.ts --format esm --dts --clean",
+		"typecheck": "pnpm -w tsc -p packages/displaylist/tsconfig.json --noEmit",
 		"test": "node -e \"process.exit(0)\"",
 		"lint": "node -e \"process.exit(0)\""
 	}

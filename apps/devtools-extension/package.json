@@ -4,10 +4,22 @@
 	"description": "Weave DevTools extension",
 	"private": true,
 	"type": "module",
+	"homepage": "https://github.com/jiujue/weave/tree/master/apps/devtools-extension",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jiujue/weave.git",
+		"directory": "apps/devtools-extension"
+	},
+	"keywords": [
+		"weave",
+		"devtools",
+		"extension"
+	],
 	"scripts": {
 		"dev": "plasmo dev",
 		"build": "plasmo build",
 		"package": "plasmo package",
+		"typecheck": "pnpm -w tsc -p apps/devtools-extension/tsconfig.json --noEmit",
 		"test": "node -e \"process.exit(0)\"",
 		"lint": "node -e \"process.exit(0)\""
 	},

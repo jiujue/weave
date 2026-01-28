@@ -1,8 +1,30 @@
 {
 	"name": "@jiujue/weave-adapter-node",
 	"version": "3.0.0",
+	"description": "Weave Node 适配：离屏渲染到 canvas，并可导出 PNG。",
+	"keywords": [
+		"weave",
+		"rendering",
+		"node",
+		"canvas",
+		"png"
+	],
+	"homepage": "https://github.com/jiujue/weave/tree/master/packages/adapter-node",
+	"bugs": {
+		"url": "https://github.com/jiujue/weave/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jiujue/weave.git",
+		"directory": "packages/adapter-node"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"type": "module",
 	"sideEffects": false,
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
@@ -12,14 +34,29 @@
 	"files": [
 		"dist",
 		"skills",
-		"AI_GUIDE.md"
+		"AI_GUIDE.md",
+		"README.md",
+		"CHANGELOG.md"
 	],
 	"dependencies": {
 		"@jiujue/weave-displaylist": "workspace:*",
 		"@jiujue/weave-types": "workspace:*"
 	},
+	"peerDependencies": {
+		"@napi-rs/canvas": "*",
+		"canvas": "*"
+	},
+	"peerDependenciesMeta": {
+		"@napi-rs/canvas": {
+			"optional": true
+		},
+		"canvas": {
+			"optional": true
+		}
+	},
 	"scripts": {
 		"build": "tsup src/index.ts --format esm --dts --clean --external @napi-rs/canvas --external canvas",
+		"typecheck": "pnpm -w tsc -p packages/adapter-node/tsconfig.json --noEmit",
 		"test": "node -e \"process.exit(0)\"",
 		"lint": "node -e \"process.exit(0)\""
 	}

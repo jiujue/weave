@@ -1,7 +1,28 @@
 {
 	"name": "@jiujue/weave-editor-core",
 	"version": "3.0.0",
+	"description": "Weave Editor 内核：组件注册、编辑器状态与代码生成等基础能力。",
+	"keywords": [
+		"weave",
+		"editor",
+		"rendering"
+	],
+	"homepage": "https://github.com/jiujue/weave/tree/master/packages/editor-core",
+	"bugs": {
+		"url": "https://github.com/jiujue/weave/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jiujue/weave.git",
+		"directory": "packages/editor-core"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"type": "module",
+	"sideEffects": false,
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
@@ -11,10 +32,15 @@
 	"files": [
 		"dist",
 		"skills",
-		"AI_GUIDE.md"
+		"AI_GUIDE.md",
+		"README.md",
+		"CHANGELOG.md"
 	],
 	"scripts": {
-		"build": "tsup src/index.ts --format esm --dts --clean"
+		"build": "tsup src/index.ts --format esm --dts --clean",
+		"typecheck": "pnpm -w tsc -p packages/editor-core/tsconfig.json --noEmit",
+		"test": "node -e \"process.exit(0)\"",
+		"lint": "node -e \"process.exit(0)\""
 	},
 	"dependencies": {
 		"@jiujue/weave-types": "workspace:*"

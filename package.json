@@ -1,7 +1,27 @@
 {
 	"name": "weave",
 	"version": "0.0.1",
+	"description": "OffscreenCanvas + Yoga 布局 + DisplayList 的可演进渲染引擎实验项目。",
 	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jiujue/weave.git"
+	},
+	"homepage": "https://github.com/jiujue/weave",
+	"bugs": {
+		"url": "https://github.com/jiujue/weave/issues"
+	},
+	"keywords": [
+		"weave",
+		"rendering",
+		"canvas",
+		"offscreen-canvas",
+		"yoga-layout",
+		"display-list"
+	],
+	"engines": {
+		"node": ">=18.0.0"
+	},
 	"packageManager": "pnpm@9.15.4",
 	"type": "module",
 	"scripts": {
@@ -14,13 +34,14 @@
 		"docs:preview": "pnpm -C apps/docs-dumi preview",
 		"prepare": "husky",
 		"test": "vitest run",
+		"typecheck": "pnpm -r --workspace-concurrency=1 --filter \"./packages/**\" typecheck",
 		"lint": "eslint . --ext .js,.jsx,.ts,.tsx,.vue,.mjs,.cjs --max-warnings=0",
 		"lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.vue,.mjs,.cjs --fix",
 		"lint:workspace": "pnpm -r lint",
 		"lint-staged": "lint-staged",
 		"format": "prettier . --write",
 		"format:check": "prettier . --check",
-		"check": "pnpm lint && pnpm test",
+		"check": "pnpm lint && pnpm typecheck && pnpm test",
 		"change": "changeset",
 		"change:commit": "changeset && git add .changeset && git commit -m \"chore: add changeset\"",
 		"version-packages": "changeset version && VERSION=$(node -p \"require('./packages/core/package.json').version\") && git add . && git commit -m \"chore: version packages v$VERSION\"",

@@ -1,8 +1,30 @@
 {
 	"name": "@jiujue/weave-app",
 	"version": "3.0.0",
+	"description": "Weave 端到端统一入口：createWeaveApp（browser/node）。",
+	"keywords": [
+		"weave",
+		"rendering",
+		"canvas",
+		"offscreen-canvas",
+		"node"
+	],
+	"homepage": "https://github.com/jiujue/weave/tree/master/packages/app",
+	"bugs": {
+		"url": "https://github.com/jiujue/weave/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jiujue/weave.git",
+		"directory": "packages/app"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"type": "module",
 	"sideEffects": false,
+	"main": "./dist/browser.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
@@ -14,7 +36,9 @@
 	"files": [
 		"dist",
 		"skills",
-		"AI_GUIDE.md"
+		"AI_GUIDE.md",
+		"README.md",
+		"CHANGELOG.md"
 	],
 	"dependencies": {
 		"@jiujue/weave-adapter-node": "workspace:*",
@@ -25,6 +49,7 @@
 	},
 	"scripts": {
 		"build": "tsup src/index.ts src/browser.ts src/node.ts --format esm --dts --clean --external @jiujue/weave-adapter-node --external @jiujue/weave-adapter-offscreen --external @jiujue/weave-core --external @jiujue/weave-displaylist --external @jiujue/weave-types",
+		"typecheck": "pnpm -w tsc -p packages/app/tsconfig.json --noEmit",
 		"test": "node -e \"process.exit(0)\"",
 		"lint": "node -e \"process.exit(0)\""
 	}

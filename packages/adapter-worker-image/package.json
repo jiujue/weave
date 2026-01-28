@@ -1,8 +1,30 @@
 {
 	"name": "@jiujue/weave-adapter-worker-image",
 	"version": "3.0.0",
+	"description": "Weave Worker Image 适配：把渲染放到 Worker，并把结果以 ImageBitmap / ImageData 传回主线程。",
+	"keywords": [
+		"weave",
+		"rendering",
+		"webworker",
+		"imagebitmap",
+		"canvas"
+	],
+	"homepage": "https://github.com/jiujue/weave/tree/master/packages/adapter-worker-image",
+	"bugs": {
+		"url": "https://github.com/jiujue/weave/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jiujue/weave.git",
+		"directory": "packages/adapter-worker-image"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"type": "module",
 	"sideEffects": false,
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
@@ -16,7 +38,9 @@
 	"files": [
 		"dist",
 		"skills",
-		"AI_GUIDE.md"
+		"AI_GUIDE.md",
+		"README.md",
+		"CHANGELOG.md"
 	],
 	"dependencies": {
 		"@jiujue/weave-core": "workspace:*",
@@ -25,6 +49,7 @@
 	},
 	"scripts": {
 		"build": "tsup --config tsup.worker.config.ts && tsup",
+		"typecheck": "pnpm -w tsc -p packages/adapter-worker-image/tsconfig.json --noEmit",
 		"test": "node -e \"process.exit(0)\"",
 		"lint": "node -e \"process.exit(0)\""
 	}

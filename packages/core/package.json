@@ -1,8 +1,30 @@
 {
 	"name": "@jiujue/weave-core",
 	"version": "3.0.0",
+	"description": "Weave 核心引擎：scene tree → Yoga layout → DisplayList。",
+	"keywords": [
+		"weave",
+		"rendering",
+		"layout",
+		"yoga-layout",
+		"canvas"
+	],
+	"homepage": "https://github.com/jiujue/weave/tree/master/packages/core",
+	"bugs": {
+		"url": "https://github.com/jiujue/weave/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jiujue/weave.git",
+		"directory": "packages/core"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"type": "module",
 	"sideEffects": false,
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
@@ -12,7 +34,9 @@
 	"files": [
 		"dist",
 		"skills",
-		"AI_GUIDE.md"
+		"AI_GUIDE.md",
+		"README.md",
+		"CHANGELOG.md"
 	],
 	"dependencies": {
 		"@jiujue/weave-displaylist": "workspace:*",
@@ -21,6 +45,7 @@
 	},
 	"scripts": {
 		"build": "tsup src/index.ts --format esm --dts --clean",
+		"typecheck": "pnpm -w tsc -p packages/core/tsconfig.json --noEmit",
 		"test": "node -e \"process.exit(0)\"",
 		"lint": "node -e \"process.exit(0)\""
 	}

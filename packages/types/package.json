@@ -1,8 +1,30 @@
 {
 	"name": "@jiujue/weave-types",
 	"version": "3.0.0",
+	"description": "Weave 数据模型与协议（SceneNode、patch、TextMeasurer、JSX runtime）。",
+	"keywords": [
+		"weave",
+		"rendering",
+		"scene",
+		"jsx",
+		"canvas"
+	],
+	"homepage": "https://github.com/jiujue/weave/tree/master/packages/types",
+	"bugs": {
+		"url": "https://github.com/jiujue/weave/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jiujue/weave.git",
+		"directory": "packages/types"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"type": "module",
 	"sideEffects": false,
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
@@ -20,10 +42,13 @@
 	"files": [
 		"dist",
 		"skills",
-		"AI_GUIDE.md"
+		"AI_GUIDE.md",
+		"README.md",
+		"CHANGELOG.md"
 	],
 	"scripts": {
 		"build": "tsup src/index.ts src/jsx-runtime.ts src/jsx-dev-runtime.ts --format esm --dts --clean",
+		"typecheck": "pnpm -w tsc -p packages/types/tsconfig.json --noEmit",
 		"test": "node -e \"process.exit(0)\"",
 		"lint": "node -e \"process.exit(0)\""
 	}

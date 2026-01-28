@@ -1,5 +1,17 @@
 # @jiujue/weave-app
 
+## 3.0.2
+
+### Patch Changes
+
+- docs: update homepage
+- Updated dependencies
+  - @jiujue/weave-adapter-node@3.0.2
+  - @jiujue/weave-adapter-offscreen@3.0.2
+  - @jiujue/weave-core@3.0.2
+  - @jiujue/weave-displaylist@3.0.2
+  - @jiujue/weave-types@3.0.2
+
 ## 3.0.1
 
 ### Patch Changes

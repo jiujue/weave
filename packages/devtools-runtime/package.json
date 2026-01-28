@@ -1,6 +1,6 @@
 {
 	"name": "@jiujue/weave-devtools-runtime",
-	"version": "3.0.1",
+	"version": "3.0.2",
 	"description": "Weave DevTools runtime：在运行时收集与暴露调试信息。",
 	"keywords": [
 		"weave",

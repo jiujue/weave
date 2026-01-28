@@ -1,5 +1,15 @@
 # @jiujue/weave-adapter-worker-image
 
+## 3.0.2
+
+### Patch Changes
+
+- docs: update homepage
+- Updated dependencies
+  - @jiujue/weave-core@3.0.2
+  - @jiujue/weave-displaylist@3.0.2
+  - @jiujue/weave-types@3.0.2
+
 ## 3.0.1
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
 	"name": "@jiujue/weave-react",
-	"version": "3.0.1",
+	"version": "3.0.2",
 	"description": "Weave 的 React 绑定：用 React JSX 构建 SceneNode。",
 	"keywords": [
 		"weave",

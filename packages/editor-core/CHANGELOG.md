@@ -1,5 +1,13 @@
 # @jiujue/weave-editor-core
 
+## 3.0.2
+
+### Patch Changes
+
+- docs: update homepage
+- Updated dependencies
+  - @jiujue/weave-types@3.0.2
+
 ## 3.0.1
 
 ### Patch Changes

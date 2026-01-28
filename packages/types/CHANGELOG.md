@@ -1,5 +1,11 @@
 # @jiujue/weave-types
 
+## 3.0.2
+
+### Patch Changes
+
+- docs: update homepage
+
 ## 3.0.1
 
 ### Patch Changes

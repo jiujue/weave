@@ -1,6 +1,6 @@
 {
 	"name": "@jiujue/weave-adapter-node",
-	"version": "3.0.1",
+	"version": "3.0.2",
 	"description": "Weave Node 适配：离屏渲染到 canvas，并可导出 PNG。",
 	"keywords": [
 		"weave",

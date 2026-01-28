@@ -1,6 +1,6 @@
 {
 	"name": "@jiujue/weave-adapter-offscreen",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Weave 浏览器 Worker 适配：消息协议 + OffscreenCanvas + replay。",
 	"keywords": [
 		"weave",

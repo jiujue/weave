@@ -1,5 +1,11 @@
 # @jiujue/weave-types
 
+## 3.0.1
+
+### Patch Changes
+
+- feat(all): add skills, ai guid, git repo link
+
 ## 3.0.0
 
 ### Major Changes

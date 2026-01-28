@@ -1,6 +1,6 @@
 {
 	"name": "@jiujue/weave-types",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Weave 数据模型与协议（SceneNode、patch、TextMeasurer、JSX runtime）。",
 	"keywords": [
 		"weave",

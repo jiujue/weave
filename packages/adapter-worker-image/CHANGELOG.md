@@ -1,5 +1,15 @@
 # @jiujue/weave-adapter-worker-image
 
+## 3.0.1
+
+### Patch Changes
+
+- feat(all): add skills, ai guid, git repo link
+- Updated dependencies
+  - @jiujue/weave-core@3.0.1
+  - @jiujue/weave-displaylist@3.0.1
+  - @jiujue/weave-types@3.0.1
+
 ## 3.0.0
 
 ### Major Changes

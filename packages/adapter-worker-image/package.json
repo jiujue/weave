@@ -1,6 +1,6 @@
 {
 	"name": "@jiujue/weave-adapter-worker-image",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Weave Worker Image 适配：把渲染放到 Worker，并把结果以 ImageBitmap / ImageData 传回主线程。",
 	"keywords": [
 		"weave",

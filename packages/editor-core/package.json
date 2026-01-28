@@ -1,6 +1,6 @@
 {
 	"name": "@jiujue/weave-editor-core",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Weave Editor 内核：组件注册、编辑器状态与代码生成等基础能力。",
 	"keywords": [
 		"weave",

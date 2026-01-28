@@ -1,6 +1,6 @@
 {
 	"name": "@jiujue/weave-app",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Weave 端到端统一入口：createWeaveApp（browser/node）。",
 	"keywords": [
 		"weave",

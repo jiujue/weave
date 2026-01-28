@@ -1,6 +1,6 @@
 {
 	"name": "@jiujue/weave-core",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Weave 核心引擎：scene tree → Yoga layout → DisplayList。",
 	"keywords": [
 		"weave",

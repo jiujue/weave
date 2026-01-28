@@ -1,6 +1,6 @@
 {
 	"name": "@jiujue/weave-displaylist",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Weave DisplayList schema + replay：把绘制指令解释执行到 2D context。",
 	"keywords": [
 		"weave",

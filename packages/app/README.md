@@ -1,24 +1,24 @@
 # @jiujue/weave-app
 
-Weave 的端到端统一入口：把 SceneNode 渲染到浏览器（Worker + OffscreenCanvas）或 Node（离屏导出 PNG）。
+The unified end-to-end entry for Weave: Renders SceneNode to the browser (Worker + OffscreenCanvas) or Node (offscreen export to PNG).
 
-## 在 Weave 里的位置（分层）
+## Position in Weave (Layering)
 
-| 层级       | 包                                                                                                      | 作用                                     |
-| ---------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| 场景数据   | `@jiujue/weave-types`                                                                                   | SceneNode/patch/TextMeasurer/JSX runtime |
-| 引擎核心   | `@jiujue/weave-core`                                                                                    | Yoga layout + paint + hitTest            |
-| 绘制回放   | `@jiujue/weave-displaylist`                                                                             | DisplayList schema + replay              |
-| 平台适配   | `@jiujue/weave-adapter-offscreen` / `@jiujue/weave-adapter-node` / `@jiujue/weave-adapter-worker-image` | Worker/Node/图片导出                     |
-| 端到端入口 | `@jiujue/weave-app`                                                                                     | 聚合上述能力并提供统一 API               |
+| Layer               | Package                                                                                                 | Role                                     |
+| ------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| Scene Data          | `@jiujue/weave-types`                                                                                   | SceneNode/patch/TextMeasurer/JSX runtime |
+| Engine Core         | `@jiujue/weave-core`                                                                                    | Yoga layout + paint + hitTest            |
+| Drawing Replay      | `@jiujue/weave-displaylist`                                                                             | DisplayList schema + replay              |
+| Platform Adaptation | `@jiujue/weave-adapter-offscreen` / `@jiujue/weave-adapter-node` / `@jiujue/weave-adapter-worker-image` | Worker/Node/Image Export                 |
+| End-to-End Entry    | `@jiujue/weave-app`                                                                                     | Aggregates capabilities with unified API |
 
-## 安装
+## Installation
 
 ```bash
 pnpm add @jiujue/weave-app
 ```
 
-## 浏览器用法
+## Browser Usage
 
 ```ts
 import { createWeaveApp } from '@jiujue/weave-app'
@@ -31,13 +31,13 @@ const app = createWeaveApp({
 app.render()
 ```
 
-## Node 用法（导出 PNG）
+## Node Usage (Export to PNG)
 
-Node 侧需要安装任意一种 canvas 后端：
+Node requires installing any canvas backend:
 
 ```bash
 pnpm add @napi-rs/canvas
-# 或
+# OR
 pnpm add canvas
 ```
 
@@ -54,21 +54,21 @@ const png = await app.renderToPng()
 app.dispose()
 ```
 
-## 组合使用（典型方式）
+## Composition (Typical Usage)
 
-- 场景构建：用 `@jiujue/weave-react` 的 `sceneFromJSX` 或 `@jiujue/weave-types` JSX runtime 生成 `SceneNode`
-- 浏览器渲染：`createWeaveApp({ canvas, scene })`（内部用 `adapter-offscreen` + `core` + `displaylist`）
-- Node 导出：`createWeaveApp({ width, height, scene }).renderToPng()`（内部用 `adapter-node` + `core` + `displaylist`）
-- Worker 图片导出：需要“拿到 PNG 二进制”时，优先用 `@jiujue/weave-adapter-worker-image`
+- Scene Construction: Use `sceneFromJSX` from `@jiujue/weave-react` or `@jiujue/weave-types` JSX runtime to generate `SceneNode`.
+- Browser Rendering: `createWeaveApp({ canvas, scene })` (internally uses `adapter-offscreen` + `core` + `displaylist`).
+- Node Export: `createWeaveApp({ width, height, scene }).renderToPng()` (internally uses `adapter-node` + `core` + `displaylist`).
+- Worker Image Export: When you need "PNG binary", prefer using `@jiujue/weave-adapter-worker-image`.
 
 ## AI / Skills
 
-- [AI_GUIDE.md](./weave/packages/app/AI_GUIDE.md)
-- [skills/SKILL.md](./weave/packages/app/skills/SKILL.md)
-- [CHANGELOG.md](./weave/packages/app/CHANGELOG.md)
+- [AI_GUIDE.md](./AI_GUIDE.md)
+- [skills/SKILL.md](./skills/SKILL.md)
+- [CHANGELOG.md](./CHANGELOG.md)
 
-## 相关 demo
+## Related Demos
 
-- [weave-demo](./weave/apps/demo/README.md)
-- [weave-demo-react](./weave/apps/demo-react/README.md)
-- [weave-demo-node](./weave/apps/demo-node/README.md)
+- [weave-demo](../../apps/demo/README.md)
+- [weave-demo-react](../../apps/demo-react/README.md)
+- [weave-demo-node](../../apps/demo-node/README.md)

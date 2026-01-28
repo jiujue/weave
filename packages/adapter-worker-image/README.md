@@ -1,24 +1,24 @@
 # @jiujue/weave-adapter-worker-image
 
-把 Weave 渲染放到 Worker 里执行，并把渲染结果（PNG 二进制）回传主线程。适合“离屏渲染生成图片”的场景（报表、导出、缩略图等）。
+Runs Weave rendering in a Worker and sends the rendering result (PNG binary) back to the main thread. Suitable for "offscreen rendering to generate images" scenarios (reports, exports, thumbnails, etc.).
 
-## 在 Weave 里的位置（分层）
+## Position in Weave (Layering)
 
-| 层级       | 包                                   | 作用                                       |
-| ---------- | ------------------------------------ | ------------------------------------------ |
-| 场景数据   | `@jiujue/weave-types`                | SceneNode/patch/TextMeasurer               |
-| 引擎核心   | `@jiujue/weave-core`                 | layout + paint                             |
-| 绘制回放   | `@jiujue/weave-displaylist`          | replay 到 OffscreenCanvas 2D context       |
-| 平台适配   | `@jiujue/weave-adapter-worker-image` | Worker 渲染并回传 PNG                      |
-| 端到端入口 | `@jiujue/weave-app`                  | 适合“画到 canvas”；需要 PNG 二进制时用本包 |
+| Layer               | Package                              | Role                                                                         |
+| ------------------- | ------------------------------------ | ---------------------------------------------------------------------------- |
+| Scene Data          | `@jiujue/weave-types`                | SceneNode/patch/TextMeasurer                                                 |
+| Engine Core         | `@jiujue/weave-core`                 | layout + paint                                                               |
+| Drawing Replay      | `@jiujue/weave-displaylist`          | replay to OffscreenCanvas 2D context                                         |
+| Platform Adaptation | `@jiujue/weave-adapter-worker-image` | Worker rendering and return PNG                                              |
+| End-to-End Entry    | `@jiujue/weave-app`                  | Suitable for "drawing to canvas"; use this package when PNG binary is needed |
 
-## 安装
+## Installation
 
 ```bash
 pnpm add @jiujue/weave-adapter-worker-image
 ```
 
-## 用法
+## Usage
 
 ```ts
 import { createWeaveImageClient } from '@jiujue/weave-adapter-worker-image'
@@ -36,19 +36,19 @@ const blob = new Blob([r.data], { type: r.mime })
 const url = URL.createObjectURL(blob)
 ```
 
-## 组合使用（典型方式）
+## Composition (Typical Usage)
 
-- 报表/导出/缩略图：本包（PNG 二进制）+ 业务侧将 `ArrayBuffer` 转 Blob/下载/上传
-- 交互式画布：用 `@jiujue/weave-app`（它会把结果画到 canvas，而不是导出 PNG）
+- Reports/Exports/Thumbnails: This package (PNG binary) + business side converting `ArrayBuffer` to Blob/Download/Upload.
+- Interactive Canvas: Use `@jiujue/weave-app` (it draws results to a canvas instead of exporting PNG).
 
 ## AI / Skills
 
-- [AI_GUIDE.md](./weave/packages/adapter-worker-image/AI_GUIDE.md)
-- [skills/SKILL.md](./weave/packages/adapter-worker-image/skills/SKILL.md)
-- [CHANGELOG.md](./weave/packages/adapter-worker-image/CHANGELOG.md)
+- [AI_GUIDE.md](./AI_GUIDE.md)
+- [skills/SKILL.md](./skills/SKILL.md)
+- [CHANGELOG.md](./CHANGELOG.md)
 
-## 相关包
+## Related Packages
 
-- `@jiujue/weave-core`：layout/paint
-- `@jiujue/weave-displaylist`：replay
-- `@jiujue/weave-types`：SceneNode/patch
+- `@jiujue/weave-core`: layout/paint
+- `@jiujue/weave-displaylist`: replay
+- `@jiujue/weave-types`: SceneNode/patch

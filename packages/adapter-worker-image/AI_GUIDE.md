@@ -2,26 +2,26 @@
 title: @jiujue/weave-adapter-worker-image AI Guide
 ---
 
-## 这个包是什么
+## What is this package?
 
-`@jiujue/weave-adapter-worker-image` 提供 Worker 侧渲染（偏“图片/离屏产出”）的适配层：
+`@jiujue/weave-adapter-worker-image` provides an adaptation layer for Worker-side rendering (focused on "image/offscreen output"):
 
-- 提供 worker 入口（`exports./worker`）
-- 在 worker 内组合 `core` + `displaylist` 完成 render/replay
-- 供 docs 与 demo 在 worker 环境复用渲染能力
+- Provides a worker entry point (`exports./worker`).
+- Combines `core` + `displaylist` within the worker to perform render/replay.
+- Allows docs and demos to reuse rendering capabilities in a worker environment.
 
-## 修改原则
+## Principles of Modification
 
-- Worker 侧只使用可序列化协议与 OffscreenCanvas（或等价抽象）
-- 与 `adapter-offscreen` 的协议保持一致或明确区分
-- 任何新增能力先明确“消息协议/输入输出/线程边界”
+- The worker side only uses serializable protocols and OffscreenCanvas (or equivalent abstractions).
+- Maintain consistency or clear distinction with the `adapter-offscreen` protocol.
+- Any new capability should first define the "message protocol/input-output/thread boundary".
 
-## 常见改动入口
+## Common Entry Points
 
-- `src/index.ts`：主入口
-- `src/worker.ts`：worker 入口
+- `src/index.ts`: Main entry point.
+- `src/worker.ts`: Worker entry point.
 
-## 验证方式
+## Verification
 
 - `pnpm -C packages/adapter-worker-image build`
-- 运行 docs-dumi 或相关 demo，确认 worker 渲染正常
+- Run docs-dumi or related demos and confirm worker rendering is functioning correctly.

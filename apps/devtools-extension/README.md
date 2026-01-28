@@ -1,35 +1,35 @@
-# Weave DevTools Extension（Plasmo）
+# Weave DevTools Extension (Plasmo)
 
-## 这是什么
+## What is this?
 
-一个浏览器扩展，在 DevTools 里提供 Weave 面板，用于：
+A browser extension that provides a Weave panel in DevTools for:
 
-- 查看 SceneNode 场景树
-- 查看节点属性（JSON）
-- Inspect 模式：在页面中拾取节点并高亮
+- Viewing the SceneNode scene tree
+- Viewing node properties (JSON)
+- Inspect mode: Pick nodes in the page and highlight them
 
-## 开发
+## Development
 
-在仓库根目录安装依赖后：
+After installing dependencies in the repository root:
 
-- 开发：`pnpm -C apps/devtools-extension dev`
-- 构建：`pnpm -C apps/devtools-extension build`
+- Development: `pnpm -C apps/devtools-extension dev`
+- Build: `pnpm -C apps/devtools-extension build`
 
-Chrome 加载方式（开发构建）：
+How to load in Chrome (development build):
 
-- 打开 `chrome://extensions`
-- 打开开发者模式
-- Load unpacked → 选择 `apps/devtools-extension/build/chrome-mv3-dev`
+- Open `chrome://extensions`
+- Enable Developer mode
+- Load unpacked → Select `apps/devtools-extension/build/chrome-mv3-dev`
 
-开发时常见问题：
+Common development issues:
 
 - `Uncaught Error: Extension context invalidated`
-  - 这是 Chrome 在你 Reload 扩展、或 Plasmo 热更新触发扩展重载后，旧的 content script 上下文被销毁导致的。
-  - 处理方式：Reload 扩展后 **刷新目标页面**（或重新打开 DevTools/页面）即可。
+  - This is caused by the old content script context being destroyed after Chrome reloads the extension, or Plasmo hot update triggers an extension reload.
+  - Solution: After reloading the extension, **refresh the target page** (or reopen DevTools/page).
 
-## 使用
+## Usage
 
-1. 在你的 Weave 页面创建 app 时开启：
+1. Enable when creating the app in your Weave page:
 
 ```ts
 createWeaveApp({
@@ -39,11 +39,11 @@ createWeaveApp({
 })
 ```
 
-2. 打开该页面的 DevTools，选择 `Weave` 面板。
+2. Open the page's DevTools and select the `Weave` panel.
 
-## 架构
+## Architecture
 
-- `contents/weave-main.ts`：main world bridge，访问 `window.__WEAVE_DEVTOOLS_HOOK__`
-- `content.ts`：isolated world，overlay 与 inspect，转发请求/事件
-- `background.ts`：panel ↔ content script 路由
-- `devtools.tsx` + `panels/weave-panel/*`：DevTools 面板 UI
+- `contents/weave-main.ts`: main world bridge, accesses `window.__WEAVE_DEVTOOLS_HOOK__`
+- `content.ts`: isolated world, overlay and inspect, forwards requests/events
+- `background.ts`: panel ↔ content script routing
+- `devtools.tsx` + `panels/weave-panel/*`: DevTools panel UI

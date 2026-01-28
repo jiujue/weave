@@ -1,12 +1,12 @@
 ---
 name: 'weave-devtools-runtime'
-description: '提供 Weave DevTools 运行时桥接（attachWeaveDevtools、scene mirror、hook 协议）。用户在扩展联动、实例发现、事件协议问题时调用。'
+description: 'Provides Weave DevTools runtime bridging (attachWeaveDevtools, scene mirror, hook protocol). Called when users have questions about extension integration, instance discovery, or event protocols.'
 ---
 
 # @jiujue/weave-devtools-runtime
 
-## 适用场景
+## Applicable Scenarios
 
-- 解释 DevTools hook 的数据结构与版本策略
-- 排查面板发现实例失败、scene 不更新、hitTest/高亮不一致等问题
-- 设计新增事件/能力时如何扩展协议并保持兼容
+- Explaining the data structure and versioning strategy of the DevTools hook.
+- Troubleshooting issues like failure of the panel to discover instances, scene not updating, or inconsistencies in hitTest/highlighting.
+- Designing how to extend the protocol with new events/capabilities while maintaining compatibility.

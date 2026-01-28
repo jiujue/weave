@@ -1,10 +1,10 @@
 # @jiujue/weave-builder-react
 
-Weave 可视化编辑器原型（React + Vite）。用于验证“编辑器状态/属性面板/图层树/画布渲染/导出 JSX”等能力的组合。
+Weave visual editor prototype (React + Vite). Used to verify the combination of capabilities such as "editor state / property panel / layer tree / canvas rendering / JSX export".
 
-## 运行
+## Running
 
-在仓库根目录：
+In the repository root:
 
 ```bash
 pnpm install
@@ -12,4 +12,4 @@ pnpm -r build
 pnpm -C apps/builder-react dev
 ```
 
-默认端口：`5174`。
+Default port: `5174`.

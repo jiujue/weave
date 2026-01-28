@@ -1,10 +1,10 @@
 # weave-demo-vue3
 
-Vue3 演示：通过 `@jiujue/weave-adapter-worker-image` 在 Worker 中渲染，并在主线程展示结果。
+Vue3 demo: Renders in a Worker via `@jiujue/weave-adapter-worker-image` and displays the results on the main thread.
 
-## 运行
+## Running
 
-在仓库根目录：
+In the repository root:
 
 ```bash
 pnpm install

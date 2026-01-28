@@ -2,24 +2,24 @@
 title: @jiujue/weave-adapter-node AI Guide
 ---
 
-## 这个包是什么
+## What is this package?
 
-`@jiujue/weave-adapter-node` 提供 Node 环境的绘制适配：
+`@jiujue/weave-adapter-node` provides drawing adaptation for Node environment:
 
-- 提供可用于 replay 的 `Context2DLike` backend
-- 支持离屏渲染并导出 PNG（依赖可选 canvas backend）
+- Provides a `Context2DLike` backend suitable for replay.
+- Supports offscreen rendering and PNG export (depends on optional canvas backend).
 
-## 修改原则
+## Principles of Modification
 
-- backend 依赖必须是可选的（不要强制安装原生依赖）
-- 错误提示要清晰：缺少 backend 时应明确给出安装建议
-- 输出一致性优先：同一 DisplayList 在 Node 与浏览器尽量保持一致
+- Backend dependencies must be optional (do not force installation of native dependencies).
+- Error messages must be clear: clearly provide installation suggestions when a backend is missing.
+- Output consistency is a priority: the same DisplayList should be as consistent as possible between Node and the browser.
 
-## 常见改动入口
+## Common Entry Points
 
-- `src/index.ts`：Node 适配入口
+- `src/index.ts`: Node adaptation entry point.
 
-## 验证方式
+## Verification
 
 - `pnpm -C packages/adapter-node build`
-- 运行 `apps/demo-node` 的渲染脚本（生成图片）验证输出
+- Run the rendering script in `apps/demo-node` (generates images) to verify the output.

@@ -1,23 +1,23 @@
 # @jiujue/weave-react
 
-提供 `sceneFromJSX`：把 React JSX（intrinsic elements）转换为 `@jiujue/weave-types` 的 `SceneNode`（纯数据）。
+Provides `sceneFromJSX`: Converts React JSX (intrinsic elements) to `@jiujue/weave-types` `SceneNode` (pure data).
 
-## 在 Weave 里的位置（分层）
+## Position in Weave (Layering)
 
-| 层级              | 包                    | 作用                        |
-| ----------------- | --------------------- | --------------------------- |
-| 场景构建（React） | `@jiujue/weave-react` | React JSX → SceneNode       |
-| 场景数据          | `@jiujue/weave-types` | SceneNode/patch/JSX runtime |
-| 端到端渲染        | `@jiujue/weave-app`   | browser/node 统一入口       |
-| 引擎核心          | `@jiujue/weave-core`  | layout + paint + hitTest    |
+| Layer                      | Package               | Role                        |
+| -------------------------- | --------------------- | --------------------------- |
+| Scene Construction (React) | `@jiujue/weave-react` | React JSX → SceneNode       |
+| Scene Data                 | `@jiujue/weave-types` | SceneNode/patch/JSX runtime |
+| End-to-End Rendering       | `@jiujue/weave-app`   | Unified browser/node entry  |
+| Engine Core                | `@jiujue/weave-core`  | layout + paint + hitTest    |
 
-## 安装
+## Installation
 
 ```bash
 pnpm add @jiujue/weave-react
 ```
 
-## 用法
+## Usage
 
 ```tsx
 import React from 'react'
@@ -35,25 +35,25 @@ const scene: SceneNode = sceneFromJSX(
 )
 ```
 
-## 约束
+## Constraints
 
-- 只支持 intrinsic elements（如 `<container />`、`<text />`）
-- 不要传入函数组件/类组件（例如 `<MyScene />`），否则会抛错
+- Only supports intrinsic elements (e.g., `<container />`, `<text />`).
+- Do not pass function components/class components (e.g., `<MyScene />`), otherwise an error will be thrown.
 
-## 组合使用（典型方式）
+## Composition (Typical Usage)
 
-- React 项目里“写场景”：用本包 `sceneFromJSX` 得到 `SceneNode`
-- 交给引擎渲染：`SceneNode` → `@jiujue/weave-app`（浏览器/Node）或 `@jiujue/weave-core`（自定义驱动）
-- 若你更偏 DSL/强类型：改用 `@jiujue/weave-types` JSX runtime（它是“编译后产物”形态，适合 TS/TSX）
+- "Writing scenes" in React projects: Use `sceneFromJSX` from this package to get `SceneNode`.
+- Hand over to engine rendering: `SceneNode` → `@jiujue/weave-app` (browser/Node) or `@jiujue/weave-core` (custom drive).
+- If you prefer DSL/strong typing: Switch to the `@jiujue/weave-types` JSX runtime (which is a "post-compilation" form, suitable for TS/TSX).
 
 ## AI / Skills
 
-- [AI_GUIDE.md](./weave/packages/react/AI_GUIDE.md)
-- [skills/SKILL.md](./weave/packages/react/skills/SKILL.md)
-- [CHANGELOG.md](./weave/packages/react/CHANGELOG.md)
+- [AI_GUIDE.md](./AI_GUIDE.md)
+- [skills/SKILL.md](./skills/SKILL.md)
+- [CHANGELOG.md](./CHANGELOG.md)
 
-## 相关包
+## Related Packages
 
-- `@jiujue/weave-types`：SceneNode/类型定义/JSX runtime
-- `@jiujue/weave-app`：端到端渲染入口（浏览器/Node）
-- `@jiujue/weave-core`：引擎核心（layout/paint）
+- `@jiujue/weave-types`: SceneNode/type definitions/JSX runtime.
+- `@jiujue/weave-app`: End-to-end rendering entry (browser/Node).
+- `@jiujue/weave-core`: Engine core (layout/paint).

@@ -2,33 +2,33 @@
 title: @jiujue/weave-types AI Guide
 ---
 
-## 这个包是什么
+## What is this package?
 
-`@jiujue/weave-types` 定义 Weave 的核心协议与类型系统，包括：
+`@jiujue/weave-types` defines Weave's core protocols and type system, including:
 
-- SceneNode 场景树数据结构
-- Patch 增量更新协议
-- DisplayList / Context2DLike 等跨端绘制抽象
-- JSX runtime（非 React）用来直接产出 SceneNode
+- SceneNode scene tree data structure
+- Patch incremental update protocol
+- Cross-platform drawing abstractions like DisplayList / Context2DLike
+- JSX runtime (non-React) used to directly produce SceneNode
 
-## 你应该优先遵循的原则
+## Principles you should prioritize
 
-- 类型是事实来源：任何跨包能力都应该先在这里定义类型与协议
-- 尽量保持向后兼容：新增字段优于破坏式修改
-- Patch 结构一旦变更，要同步影响 `core`、adapters、docs 示例
+- Types are the source of truth: any cross-package capability should have its types and protocols defined here first.
+- Maintain backward compatibility as much as possible: adding fields is preferred over breaking changes.
+- Once the Patch structure changes, it should synchronously affect `core`, adapters, and docs examples.
 
-## 常见改动入口
+## Common Entry Points
 
-- `src/index.ts`：主导出
-- `src/jsx-runtime.ts`：JSX runtime（配合 `jsxImportSource: @jiujue/weave-types`）
-- `dist/*` 为构建产物，不直接改
+- `src/index.ts`: Main exports.
+- `src/jsx-runtime.ts`: JSX runtime (used with `jsxImportSource: @jiujue/weave-types`).
+- `dist/*` are build artifacts, do not modify them directly.
 
-## 修改后的自检
+## Self-check after modification
 
 - `pnpm -C packages/types build`
-- 在依赖该协议的包中做一次类型检查（至少 `pnpm -C packages/core build`）
+- Run a type check in packages that depend on this protocol (at least `pnpm -C packages/core build`).
 
-## 常见坑
+## Common Pitfalls
 
-- ESM 导出：`exports` 字段决定消费者可引用的子路径
-- d.ts 需要与实现一致；不要只改类型不改实现（或反之）
+- ESM Exports: The `exports` field determines the subpaths consumers can reference.
+- d.ts must be consistent with the implementation; don't just change the type without changing the implementation (or vice versa).

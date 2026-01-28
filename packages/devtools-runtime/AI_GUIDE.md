@@ -2,25 +2,25 @@
 title: @jiujue/weave-devtools-runtime AI Guide
 ---
 
-## 这个包是什么
+## What is this package?
 
-`@jiujue/weave-devtools-runtime` 提供 DevTools 运行时桥接能力，用于把 Weave 实例暴露给浏览器扩展面板：
+`@jiujue/weave-devtools-runtime` provides DevTools runtime bridging capabilities, used to expose Weave instances to the browser extension panel:
 
-- `attachWeaveDevtools(...)`：注册实例、发送事件
-- `createSceneMirror(...)`：在主线程维护 scene 快照，供面板查询
-- 对外暴露 hook（如 `window.__WEAVE_DEVTOOLS_HOOK__`）
+- `attachWeaveDevtools(...)`: Registers instances and sends events.
+- `createSceneMirror(...)`: Maintains a scene snapshot in the main thread for panel queries.
+- Exposes hooks to the outside (e.g., `window.__WEAVE_DEVTOOLS_HOOK__`).
 
-## 修改原则
+## Principles of Modification
 
-- 默认应当可关闭（生产环境不建议暴露场景数据）
-- hook 协议应保持版本化与向后兼容
-- 不要引入对扩展实现细节的强耦合，runtime 只负责桥接与协议
+- Should be disableable by default (exposing scene data in production is not recommended).
+- The hook protocol should remain versioned and backward-compatible.
+- Avoid introducing tight coupling with extension implementation details; the runtime is only responsible for bridging and protocols.
 
-## 常见改动入口
+## Common Entry Points
 
-- `src/index.ts`：主要类型与实现
+- `src/index.ts`: Main types and implementation.
 
-## 验证方式
+## Verification
 
 - `pnpm -C packages/devtools-runtime build`
-- 用 `apps/docs-dumi` 的 devtools demo 页面验证 hook 行为与事件流
+- Verify hook behavior and event flow using the devtools demo page in `apps/docs-dumi`.

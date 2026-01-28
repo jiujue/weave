@@ -2,33 +2,33 @@
 title: @jiujue/weave-core AI Guide
 ---
 
-## 这个包是什么
+## What is this package?
 
-`@jiujue/weave-core` 是 Weave 引擎内核：
+`@jiujue/weave-core` is the core kernel of the Weave engine:
 
-- 维护 scene tree（来自 `@jiujue/weave-types`）
-- 用 Yoga 计算布局
-- 产出 DisplayList（给 `@jiujue/weave-displaylist` 回放）
-- 提供 `createEngine` 与渲染/增量更新相关 API
+- Maintains the scene tree (from `@jiujue/weave-types`).
+- Calculates layout using Yoga.
+- Produces DisplayList (for replay by `@jiujue/weave-displaylist`).
+- Provides `createEngine` and APIs related to rendering and incremental updates.
 
-## 修改原则
+## Principles of Modification
 
-- 任何对外行为变化要体现在导出 API 与类型上
-- Patch 应用必须保持幂等与可预测，避免隐式副作用
-- 性能相关改动优先保证正确性，再做优化
+- Any change in external behavior must be reflected in the exported APIs and types.
+- Patch application must remain idempotent and predictable, avoiding implicit side effects.
+- For performance-related changes, prioritize correctness before optimization.
 
-## 常见改动入口
+## Common Entry Points
 
-- `src/engine.ts`：核心实现（布局、paint、patch）
-- `src/index.ts`：对外导出
+- `src/engine.ts`: Core implementation (layout, paint, patch).
+- `src/index.ts`: External exports.
 
-## 验证方式
+## Verification
 
 - `pnpm -C packages/core build`
-- `pnpm test`（仓库根目录，包含 core 的测试）
-- 若改动影响渲染链路：用 docs-dumi demo 或 demo app 做一次跑通验证
+- `pnpm test` (at repository root, including tests for core).
+- If the change affects the rendering pipeline: perform a full-path verification using the docs-dumi demo or a demo app.
 
-## 常见坑
+## Common Pitfalls
 
-- Yoga 初始化是异步的：不要引入同步假设
-- Node/Worker 环境与浏览器环境差异：不要直接依赖 DOM API
+- Yoga initialization is asynchronous: do not introduce synchronous assumptions.
+- Differences between Node/Worker and browser environments: do not directly depend on DOM APIs.

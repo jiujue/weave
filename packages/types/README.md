@@ -1,23 +1,23 @@
 # @jiujue/weave-types
 
-Weave 的数据模型与协议层：定义 SceneNode、patch、TextMeasurer、Context2DLike，以及用于“直接产出 SceneNode”的 JSX runtime。
+Data model and protocol layer for Weave: Defines SceneNode, patch, TextMeasurer, Context2DLike, and the JSX runtime for "direct SceneNode output".
 
-## 在 Weave 里的位置（分层）
+## Position in Weave (Layering)
 
-| 层级       | 包                          | 作用                                                   |
-| ---------- | --------------------------- | ------------------------------------------------------ |
-| 场景数据   | `@jiujue/weave-types`       | SceneNode/patch/TextMeasurer/Context2DLike/JSX runtime |
-| 引擎核心   | `@jiujue/weave-core`        | Yoga layout + paint + hitTest                          |
-| 绘制回放   | `@jiujue/weave-displaylist` | DisplayList schema + replay                            |
-| 端到端入口 | `@jiujue/weave-app`         | browser/node 统一入口                                  |
+| Layer            | Package                     | Role                                                   |
+| ---------------- | --------------------------- | ------------------------------------------------------ |
+| Scene Data       | `@jiujue/weave-types`       | SceneNode/patch/TextMeasurer/Context2DLike/JSX runtime |
+| Engine Core      | `@jiujue/weave-core`        | Yoga layout + paint + hitTest                          |
+| Drawing Replay   | `@jiujue/weave-displaylist` | DisplayList schema + replay                            |
+| End-to-End Entry | `@jiujue/weave-app`         | Unified browser/node entry                             |
 
-## 安装
+## Installation
 
 ```bash
 pnpm add @jiujue/weave-types
 ```
 
-## 作为类型/协议使用
+## Usage as Types/Protocol
 
 ```ts
 import type { SceneNode } from '@jiujue/weave-types'
@@ -25,9 +25,9 @@ import type { SceneNode } from '@jiujue/weave-types'
 const scene: SceneNode = { id: 'root', type: 'container', children: [] }
 ```
 
-## JSX runtime（更偏 DSL）
+## JSX Runtime (DSL approach)
 
-### 方式 A：直接调用 runtime（不依赖 JSX 编译）
+### Method A: Directly call the runtime (no JSX compilation required)
 
 ```ts
 import { jsx, jsxs } from '@jiujue/weave-types/jsx-runtime'
@@ -41,7 +41,7 @@ const scene = jsxs('container', {
 })
 ```
 
-### 方式 B：在 TS/TSX 里写 JSX（需要配置 jsxImportSource）
+### Method B: Write JSX in TS/TSX (requires jsxImportSource configuration)
 
 ```ts
 /** @jsxImportSource @jiujue/weave-types */
@@ -56,21 +56,21 @@ const scene: SceneNode = (
 )
 ```
 
-## 组合使用（典型方式）
+## Composition (Typical Usage)
 
-- 浏览器渲染：用本包产出的 `SceneNode` 交给 `@jiujue/weave-app` 或 `@jiujue/weave-core`
-- React 项目：若你更喜欢 React JSX 语法与心智模型，用 `@jiujue/weave-react` 的 `sceneFromJSX`（它最终也产出本包的 `SceneNode`）
-- 自定义平台：实现 `TextMeasurer` 与 `Context2DLike`，即可让 `@jiujue/weave-core` / `@jiujue/weave-displaylist` 在新平台工作
+- Browser Rendering: Pass the `SceneNode` produced by this package to `@jiujue/weave-app` or `@jiujue/weave-core`.
+- React Projects: If you prefer React JSX syntax and mental models, use `sceneFromJSX` from `@jiujue/weave-react` (which ultimately also produces this package's `SceneNode`).
+- Custom Platforms: Implement `TextMeasurer` and `Context2DLike` to make `@jiujue/weave-core` / `@jiujue/weave-displaylist` work on new platforms.
 
 ## AI / Skills
 
-- [AI_GUIDE.md](./weave/packages/types/AI_GUIDE.md)
-- [skills/SKILL.md](./weave/packages/types/skills/SKILL.md)
-- [CHANGELOG.md](./weave/packages/types/CHANGELOG.md)
+- [AI_GUIDE.md](./AI_GUIDE.md)
+- [skills/SKILL.md](./skills/SKILL.md)
+- [CHANGELOG.md](./CHANGELOG.md)
 
-## 相关包
+## Related Packages
 
-- `@jiujue/weave-core`：消费 `SceneNode`，产出 DisplayList
-- `@jiujue/weave-displaylist`：消费 DisplayList，replay 到 2D context
-- `@jiujue/weave-app`：把端到端链路封装成统一 API
-- `@jiujue/weave-react`：React JSX → SceneNode
+- `@jiujue/weave-core`: Consumes `SceneNode`, produces DisplayList.
+- `@jiujue/weave-displaylist`: Consumes DisplayList, replays to 2D context.
+- `@jiujue/weave-app`: Encapsulates the end-to-end pipeline into a unified API.
+- `@jiujue/weave-react`: React JSX → SceneNode.

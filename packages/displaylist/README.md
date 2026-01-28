@@ -1,23 +1,23 @@
 # @jiujue/weave-displaylist
 
-Weave 的 DisplayList schema + replay：把 `@jiujue/weave-core` 产出的绘制指令解释执行到任意 `Context2DLike`（浏览器 Canvas2D、OffscreenCanvas、Node canvas 等）。
+DisplayList schema + replay for Weave: Interprets and executes drawing commands produced by `@jiujue/weave-core` onto any `Context2DLike` (browser Canvas2D, OffscreenCanvas, Node canvas, etc.).
 
-## 在 Weave 里的位置（分层）
+## Position in Weave (Layering)
 
-| 层级       | 包                          | 作用                             |
-| ---------- | --------------------------- | -------------------------------- |
-| 场景数据   | `@jiujue/weave-types`       | Context2DLike / TextStyle 等类型 |
-| 引擎核心   | `@jiujue/weave-core`        | 产出 DisplayList                 |
-| 绘制回放   | `@jiujue/weave-displaylist` | 把 DisplayList replay 到 context |
-| 端到端入口 | `@jiujue/weave-app`         | browser/node 统一入口            |
+| Layer            | Package                     | Role                            |
+| ---------------- | --------------------------- | ------------------------------- |
+| Scene Data       | `@jiujue/weave-types`       | Context2DLike / TextStyle types |
+| Engine Core      | `@jiujue/weave-core`        | Produces DisplayList            |
+| Drawing Replay   | `@jiujue/weave-displaylist` | Replays DisplayList to context  |
+| End-to-End Entry | `@jiujue/weave-app`         | Unified browser/node entry      |
 
-## 安装
+## Installation
 
 ```bash
 pnpm add @jiujue/weave-displaylist
 ```
 
-## 用法
+## Usage
 
 ```ts
 import { replayDisplayList } from '@jiujue/weave-displaylist'
@@ -31,19 +31,19 @@ const dl: DisplayList = [
 replayDisplayList(canvas.getContext('2d')!, dl, { dpr: window.devicePixelRatio })
 ```
 
-## 组合使用（典型方式）
+## Composition (Typical Usage)
 
-- 端到端：优先用 `@jiujue/weave-app`（内部会调用 replay）
-- 引擎直连：`@jiujue/weave-core` 负责 layout/paint，产出 DisplayList；本包负责把 DisplayList 绘制到平台 context
-- 跨端：只要平台能提供一个 `Context2DLike` 兼容层，就能复用 DisplayList
+- End-to-End: Prefer using `@jiujue/weave-app` (it calls replay internally).
+- Engine Direct: `@jiujue/weave-core` handles layout/paint and produces DisplayList; this package draws the DisplayList to the platform context.
+- Cross-platform: As long as the platform provides a `Context2DLike` compatibility layer, the DisplayList can be reused.
 
 ## AI / Skills
 
-- [AI_GUIDE.md](./weave/packages/displaylist/AI_GUIDE.md)
-- [skills/SKILL.md](./weave/packages/displaylist/skills/SKILL.md)
-- [CHANGELOG.md](./weave/packages/displaylist/CHANGELOG.md)
+- [AI_GUIDE.md](./AI_GUIDE.md)
+- [skills/SKILL.md](./skills/SKILL.md)
+- [CHANGELOG.md](./CHANGELOG.md)
 
-## 相关包
+## Related Packages
 
-- `@jiujue/weave-core`：产出 DisplayList
-- `@jiujue/weave-types`：Context2DLike / 文本与样式类型
+- `@jiujue/weave-core`: Produces DisplayList.
+- `@jiujue/weave-types`: Context2DLike / Text and Style types.

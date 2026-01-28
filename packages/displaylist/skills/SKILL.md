@@ -1,12 +1,12 @@
 ---
 name: 'weave-displaylist'
-description: '提供 DisplayList 协议与 replay 到 Context2DLike 的能力。用户在绘制指令、回放一致性、跨端渲染问题时调用。'
+description: 'Provides DisplayList protocol and replay capabilities to Context2DLike. Called when users have questions about drawing commands, replay consistency, or cross-platform rendering issues.'
 ---
 
 # @jiujue/weave-displaylist
 
-## 适用场景
+## Applicable Scenarios
 
-- 解释 DisplayList 的结构与 draw op 语义
-- 排查 replay 到 Canvas2D / OffscreenCanvas / Node backend 的差异
-- 设计新增绘制能力时如何扩展协议与回放实现
+- Explaining the structure and draw op semantics of DisplayList.
+- Troubleshooting differences when replaying to Canvas2D / OffscreenCanvas / Node backends.
+- Designing how to extend the protocol and replay implementation when adding new drawing capabilities.

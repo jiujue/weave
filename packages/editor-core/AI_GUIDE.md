@@ -2,26 +2,26 @@
 title: @jiujue/weave-editor-core AI Guide
 ---
 
-## 这个包是什么
+## What is this package?
 
-`@jiujue/weave-editor-core` 提供编辑器相关的核心能力（不包含具体 UI）：
+`@jiujue/weave-editor-core` provides core editor-related capabilities (excluding concrete UI):
 
-- 节点 registry（节点类型、可编辑属性、默认值等）
-- scene 与 JSX/配置之间的转换（用于导出、复制、回放）
-- 给 `apps/builder-react` 等编辑器项目复用的纯逻辑层
+- Node registry (node types, editable properties, default values, etc.)
+- Conversion between scene and JSX/configuration (used for export, copy, replay)
+- A pure logic layer reused by editor projects like `apps/builder-react`.
 
-## 修改原则
+## Principles of Modification
 
-- 不要耦合具体框架（React/Vue），保持纯逻辑/纯类型
-- 任何 registry/schema 变更要考虑向后兼容与数据迁移
-- 导出的结构要可序列化（用于存储、复制、导出）
+- Do not couple with specific frameworks (React/Vue); maintain pure logic/pure types.
+- Any registry/schema changes must consider backward compatibility and data migration.
+- The exported structure must be serializable (for storage, copying, exporting).
 
-## 常见改动入口
+## Common Entry Points
 
-- `src/index.ts`：对外导出
-- 其它 `src/*`：registry、转换逻辑、工具函数
+- `src/index.ts`: Public exports.
+- Other `src/*`: Registry, conversion logic, utility functions.
 
-## 验证方式
+## Verification
 
 - `pnpm -C packages/editor-core build`
-- 运行 `apps/builder-react` 验证导出/导入与 Inspector 配置是否正常
+- Run `apps/builder-react` to verify if export/import and Inspector configurations are normal.

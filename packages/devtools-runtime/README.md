@@ -1,23 +1,23 @@
 # @jiujue/weave-devtools-runtime
 
-Weave DevTools 的运行时能力：在 `globalThis` 上注入 hook，用于注册实例、枚举实例，以及在 DevTools 面板里做 scene 查看、命中测试等交互。
+Runtime capabilities for Weave DevTools: Inject hooks onto `globalThis` for instance registration, enumeration, and interactions like scene viewing and hit testing within the DevTools panel.
 
-## 在 Weave 里的位置（分层）
+## Position in Weave (Layering)
 
-| 层级       | 包                               | 作用                                   |
-| ---------- | -------------------------------- | -------------------------------------- |
-| 场景数据   | `@jiujue/weave-types`            | SceneNode/patch                        |
-| 端到端入口 | `@jiujue/weave-app`              | 可选集成 DevTools hook                 |
-| 调试能力   | `@jiujue/weave-devtools-runtime` | hook 定义 + scene mirror（patch 应用） |
-| 工具侧     | `apps/devtools-extension`        | 浏览器 DevTools 面板（Plasmo）         |
+| Layer            | Package                          | Role                                   |
+| ---------------- | -------------------------------- | -------------------------------------- |
+| Scene Data       | `@jiujue/weave-types`            | SceneNode/patch                        |
+| End-to-End Entry | `@jiujue/weave-app`              | Optional integration of DevTools hook  |
+| Debugging        | `@jiujue/weave-devtools-runtime` | hook definition + scene mirror (patch) |
+| Tooling          | `apps/devtools-extension`        | Browser DevTools panel (Plasmo)        |
 
-## 安装
+## Installation
 
 ```bash
 pnpm add @jiujue/weave-devtools-runtime
 ```
 
-## 用法
+## Usage
 
 ```ts
 import { ensureWeaveDevtoolsHook } from '@jiujue/weave-devtools-runtime'
@@ -32,17 +32,17 @@ hook.register({
 })
 ```
 
-## 组合使用（典型方式）
+## Composition (Typical Usage)
 
-- 应用侧：`@jiujue/weave-app` 开启 `devtools: { enabled: true }` 即可自动注册实例
-- 工具侧：安装并使用浏览器扩展 `apps/devtools-extension` 查看场景树、inspect、节点高亮
+- Application side: Enable `devtools: { enabled: true }` in `@jiujue/weave-app` to automatically register instances.
+- Tooling side: Install and use the browser extension `apps/devtools-extension` to view the scene tree, inspect, and highlight nodes.
 
 ## AI / Skills
 
-- [AI_GUIDE.md](./weave/packages/devtools-runtime/AI_GUIDE.md)
-- [skills/SKILL.md](./weave/packages/devtools-runtime/skills/SKILL.md)
-- [CHANGELOG.md](./weave/packages/devtools-runtime/CHANGELOG.md)
+- [AI_GUIDE.md](./AI_GUIDE.md)
+- [skills/SKILL.md](./skills/SKILL.md)
+- [CHANGELOG.md](./CHANGELOG.md)
 
-## 相关包
+## Related Packages
 
-- `@jiujue/weave-app`：已内置对 DevTools 的集成入口（可选）
+- `@jiujue/weave-app`: Includes a built-in entry point for DevTools integration (optional).

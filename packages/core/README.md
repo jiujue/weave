@@ -1,25 +1,25 @@
 # @jiujue/weave-core
 
-Weave 的核心引擎：维护 scene tree，使用 Yoga 做布局（layout），把绘制产物输出为 DisplayList，并支持命中测试与节点信息查询。
+The core engine of Weave: Maintains the scene tree, uses Yoga for layout, outputs drawing results as DisplayList, and supports hit testing and node information queries.
 
-## 在 Weave 里的位置（分层）
+## Position in Weave (Layering)
 
-| 层级       | 包                          | 作用                          |
-| ---------- | --------------------------- | ----------------------------- |
-| 场景数据   | `@jiujue/weave-types`       | SceneNode/patch/TextMeasurer  |
-| 引擎核心   | `@jiujue/weave-core`        | Yoga layout + paint + hitTest |
-| 绘制回放   | `@jiujue/weave-displaylist` | DisplayList schema + replay   |
-| 端到端入口 | `@jiujue/weave-app`         | browser/node 统一入口         |
+| Layer            | Package                     | Role                          |
+| ---------------- | --------------------------- | ----------------------------- |
+| Scene Data       | `@jiujue/weave-types`       | SceneNode/patch/TextMeasurer  |
+| Engine Core      | `@jiujue/weave-core`        | Yoga layout + paint + hitTest |
+| Drawing Replay   | `@jiujue/weave-displaylist` | DisplayList schema + replay   |
+| End-to-End Entry | `@jiujue/weave-app`         | browser/node unified entry    |
 
-## 安装
+## Installation
 
 ```bash
 pnpm add @jiujue/weave-core
 ```
 
-## 最小用法（Canvas 2D）
+## Minimal Usage (Canvas 2D)
 
-`createEngine` 只依赖 `TextMeasurer` 接口，不绑定具体平台；浏览器侧可以用一个临时 canvas 实现测量。
+`createEngine` only depends on the `TextMeasurer` interface and is not tied to a specific platform; on the browser side, a temporary canvas can be used for measurement.
 
 ```ts
 import { createEngine } from '@jiujue/weave-core'
@@ -56,20 +56,20 @@ replayDisplayList(document.querySelector('canvas')!.getContext('2d')!, displayLi
 })
 ```
 
-## 组合使用（典型方式）
+## Composition (Typical Usage)
 
-- 端到端：优先用 `@jiujue/weave-app`（它内部会创建并驱动 engine）
-- 只需要“引擎能力”：直接用本包的 `createEngine`（你负责 `TextMeasurer`、驱动 render、以及把 DisplayList replay 到目标平台）
-- 场景构建：用 `@jiujue/weave-types` JSX runtime 或 `@jiujue/weave-react` 的 `sceneFromJSX` 生成 `SceneNode`
+- End-to-End: Prefer using `@jiujue/weave-app` (it creates and drives the engine internally).
+- "Engine only": Use `createEngine` from this package directly (you are responsible for `TextMeasurer`, driving render, and replaying DisplayList to the target platform).
+- Scene Construction: Use `@jiujue/weave-types` JSX runtime or `sceneFromJSX` from `@jiujue/weave-react` to generate `SceneNode`.
 
 ## AI / Skills
 
-- [AI_GUIDE.md](./weave/packages/core/AI_GUIDE.md)
-- [skills/SKILL.md](./weave/packages/core/skills/SKILL.md)
-- [CHANGELOG.md](./weave/packages/core/CHANGELOG.md)
+- [AI_GUIDE.md](./AI_GUIDE.md)
+- [skills/SKILL.md](./skills/SKILL.md)
+- [CHANGELOG.md](./CHANGELOG.md)
 
-## 相关包
+## Related Packages
 
-- `@jiujue/weave-types`：SceneNode/patch/TextMeasurer/Context2DLike
-- `@jiujue/weave-displaylist`：DisplayList schema + replay
-- `@jiujue/weave-app`：端到端入口（browser/node）
+- `@jiujue/weave-types`: SceneNode/patch/TextMeasurer/Context2DLike
+- `@jiujue/weave-displaylist`: DisplayList schema + replay
+- `@jiujue/weave-app`: End-to-end entry (browser/node)

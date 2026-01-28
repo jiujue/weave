@@ -1,51 +1,51 @@
 ---
-title: Weave 仓库 AI Guide
+title: Weave Repository AI Guide
 ---
 
-## 目标
+## Goals
 
-在本仓库进行改动时，优先保证：
+When making changes in this repository, prioritize:
 
-- 子包 API 的稳定与类型正确
-- Worker/Node/Browser 三条链路可正常跑通
-- 版本、发布与文档部署流程可复用、可自动化
+- Stability and type correctness of sub-package APIs
+- Ensuring Worker/Node/Browser paths work correctly
+- Reusable and automated versioning, release, and documentation deployment processes
 
-## 仓库结构（快速定位）
+## Repository Structure (Quick Navigation)
 
-- `packages/*`：对外发布的子包（ESM + d.ts）
-- `apps/*`：演示与工具（不发布）
-- `apps/docs-dumi`：文档站点源码，构建产物输出到 `dumi-docs/`
-- `.github/workflows/*`：CI/CD（文档部署、扩展发布等）
+- `packages/*`: Publicly released sub-packages (ESM + d.ts)
+- `apps/*`: Demos and tools (not released)
+- `apps/docs-dumi`: Source code for the documentation site, build output to `dumi-docs/`
+- `.github/workflows/*`: CI/CD (doc deployment, extension release, etc.)
 
-## 常用命令
+## Common Commands
 
-- 安装依赖：`pnpm install`
-- 全量构建：`pnpm build`
-- 代码检查：`pnpm lint`
-- 测试：`pnpm test`
-- 构建文档：`pnpm docs:build`
-- 触发 gh-pages 部署（自动 bump + tag）：`pnpm deploy:gh-pages`
+- Install dependencies: `pnpm install`
+- Full build: `pnpm build`
+- Lint: `pnpm lint`
+- Test: `pnpm test`
+- Build docs: `pnpm docs:build`
+- Trigger gh-pages deployment (auto bump + tag): `pnpm deploy:gh-pages`
 
-## 版本与发布（Changesets）
+## Versioning and Release (Changesets)
 
-- 新增变更记录：`pnpm change`
-- 生成各包新版本：`pnpm version-packages`
-- 发布到 npm：`pnpm release`
+- Add change record: `pnpm change`
+- Generate new versions for each package: `pnpm version-packages`
+- Publish to npm: `pnpm release`
 
-约定：
+Convention:
 
-- `pnpm change` 的提交用于记录“变更意图”
-- `pnpm version-packages` 的提交用于记录“版本与 changelog 结果”
+- `pnpm change` commits record "intent of change"
+- `pnpm version-packages` commits record "version and changelog results"
 
-## 改动优先级与边界
+## Change Priorities and Boundaries
 
-- 优先复用现有包的公共类型（尤其是 `@jiujue/weave-types`）
-- 对外可见的行为变更必须同步补齐类型与导出
-- 避免在运行时代码里新增日志输出或注释（除非明确要求）
+- Prioritize reusing existing public types from packages (especially `@jiujue/weave-types`)
+- External behavior changes must be synchronized with types and exports
+- Avoid adding log output or comments in runtime code (unless explicitly requested)
 
-## PR 自检清单
+## PR Self-Checklist
 
-- `pnpm lint` 通过
-- `pnpm test` 通过
-- 若涉及子包：对应子包 `pnpm -C packages/<name> build` 通过
-- 若涉及文档/示例：`pnpm docs:build` 或对应 app build 通过
+- `pnpm lint` passes
+- `pnpm test` passes
+- If involving sub-packages: `pnpm -C packages/<name> build` passes
+- If involving docs/apps: `pnpm docs:build` or corresponding app build passes

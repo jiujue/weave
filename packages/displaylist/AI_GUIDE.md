@@ -2,26 +2,26 @@
 title: @jiujue/weave-displaylist AI Guide
 ---
 
-## 这个包是什么
+## What is this package?
 
-`@jiujue/weave-displaylist` 提供“绘制指令集”与回放能力：
+`@jiujue/weave-displaylist` provides the "drawing command set" and replay capabilities:
 
-- DisplayList schema（绘制操作、路径命令等）
-- `replay(displayList, ctxLike, opts)`：把 DisplayList 解释执行到 `Context2DLike`
-- 序列化/反序列化（如有）
+- DisplayList schema (drawing operations, path commands, etc.)
+- `replay(displayList, ctxLike, opts)`: Interprets and executes DisplayList onto `Context2DLike`
+- Serialization/Deserialization (if any)
 
-## 修改原则
+## Principles of Modification
 
-- DisplayList 是跨端协议：变更要非常谨慎，尽量新增而不是改语义
-- 回放层必须保持确定性：同一输入应产生同一绘制序列
-- 不引入平台专属 API，统一依赖 `Context2DLike`
+- DisplayList is a cross-platform protocol: changes must be very cautious, prioritize adding new operations over changing semantics.
+- The replay layer must remain deterministic: the same input should produce the same drawing sequence.
+- Do not introduce platform-specific APIs; strictly depend on `Context2DLike`.
 
-## 常见改动入口
+## Common Entry Points
 
-- `src/index.ts`：导出与 replay 入口
-- 与 `@jiujue/weave-types` 的类型联动：优先从 types 同步更新
+- `src/index.ts`: Exports and replay entry.
+- Type linkage with `@jiujue/weave-types`: Prioritize synchronous updates from types.
 
-## 验证方式
+## Verification
 
 - `pnpm -C packages/displaylist build`
-- 若变更影响画面：用 docs-dumi 的 canvas demo 验证渲染结果
+- If changes affect visuals: Verify rendering results using the canvas demo in `docs-dumi`.

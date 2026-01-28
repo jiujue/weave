@@ -2,25 +2,25 @@
 title: @jiujue/weave-adapter-offscreen AI Guide
 ---
 
-## 这个包是什么
+## What is this package?
 
-`@jiujue/weave-adapter-offscreen` 提供浏览器 OffscreenCanvas + Worker 适配：
+`@jiujue/weave-adapter-offscreen` provides browser OffscreenCanvas + Worker adaptation:
 
-- 主线程侧：transfer canvas、发送 init/resize/render/patch/setScene 等消息
-- Worker 侧：创建引擎、接收消息、layout/paint 产出 DisplayList 并回放
+- Main thread side: transfer canvas, send messages like init/resize/render/patch/setScene.
+- Worker side: create the engine, receive messages, layout/paint to produce DisplayList and replay.
 
-## 修改原则
+## Principles of Modification
 
-- 消息协议要稳定，尽量新增字段而不是修改既有语义
-- Worker 线程不要依赖 DOM；只使用 OffscreenCanvas 与可序列化数据
-- 任何影响渲染一致性的改动需要同时验证主线程与 worker 两侧
+- Message protocol must be stable; prefer adding new fields over modifying existing semantics.
+- Worker thread should not depend on the DOM; only use OffscreenCanvas and serializable data.
+- Any change affecting rendering consistency needs to be verified on both the main thread and worker sides.
 
-## 常见改动入口
+## Common Entry Points
 
-- `src/index.ts`：主入口
-- `src/worker.ts`：worker 入口（通过 `exports./worker` 暴露）
+- `src/index.ts`: Main entry point.
+- `src/worker.ts`: Worker entry point (exposed via `exports./worker`).
 
-## 验证方式
+## Verification
 
 - `pnpm -C packages/adapter-offscreen build`
-- 运行 docs-dumi 或 demo app，确认 worker 渲染链路正常
+- Run docs-dumi or a demo app and confirm the worker rendering pipeline is functioning correctly.

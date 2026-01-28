@@ -1,17 +1,17 @@
 # weave-demo
 
-浏览器演示：主线程 UI + Worker（OffscreenCanvas）渲染，展示两种场景构建方式的对照。
+Browser demo: Main thread UI + Worker (OffscreenCanvas) rendering, demonstrating a comparison between two scene construction methods.
 
-## 运行
+## Running
 
-在仓库根目录：
+In the repository root:
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-## 相关包
+## Related Packages
 
 - `@jiujue/weave-app`
 - `@jiujue/weave-react`

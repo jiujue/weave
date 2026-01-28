@@ -1,17 +1,17 @@
 # weave-docs
 
-Weave 文档站点（dumi）。
+Weave documentation site (dumi).
 
-## 运行
+## Running
 
-在仓库根目录：
+In the repository root:
 
 ```bash
 pnpm install
 pnpm docs
 ```
 
-## 构建
+## Build
 
 ```bash
 pnpm docs:build

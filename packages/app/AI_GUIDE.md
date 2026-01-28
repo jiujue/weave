@@ -2,28 +2,28 @@
 title: @jiujue/weave-app AI Guide
 ---
 
-## 这个包是什么
+## What is this package?
 
-`@jiujue/weave-app` 是端到端统一入口：
+`@jiujue/weave-app` is the unified end-to-end entry:
 
-- 对应用侧隐藏 adapter 差异（browser/node）
-- 统一提供 setScene/applyPatches/resize/render（或 renderToPng 等）能力
-- 组合 `core`、`displaylist` 与 adapter（offscreen/node）
+- Hides adapter differences (browser/node) from the application side.
+- Provides unified capabilities for setScene/applyPatches/resize/render (or renderToPng, etc.).
+- Combines `core`, `displaylist`, and adapters (offscreen/node).
 
-## 修改原则
+## Principles of Modification
 
-- API 要保持“少而稳定”，避免把底层实现细节暴露给上层
-- browser/node 分支要清晰；不要在默认入口混入 node-only 依赖
-- 任何对外参数变更要同步更新类型定义
+- Maintain a "minimal and stable" API, avoiding exposure of underlying implementation details to upper layers.
+- Clearly separate browser/node branches; do not mix node-only dependencies into the default entry.
+- Synchronize any external parameter changes with type definitions.
 
-## 常见改动入口
+## Common Entry Points
 
-- `src/index.ts`：主导出
-- `src/browser.ts`：浏览器链路
-- `src/node.ts`：Node 链路
+- `src/index.ts`: Main exports.
+- `src/browser.ts`: Browser pipeline.
+- `src/node.ts`: Node pipeline.
 
-## 验证方式
+## Verification
 
 - `pnpm -C packages/app build`
-- 浏览器链路：跑 docs-dumi 或 demo app
-- Node 链路：跑 `apps/demo-node` 的渲染脚本（如有变更）
+- Browser pipeline: Run docs-dumi or a demo app.
+- Node pipeline: Run the rendering script in `apps/demo-node` (if there are changes).

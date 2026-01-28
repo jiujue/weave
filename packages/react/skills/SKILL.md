@@ -1,16 +1,16 @@
 ---
 name: 'weave-react'
-description: '提供 sceneFromJSX：把 React JSX 转成 Weave SceneNode。用户在用 React 方式写场景、排查 JSX 转换问题时调用。'
+description: 'Provides sceneFromJSX: Converts React JSX to Weave SceneNode. Called when users write scenes using React or troubleshoot JSX conversion issues.'
 ---
 
 # @jiujue/weave-react
 
-## 适用场景
+## Applicable Scenarios
 
-- 解释 `sceneFromJSX` 的输入输出与限制
-- 新增/调整 JSX 节点到 SceneNode 的映射规则
-- 处理 fragment/children/key/props 等 React 结构差异
+- Explaining the inputs, outputs, and limitations of `sceneFromJSX`.
+- Adding/adjusting mapping rules from JSX nodes to SceneNode.
+- Handling React structural differences such as fragments, children, keys, and props.
 
-## 注意事项
+## Notes
 
-- 该包不负责渲染；渲染请走 `@jiujue/weave-core` + `@jiujue/weave-displaylist` 或 `@jiujue/weave-app`
+- This package is not responsible for rendering; for rendering, use `@jiujue/weave-core` + `@jiujue/weave-displaylist` or `@jiujue/weave-app`.

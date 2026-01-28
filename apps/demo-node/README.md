@@ -1,10 +1,10 @@
 # weave-demo-node
 
-Node 演示：离屏渲染导出 PNG（两种场景构建方式各一张图）。
+Node demo: Offscreen rendering export to PNG (one image for each of the two scene construction methods).
 
-## 运行
+## Running
 
-在仓库根目录：
+In the repository root:
 
 ```bash
 pnpm install
@@ -12,4 +12,4 @@ pnpm -r build
 pnpm -C apps/demo-node render
 ```
 
-输出文件在 `apps/demo-node/` 目录下（如 `output.png`、`output.sceneFromJSX.png`）。
+Output files are in the `apps/demo-node/` directory (e.g., `output.png`, `output.sceneFromJSX.png`).
